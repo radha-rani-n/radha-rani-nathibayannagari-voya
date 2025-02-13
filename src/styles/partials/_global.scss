@@ -1,0 +1,13 @@
+@use "./mixins" as *;
+@use "./variables" as *;
+@use "./fonts" as *;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+body {
+  box-sizing: border-box;
+}
