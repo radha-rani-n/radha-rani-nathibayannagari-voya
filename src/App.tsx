@@ -2,6 +2,7 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import PlanTrip from "./pages/PlanTrip/PlanTrip";
 import YourTrips from "./pages/YourTrips/YourTrips";
+import HomePage from "./pages/HomePage/HomePage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Header />
       <main className="main">
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="/plan-trip" element={<PlanTrip />} />
           <Route path="/your-trips" element={<YourTrips />} />
         </Routes>
