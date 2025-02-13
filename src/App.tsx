@@ -4,9 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Header />} />
-      </Routes>
+      <Header />
+      <main className="main">
+        <Routes></Routes>
+      </main>
+      <footer>Footer</footer>
     </BrowserRouter>
   );
 }

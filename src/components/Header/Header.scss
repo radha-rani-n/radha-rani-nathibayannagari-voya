@@ -4,10 +4,17 @@
 @use "../../styles/partials/mixins" as *;
 
 .header {
+  width: 100vw;
   padding: 2rem;
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  background-color: #db3069;
+
   &__title {
     font-size: 48px;
+  }
+  &__link {
+    text-decoration: none;
   }
 }
