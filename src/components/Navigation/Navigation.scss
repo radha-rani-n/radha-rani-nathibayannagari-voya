@@ -1,0 +1,9 @@
+.nav-bar {
+  &__list {
+    display: flex;
+    gap: 3rem;
+  }
+  &__item {
+    list-style: none;
+  }
+}

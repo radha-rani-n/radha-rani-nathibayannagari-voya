@@ -1,0 +1,13 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+
+.header {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  &__title {
+    font-size: 48px;
+  }
+}
