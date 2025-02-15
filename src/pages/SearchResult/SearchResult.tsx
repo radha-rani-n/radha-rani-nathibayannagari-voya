@@ -1,6 +1,10 @@
 import "./SearchResult.scss";
 
-const SearchResult = () => {
-  return <></>;
+const SearchResult = ({ results }) => {
+  return (
+    <article>
+      <ul>{}</ul>
+    </article>
+  );
 };
 export default SearchResult;
