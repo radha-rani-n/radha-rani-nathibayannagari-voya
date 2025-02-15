@@ -2,9 +2,11 @@ import { Input } from "antd";
 import "./SearchBar.scss";
 import axios from "axios";
 import { useState } from "react";
+import SearchResult from "../../pages/SearchResult/SearchResult";
 const SearchBar = () => {
   //   const API_URL = import.meta.env.VITE_API_URL;
   const [searchText, setSearchText] = useState("");
+  const [searchData, setSearchData] = useState(null);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -13,7 +15,7 @@ const SearchBar = () => {
       params: { q: `${searchText}` },
     });
 
-    console.log(data.results);
+    setSearchData(data.results);
   };
 
   return (
@@ -29,6 +31,7 @@ const SearchBar = () => {
           onChange={(e) => setSearchText(e.target.value)}
         />
       </form>
+      {searchData && <SearchResult results={searchData} />}
     </>
   );
 };
