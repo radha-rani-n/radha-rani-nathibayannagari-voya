@@ -22,7 +22,6 @@ const SearchBar = () => {
     <>
       <form className="search" onSubmit={handleFormSubmit}>
         <Input.Search
-          type="text"
           placeholder="Enter place name"
           size="large"
           //   enterButton="Search"
