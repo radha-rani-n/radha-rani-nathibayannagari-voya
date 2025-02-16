@@ -1,33 +1,51 @@
 import { Input } from "antd";
+import { useRef } from "react";
 
 import { Button } from "antd";
-import { useState } from "react";
+import axios from "axios";
+// import axios from "axios";
+
 const PlanTrip = () => {
-  const [tripName, setTripName] = useState(null);
-  const [placeName, setPlaceName] = useState(null);
-  const [fromDate, setFromDate] = useState(null);
-  const [toDate, setToDate] = useState(null);
-  const [travellerCount, setTravellerCount] = useState(null);
   const API_URL = import.meta.env.VITE_API_URL;
 
-  const handleOnFormSubmit = () => {};
+  const formRef = useRef<HTMLFormElement>(null);
+  //   const tripDatavalidation = (data:object) => {
+  //     let errors={};
+  //     Object.entries(data).forEach(([key,value])=>{
+  //       if(!value.trim()){
+  //         errors[key]="This field is required"
+  //       }
+  // return Object.keys(errors).length ===0;
+  //     })
+  //   };
+  const handleOnFormSubmit = async (e: SubmitEvent) => {
+    e.preventDefault();
+    const form = formRef.current;
+    const tripData = {
+      trip_name: form?.tripName.value,
+      place_name: form?.placeName.value,
+      from_date: form?.fromDate.value,
+      to_date: form?.toDate.value,
+      no_of_travellers: form?.noOfTravellers.value,
+    };
+    console.log(tripData);
+    try {
+      const postTrip = await axios.post(`${API_URL}/trips/addTrip`, tripData);
+      form?.reset();
+    } catch (e) {
+      console.error(`Cannot add new trip data :error: ${e}`);
+    }
+  };
 
-  const handleTripName = () => {};
-  const handlePlaceName = () => {};
-
-  const handleFromDate = () => {};
-
-  const handleToDate = () => {};
-  const handleTravellers = () => {};
   return (
-    <form onSubmit={handleOnFormSubmit}>
+    <form ref={formRef}>
       <label>
         Trip Name:
         <Input
           type="text"
           placeholder="Enter trip name"
           size="large"
-          onChange={handleTripName}
+          name="tripName"
         />
       </label>
       <label>
@@ -36,16 +54,16 @@ const PlanTrip = () => {
           type="text"
           placeholder="Enter place name"
           size="large"
-          onChange={handlePlaceName}
+          name="placeName"
         />
       </label>
       <label>
         From Date:
-        <Input type="date" size="large" onChange={handleFromDate} />
+        <Input type="date" size="large" name="fromDate" />
       </label>
       <label>
         To Date:
-        <Input type="date" size="large" onChange={handleToDate} />
+        <Input type="date" size="large" name="toDate" />
       </label>
       <label>
         No Of Travellers:
@@ -53,10 +71,10 @@ const PlanTrip = () => {
           type="number"
           placeholder="Enter no. of travellers"
           size="large"
-          onChange={handleTravellers}
+          name="noOfTravellers"
         />
       </label>
-      <Button>Save Trip</Button>
+      <Button onClick={handleOnFormSubmit}>Save Trip</Button>
     </form>
   );
 };
