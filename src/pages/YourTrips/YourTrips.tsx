@@ -24,7 +24,11 @@ const YourTrips = () => {
       }
     };
     fetchTrips();
-  }, [trips]);
+  }, [trips, API_URL]);
+  const handleDeleteTrip = (id: number) => {
+    axios.delete(`${API_URL}/trips/${id}`);
+  };
+
   if (!trips) {
     return <>Loading..</>;
   }
@@ -41,6 +45,9 @@ const YourTrips = () => {
             <Link to={`/trips/${trip.id}/edit`}>
               <button>edit</button>
             </Link>
+            <button onClick={() => handleDeleteTrip(`${trip.id}`)}>
+              Delete Trip
+            </button>
           </li>
         ))}
       </ul>
