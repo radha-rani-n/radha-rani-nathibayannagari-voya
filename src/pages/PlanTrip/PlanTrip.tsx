@@ -1,81 +1,185 @@
-import { Input } from "antd";
+import { Input, Form, DatePicker, notification } from "antd";
 import { useRef } from "react";
-
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Button } from "antd";
 import axios from "axios";
-// import axios from "axios";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
+const dateFormat = "YYYY-MM-DD";
+
+const PlanTripSchema = z.object({
+  tripName: z.string({
+    required_error: "TripName is reqired",
+  }),
+  placeName: z
+    .string({
+      required_error: "PlaceName is required",
+    })
+    .regex(new RegExp("[a-zA-Z]+"), "Place name is not of format [a-zA-Z]+"),
+  fromDate: z.coerce.date({
+    required_error: "FromDate is required",
+  }),
+  toDate: z.coerce.date({
+    required_error: "To date is required!",
+  }),
+  noOfTravellers: z.coerce
+    .number({
+      required_error: "Number of travellers cannot be empty!",
+    })
+    .nonnegative(),
+});
+type PlanTripSchemaType = z.infer<typeof PlanTripSchema>;
 const PlanTrip = () => {
+  // const formRef = useRef<HTMLFormElement>(null);
   const API_URL = import.meta.env.VITE_API_URL;
 
-  const formRef = useRef<HTMLFormElement>(null);
-  //   const tripDatavalidation = (data:object) => {
-  //     let errors={};
-  //     Object.entries(data).forEach(([key,value])=>{
-  //       if(!value.trim()){
-  //         errors[key]="This field is required"
-  //       }
-  // return Object.keys(errors).length ===0;
-  //     })
-  //   };
-  const handleOnFormSubmit = async (e: SubmitEvent) => {
-    e.preventDefault();
-    const form = formRef.current;
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<PlanTripSchemaType>({ resolver: zodResolver(PlanTripSchema) });
+
+  const [api, contextHolder] = notification.useNotification();
+
+  type NotificationType = "success" | "info" | "warning" | "error";
+
+  const openNotification = (message: string, type: NotificationType) => {
+    api[type]({
+      message: "Trip Plan Update",
+      description: message,
+      duration: 4,
+    });
+  };
+
+  const handleOnFormSubmit: SubmitHandler<PlanTripSchemaType> = async (
+    data
+  ) => {
+    // const form = formRef.current;
     const tripData = {
-      trip_name: form?.tripName.value,
-      place_name: form?.placeName.value,
-      from_date: form?.fromDate.value,
-      to_date: form?.toDate.value,
-      no_of_travellers: form?.noOfTravellers.value,
+      trip_name: data.tripName,
+      place_name: data.placeName,
+      from_date: data.fromDate.toISOString().substring(0, 10),
+      to_date: data.toDate.toISOString().substring(0, 10),
+      no_of_travellers: data.noOfTravellers,
     };
+
     console.log(tripData);
+
     try {
       const postTrip = await axios.post(`${API_URL}/trips/addTrip`, tripData);
-      form?.reset();
+      reset();
+      openNotification("Trip Updated Successfully!", "info");
     } catch (e) {
       console.error(`Cannot add new trip data :error: ${e}`);
+      openNotification("There was an error!", "error");
     }
   };
 
   return (
-    <form ref={formRef}>
-      <label>
-        Trip Name:
-        <Input
-          type="text"
-          placeholder="Enter trip name"
-          size="large"
-          name="tripName"
-        />
-      </label>
-      <label>
-        Place Name:
-        <Input
-          type="text"
-          placeholder="Enter place name"
-          size="large"
-          name="placeName"
-        />
-      </label>
-      <label>
-        From Date:
-        <Input type="date" size="large" name="fromDate" />
-      </label>
-      <label>
-        To Date:
-        <Input type="date" size="large" name="toDate" />
-      </label>
-      <label>
-        No Of Travellers:
-        <Input
-          type="number"
-          placeholder="Enter no. of travellers"
-          size="large"
-          name="noOfTravellers"
-        />
-      </label>
-      <Button onClick={handleOnFormSubmit}>Save Trip</Button>
-    </form>
+    <>
+      {contextHolder}
+      <Form onFinish={handleSubmit(handleOnFormSubmit)}>
+        <Form.Item label="Trip Name:">
+          <Controller
+            name="tripName"
+            control={control}
+            render={({ field }) => <Input {...field}></Input>}
+          />
+        </Form.Item>
+        {errors.tripName && (
+          <span
+            style={{
+              color: "red",
+            }}
+          >
+            {errors.tripName.message}
+          </span>
+        )}
+        <Form.Item label="Place Name:">
+          <Controller
+            name="placeName"
+            control={control}
+            render={({ field }) => <Input {...field}></Input>}
+          />
+        </Form.Item>
+        {errors.placeName && (
+          <span
+            style={{
+              color: "red",
+            }}
+          >
+            {errors.placeName.message}
+          </span>
+        )}
+        <Form.Item label="From Date:">
+          <Controller
+            name="fromDate"
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                {...field}
+                onChange={(date) => field.onChange(date)}
+                format={dateFormat}
+              ></DatePicker>
+            )}
+          />
+        </Form.Item>
+        {errors.fromDate && (
+          <span
+            style={{
+              color: "red",
+            }}
+          >
+            {errors.fromDate.message}
+          </span>
+        )}
+        <Form.Item label="To Date:">
+          <Controller
+            name="toDate"
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                {...field}
+                onChange={(date) => field.onChange(date)}
+              ></DatePicker>
+            )}
+          />
+        </Form.Item>
+        {errors.toDate && (
+          <span
+            style={{
+              color: "red",
+            }}
+          >
+            {errors.toDate.message}
+          </span>
+        )}
+        <Form.Item label="No of Travellers:">
+          <Controller
+            name="noOfTravellers"
+            control={control}
+            render={({ field }) => <Input {...field}></Input>}
+          />
+        </Form.Item>
+        {errors.noOfTravellers && (
+          <span
+            style={{
+              color: "red",
+            }}
+          >
+            {errors.noOfTravellers.message}
+          </span>
+        )}
+
+        <Form.Item label={null}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </>
   );
 };
 export default PlanTrip;
