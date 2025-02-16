@@ -70,7 +70,7 @@ const PlanTrip = () => {
     try {
       const postTrip = await axios.post(`${API_URL}/trips/addTrip`, tripData);
       reset();
-      openNotification("Trip Updated Successfully!", "info");
+      openNotification("Trip Added Successfully!", "info");
     } catch (e) {
       console.error(`Cannot add new trip data :error: ${e}`);
       openNotification("There was an error!", "error");

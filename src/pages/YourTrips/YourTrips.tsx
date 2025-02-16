@@ -34,7 +34,10 @@ const YourTrips = () => {
       <ul>
         {trips.map((trip, i: number) => (
           <li key={i}>
-            <div>{trip.trip_name}</div>
+            <div>
+              {trip.trip_name}
+              {trip.id}
+            </div>
             <Link to={`/trips/${trip.id}/edit`}>
               <button>edit</button>
             </Link>

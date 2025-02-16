@@ -5,6 +5,7 @@ import YourTrips from "./pages/YourTrips/YourTrips";
 import HomePage from "./pages/HomePage/HomePage";
 // import SearchResult from "./pages/SearchResult/SearchResult";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import EditTrip from "./pages/EditTrip/EditTrip";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +16,7 @@ function App() {
           <Route path="/plan-trip" element={<PlanTrip />} />
           <Route path="/your-trips" element={<YourTrips />} />
           {/* <Route path="/search-result" element={<SearchResult />} /> */}
+          <Route path="/trips/:id/edit" element={<EditTrip />} />
         </Routes>
       </main>
       <footer>Footer</footer>
