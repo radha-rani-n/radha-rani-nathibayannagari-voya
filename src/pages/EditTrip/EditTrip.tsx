@@ -99,9 +99,7 @@ const EditTrip = () => {
           <Controller
             name="tripName"
             control={control}
-            render={({ field }) => (
-              <Input {...field} value={field.value}></Input>
-            )}
+            render={({ field }) => <Input {...field}></Input>}
           />
         </Form.Item>
         {errors.tripName && (
