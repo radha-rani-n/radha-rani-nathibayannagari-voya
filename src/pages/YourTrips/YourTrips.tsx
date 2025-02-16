@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./YourTrips.scss";
-
+import { Link } from "react-router-dom";
 interface tripData {
   trip_name: string;
   place_name: string;
   from_date: Date;
   to_date: Date;
   no_of_travellers: number;
+  id: number;
 }
 
 const YourTrips = () => {
@@ -32,7 +33,12 @@ const YourTrips = () => {
       <h2>Your planned trips</h2>
       <ul>
         {trips.map((trip, i: number) => (
-          <li key={i}>{trip.trip_name}</li>
+          <li key={i}>
+            <div>{trip.trip_name}</div>
+            <Link to={`/trips/${trip.id}/edit`}>
+              <button>edit</button>
+            </Link>
+          </li>
         ))}
       </ul>
     </section>
