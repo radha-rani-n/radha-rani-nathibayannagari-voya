@@ -19,7 +19,6 @@ const PlanTripButton = () => {
     }, 1000);
   };
   const handleCancel = () => {
-    console.log("Clicked cancel button");
     setOpen(false);
   };
 
