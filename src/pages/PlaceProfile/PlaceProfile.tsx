@@ -1,9 +1,9 @@
-import { Input } from "antd";
+import { Input, Button } from "antd";
 import { useLocation } from "react-router-dom";
 import "./PlaceProfile.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import SearchResult from "./PlaceProfile";
+
 const SearchBar = () => {
   //   const API_URL = import.meta.env.VITE_API_URL;
 

@@ -7,13 +7,13 @@ const HomePage = () => {
   return (
     <>
       {/* <Link to={"/search-result"}> */}
-      <SearchBar />
+
       <SearchBarAutoComplete />
       {/* </Link> */}
 
-      <Link to="/plan-trip">
+      {/* <Link to="/plan-trip">
         <button>Plan a trip</button>
-      </Link>
+      </Link> */}
     </>
   );
 };

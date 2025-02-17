@@ -1,4 +1,5 @@
 import { AutoComplete } from "antd";
+import "./SearchAuto.scss";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +9,7 @@ type FetchPlacesType = { value: string }[];
 const SearchBar = () => {
   const [value, setValue] = useState("");
   const [options, setOptions] = useState<{ value: string }[]>([]);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const onSearch = (searchText: string) => {
     if (searchText.length > 0) {
       axios
@@ -42,6 +43,7 @@ const SearchBar = () => {
         onSearch={onSearch}
         onChange={onChange}
         placeholder="control mode"
+        className="search-bar"
       />
     </>
   );
