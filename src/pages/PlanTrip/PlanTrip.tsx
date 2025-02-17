@@ -30,7 +30,13 @@ const PlanTripSchema = z.object({
     .nonnegative(),
 });
 type PlanTripSchemaType = z.infer<typeof PlanTripSchema>;
-const PlanTrip = () => {
+const PlanTrip = ({
+  handleOk,
+  handleCancel,
+}: {
+  handleOk: () => void;
+  handleCancel: () => void;
+}) => {
   // const formRef = useRef<HTMLFormElement>(null);
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -71,6 +77,7 @@ const PlanTrip = () => {
       const postTrip = await axios.post(`${API_URL}/trips/addTrip`, tripData);
       reset();
       openNotification("Trip Added Successfully!", "info");
+      handleOk();
     } catch (e) {
       console.error(`Cannot add new trip data :error: ${e}`);
       openNotification("There was an error!", "error");
@@ -172,10 +179,14 @@ const PlanTrip = () => {
             {errors.noOfTravellers.message}
           </span>
         )}
-
         <Form.Item label={null}>
           <Button type="primary" htmlType="submit">
             Submit
+          </Button>
+        </Form.Item>
+        <Form.Item label={null}>
+          <Button type="default" onClick={handleCancel}>
+            Cancel
           </Button>
         </Form.Item>
       </Form>

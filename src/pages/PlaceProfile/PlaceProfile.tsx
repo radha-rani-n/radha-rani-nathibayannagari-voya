@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import "./PlaceProfile.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import PlanTripButton from "../../components/PlanTripButton/PlanTripButton";
 
 const SearchBar = () => {
   //   const API_URL = import.meta.env.VITE_API_URL;
@@ -32,6 +33,7 @@ const SearchBar = () => {
           <li key={i}>{data.name}</li>
         ))}
       </ul>
+      <PlanTripButton />
     </>
   );
 };

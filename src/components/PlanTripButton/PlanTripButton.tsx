@@ -1,5 +1,6 @@
 import { Button, Modal } from "antd";
 import { useState } from "react";
+import PlanTrip from "../../pages/PlanTrip/PlanTrip";
 
 const PlanTripButton = () => {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ const PlanTripButton = () => {
     setTimeout(() => {
       setOpen(false);
       setConfirmLoading(false);
-    }, 2000);
+    }, 1000);
   };
   const handleCancel = () => {
     console.log("Clicked cancel button");
@@ -29,12 +30,14 @@ const PlanTripButton = () => {
       </Button>
       <Modal
         title="Title"
+        okText="submit"
         open={open}
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
+        footer={[]}
       >
-        <p>{modalText}</p>
+        <PlanTrip handleOk={handleOk} handleCancel={handleCancel} />
       </Modal>
     </>
   );
