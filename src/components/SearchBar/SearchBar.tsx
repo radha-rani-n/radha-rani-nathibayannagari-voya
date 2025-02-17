@@ -30,7 +30,7 @@ const SearchBar = () => {
           onChange={(e) => setSearchText(e.target.value)}
         />
       </form>
-      {searchData && <SearchResult results={searchData} />}
+      {searchData && <SearchResult results={searchData} query={searchText} />}
     </>
   );
 };

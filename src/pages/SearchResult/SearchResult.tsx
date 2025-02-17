@@ -5,11 +5,12 @@ interface Result {
 }
 interface SearchResultProps {
   results: Result[];
+  query: string;
 }
-const SearchResult = ({ results }: SearchResultProps) => {
+const SearchResult = ({ results, query }: SearchResultProps) => {
   return (
     <article>
-      <Link to="/place-search-more-details">
+      <Link to="/place-search-more-details" state={{ query: query }}>
         <button>Click to see more details</button>
       </Link>
       <ul>
