@@ -26,7 +26,7 @@ const PlanTripButton = () => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Open Modal with async logic
+        Plan A Trip
       </Button>
       <Modal
         title="Title"
