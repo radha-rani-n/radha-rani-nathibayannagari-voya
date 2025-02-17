@@ -5,8 +5,9 @@ import YourTrips from "./pages/YourTrips/YourTrips";
 import HomePage from "./pages/HomePage/HomePage";
 // import SearchResult from "./pages/SearchResult/SearchResult";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PlaceSearchMoreDetails from "./pages/PlaceSearchMoreDetails/PlaceSearchMoreDetails";
+
 import EditTrip from "./pages/EditTrip/EditTrip";
+import PlaceProfile from "./pages/PlaceProfile/PlaceProfile";
 function App() {
   return (
     <BrowserRouter>
@@ -18,10 +19,7 @@ function App() {
           <Route path="/your-trips" element={<YourTrips />} />
           {/* <Route path="/search-result" element={<SearchResult />} /> */}
           <Route path="/trips/:id/edit" element={<EditTrip />} />
-          <Route
-            path="/place-search-more-details"
-            element={<PlaceSearchMoreDetails />}
-          />
+          <Route path="/places/:id" element={<PlaceProfile />} />
         </Routes>
       </main>
       <footer>Footer</footer>

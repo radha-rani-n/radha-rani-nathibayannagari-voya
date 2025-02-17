@@ -1,5 +1,6 @@
 import "./HomePage.scss";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import SearchBar from "../PlaceProfile/PlaceProfile";
+import SearchBarAutoComplete from "../../components/SearchAuto/SearchAuto";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
@@ -7,6 +8,7 @@ const HomePage = () => {
     <>
       {/* <Link to={"/search-result"}> */}
       <SearchBar />
+      <SearchBarAutoComplete />
       {/* </Link> */}
 
       <Link to="/plan-trip">
