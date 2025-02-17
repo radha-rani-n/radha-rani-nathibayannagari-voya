@@ -6,7 +6,7 @@ const PlaceSearchDetails = () => {
   const location = useLocation();
   const { query } = location.state;
   console.log(query);
-  const [weather, setWeather] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
   useEffect(() => {
     const getWeatherData = async () => {
       const { data } = await axios.get(
@@ -14,11 +14,20 @@ const PlaceSearchDetails = () => {
 &q=${query}`
       );
       console.log(data);
-      setWeather(data.current.temp_c);
+      setWeatherData(data);
     };
     getWeatherData();
-  });
-  return <p>{weather}</p>;
+  }, [query]);
+  if (!weatherData) {
+    return <p>Loading..</p>;
+  }
+  return (
+    <article>
+      <p>{weatherData.location.name}</p>
+      <p>{weatherData.location.region}</p>
+      <p>Current Temparature: {weatherData.current.temp_c}</p>
+    </article>
+  );
 };
 
 export default PlaceSearchDetails;
