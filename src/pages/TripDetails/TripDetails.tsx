@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./TripDetails.scss";
 const TripDetails = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const { id } = useParams();
@@ -23,8 +24,8 @@ const TripDetails = () => {
     <article className="trip-data">
       <h3 className="trip-data__title">{tripdata.trip.trip_name}</h3>
       <ul className="trip-data__places">
-        {tripdata.places.map((place) => (
-          <li className="trip-data__place">
+        {tripdata.places.map((place, i) => (
+          <li className="trip-data__place" key={i}>
             <img
               className="trip-data__place-img"
               src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${place.photo_reference}&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
