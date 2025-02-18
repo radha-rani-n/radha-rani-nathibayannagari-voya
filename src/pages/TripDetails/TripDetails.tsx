@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Card } from "antd";
 import "./TripDetails.scss";
 const TripDetails = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const { id } = useParams();
-  const [tripdata, setTripData] = useState(null);
+  const [tripData, setTripData] = useState(null);
   useEffect(() => {
     const getTripData = async () => {
       try {
@@ -17,14 +18,25 @@ const TripDetails = () => {
     };
     getTripData();
   }, []);
-  if (!tripdata) {
+  if (!tripData) {
     return <p>Loading...</p>;
   }
   return (
     <article className="trip-data">
-      <h3 className="trip-data__title">{tripdata.trip.trip_name}</h3>
+      {/* <h3 className="trip-data__title">{tripData.trip.trip_name}</h3> */}
+
+      <Card
+        title={tripData.trip.trip_name}
+        variant="borderless"
+        style={{ width: 300 }}
+      >
+        <h4>Place Name: {tripData.trip.place_name}</h4>
+        <p>From Date: {tripData.trip.from_date}</p>
+        <p>To Date: {tripData.trip.to_date}</p>
+        <p>No. Of Travellers: {tripData.trip.no_of_travellers}</p>
+      </Card>
       <ul className="trip-data__places">
-        {tripdata.places.map((place, i) => (
+        {tripData.places.map((place, i) => (
           <li className="trip-data__place" key={i}>
             <img
               className="trip-data__place-img"
