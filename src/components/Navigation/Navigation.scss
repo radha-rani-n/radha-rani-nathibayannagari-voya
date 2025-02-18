@@ -1,9 +1,24 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
 .nav-bar {
   &__list {
     display: flex;
     gap: 3rem;
   }
+  &__item-link {
+    text-decoration: none;
+  }
   &__item {
     list-style: none;
+    color: $rose;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 20px;
+
+    &:hover {
+      background-color: #fbeef4;
+    }
   }
 }

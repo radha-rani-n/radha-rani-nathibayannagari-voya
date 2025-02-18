@@ -5,16 +5,17 @@
 
 .header {
   width: 100vw;
-  padding: 2rem;
+  padding: 3rem;
   display: flex;
   justify-content: space-between;
   position: fixed;
-  background-color: #db3069;
+  align-items: center;
   top: 0;
   height: 119px;
 
   &__title {
     font-size: 48px;
+    color: $rose;
   }
   &__link {
     text-decoration: none;
