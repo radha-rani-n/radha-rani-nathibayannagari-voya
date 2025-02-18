@@ -93,14 +93,34 @@ const SearchBar = () => {
           (data, i: number) =>
             i < 4 && (
               <li key={i} className="place-profile__place">
-                <img
-                  className="place-profile__place-img"
-                  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${
-                    data.photos && data.photos[0].photo_reference
-                  }&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
-                />
-                <p className="place-profile__place-name">{data.name}</p>
-                <button onClick={() => handlePlaceOnClick(data)}>+</button>
+                <div className="place-profile__img-name">
+                  <img
+                    className="place-profile__place-img"
+                    src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${
+                      data.photos && data.photos[0].photo_reference
+                    }&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+                  />
+                  <p className="place-profile__place-name">{data.name}</p>
+                </div>
+                <div onClick={() => handlePlaceOnClick(data)}>
+                  <svg
+                    class="w-6 h-6 text-gray-800 dark:text-white"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                </div>
               </li>
             )
         )}

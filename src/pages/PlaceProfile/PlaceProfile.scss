@@ -13,7 +13,11 @@
   &__place {
     position: relative;
     list-style: none;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
     width: fit-content;
     border-radius: 20px;
 
@@ -29,6 +33,9 @@
       opacity: 40%;
     }
   }
+  &__img-name {
+    position: relative;
+  }
   &__place-img {
     border-radius: 20px;
     width: 250px;
@@ -38,8 +45,8 @@
   &__place-name {
     position: absolute;
     right: 5px;
-    bottom: 8px;
-    padding: 0.5rem 1.5rem;
+    bottom: 10px;
+    padding: 0.5rem 1rem;
     color: white;
     z-index: 2;
   }
