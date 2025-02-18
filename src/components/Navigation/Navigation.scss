@@ -16,7 +16,9 @@
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 20px;
-
+    &--active {
+      background-color: #fbeef4;
+    }
     &:hover {
       background-color: #fbeef4;
     }
