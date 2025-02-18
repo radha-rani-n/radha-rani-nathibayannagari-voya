@@ -66,7 +66,7 @@ const EditTrip = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [id, API_URL, setValue]);
+  }, [id, API_URL]);
 
   const handleOnFormSubmit: SubmitHandler<PlanTripSchemaType> = async (
     data

@@ -8,25 +8,26 @@ interface tripData {
   from_date: Date;
   to_date: Date;
   no_of_travellers: number;
-  id: number;
+  trip_id: number;
 }
 
 const YourTrips = () => {
   const [trips, setTrips] = useState<tripData[] | null>(null);
   const API_URL = import.meta.env.VITE_API_URL;
+  const fetchTrips = async () => {
+    try {
+      const { data } = await axios.get(`${API_URL}/trips`);
+      setTrips(data);
+    } catch (e) {
+      console.error(`Error getting trips : ${e}`);
+    }
+  };
   useEffect(() => {
-    const fetchTrips = async () => {
-      try {
-        const { data } = await axios.get(`${API_URL}/trips`);
-        setTrips(data);
-      } catch (e) {
-        console.error(`Error getting trips : ${e}`);
-      }
-    };
     fetchTrips();
-  }, [trips, API_URL]);
-  const handleDeleteTrip = (id: number) => {
-    axios.delete(`${API_URL}/trips/${id}`);
+  }, [API_URL]);
+  const handleDeleteTrip = async (id: number) => {
+    await axios.delete(`${API_URL}/trips/${id}`);
+    fetchTrips();
   };
 
   if (!trips) {
@@ -38,14 +39,11 @@ const YourTrips = () => {
       <ul>
         {trips.map((trip, i: number) => (
           <li key={i}>
-            <div>
-              {trip.trip_name}
-              {trip.id}
-            </div>
-            <Link to={`/trips/${trip.id}/edit`}>
+            <div>{trip.trip_name}</div>
+            <Link to={`/trips/${trip.trip_id}/edit`}>
               <button>edit</button>
             </Link>
-            <button onClick={() => handleDeleteTrip(`${trip.id}`)}>
+            <button onClick={() => handleDeleteTrip(`${trip.trip_id}`)}>
               Delete Trip
             </button>
           </li>
