@@ -5,16 +5,16 @@
 
 .header {
   width: 100vw;
-  padding: 3rem;
+  padding: 2rem 3rem;
   display: flex;
   justify-content: space-between;
   position: fixed;
   align-items: center;
   top: 0;
-  height: 119px;
+  height: 90px;
 
   &__title {
-    font-size: 48px;
+    font-size: 40px;
     color: $rose;
   }
   &__link {
