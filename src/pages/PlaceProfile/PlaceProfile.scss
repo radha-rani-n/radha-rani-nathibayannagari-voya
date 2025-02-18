@@ -1,17 +1,36 @@
-// ul {
-//   display: flex;
-//   flex-direction: column;
-//   gap: 1.5rem;
-//   padding: 2rem;
-// }
-// li {
-//   display: flex;
-//   flex-direction: column;
-//   // background-color: aquamarine;
-//   width: fit-content;
-//   border-radius: 20px;
-//   padding: 1rem;
-// }
-// li img {
-//   border-radius: 0 0 20px 20px;
-// }
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+
+.place-profile {
+  &__places {
+    display: flex;
+
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+  &__place {
+    position: relative;
+    list-style: none;
+
+    width: fit-content;
+    border-radius: 30px;
+
+    // background-color: #f8eef2;
+  }
+  &__place-img {
+    border-radius: 30px;
+    width: 250px;
+    height: 150px;
+    object-position: center;
+  }
+  &__place-name {
+    position: absolute;
+  }
+}
+.plan-trip-button {
+  position: absolute;
+  top: 10px;
+  right: 4rem;
+}

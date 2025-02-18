@@ -5,7 +5,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import type { MenuProps } from "antd";
 import PlanTripButton from "../../components/PlanTripButton/PlanTripButton";
-import { Button, Dropdown, message, Modal, Space } from "antd";
+import { Button, Dropdown, Modal, Space } from "antd";
 
 const SearchBar = () => {
   //   const API_URL = import.meta.env.VITE_API_URL;
@@ -87,27 +87,25 @@ const SearchBar = () => {
   });
 
   return (
-    <>
-      <ul>
-        {searchData.map((data, i: number) => (
-          <li key={i}>
-            <h3>{data.name}</h3>
-            {/* <img
-              src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${
-                data.photos && data.photos[0].photo_reference
-              }&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
-            /> */}
-            <button onClick={() => handlePlaceOnClick(data)}>+</button>
-          </li>
-        ))}
+    <section className="place-profile">
+      <ul className="place-profile__places">
+        {searchData.map(
+          (data, i: number) =>
+            i < 4 && (
+              <li key={i} className="place-profile__place">
+                <img
+                  className="place-profile__place-img"
+                  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${
+                    data.photos && data.photos[0].photo_reference
+                  }&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+                />
+                <p className="place-profile__place-name">{data.name}</p>
+                <button onClick={() => handlePlaceOnClick(data)}>+</button>
+              </li>
+            )
+        )}
       </ul>
-      <PlanTripButton
-        refreshItems={() => {
-          axios.get("http://localhost:8080/trips").then((response) => {
-            setItems(response.data);
-          });
-        }}
-      />
+
       <Modal
         title="Add place to trip"
         okText="submit"
@@ -129,7 +127,16 @@ const SearchBar = () => {
           Add Place
         </Button>
       </Modal>
-    </>
+      <div className="plan-trip-button">
+        <PlanTripButton
+          refreshItems={() => {
+            axios.get("http://localhost:8080/trips").then((response) => {
+              setItems(response.data);
+            });
+          }}
+        />
+      </div>
+    </section>
   );
 };
 export default SearchBar;
