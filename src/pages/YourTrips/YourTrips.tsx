@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import "./YourTrips.scss";
 import { Link } from "react-router-dom";
 interface tripData {
@@ -31,23 +33,32 @@ const YourTrips = () => {
   };
 
   if (!trips) {
-    return <>Loading..</>;
+    return <p>Loading..</p>;
+  }
+  if (trips.length < 1) {
+    return <h2>You don't have any planned trips</h2>;
   }
   return (
-    <section>
-      <h2>Your planned trips</h2>
-      <ul>
+    <section className="trips">
+      <h2 className="trips__title">Your planned trips</h2>
+
+      <ul className="trips__list">
         {trips.map((trip, i: number) => (
-          <li key={i}>
-            <Link to={`/trips/${trip.trip_id}`}>
-              <div>{trip.trip_name}</div>
+          <li key={i} className="trips__list-item">
+            <Link to={`/trips/${trip.trip_id}`} className="trips__trip-name">
+              <h3>{trip.trip_name}</h3>
             </Link>
-            <Link to={`/trips/${trip.trip_id}/edit`}>
-              <button>edit</button>
+            <Link
+              to={`/trips/${trip.trip_id}/edit`}
+              className="trips__edit-trip"
+            >
+              <EditOutlined />
             </Link>
-            <button onClick={() => handleDeleteTrip(`${trip.trip_id}`)}>
-              Delete Trip
-            </button>
+
+            <DeleteOutlined
+              onClick={() => handleDeleteTrip(`${trip.trip_id}`)}
+              className="trips__delete-trip"
+            />
           </li>
         ))}
       </ul>
