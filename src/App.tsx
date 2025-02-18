@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import EditTrip from "./pages/EditTrip/EditTrip";
 import PlaceProfile from "./pages/PlaceProfile/PlaceProfile";
+import TripDetails from "./pages/TripDetails/TripDetails";
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
           {/* <Route path="/search-result" element={<SearchResult />} /> */}
           <Route path="/trips/:id/edit" element={<EditTrip />} />
           <Route path="/places/:id" element={<PlaceProfile />} />
+          <Route path="/trips/:id" element={<TripDetails />} />
         </Routes>
       </main>
       <footer>Footer</footer>

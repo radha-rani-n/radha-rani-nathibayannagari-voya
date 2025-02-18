@@ -2,7 +2,7 @@ import { Button, Modal } from "antd";
 import { useState } from "react";
 import PlanTrip from "../../pages/PlanTrip/PlanTrip";
 
-const PlanTripButton = () => {
+const PlanTripButton = ({ refreshItems }: { refreshItems: () => void }) => {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
@@ -36,7 +36,13 @@ const PlanTripButton = () => {
         onCancel={handleCancel}
         footer={[]}
       >
-        <PlanTrip handleOk={handleOk} handleCancel={handleCancel} />
+        <PlanTrip
+          handleOk={() => {
+            refreshItems();
+            handleOk();
+          }}
+          handleCancel={handleCancel}
+        />
       </Modal>
     </>
   );

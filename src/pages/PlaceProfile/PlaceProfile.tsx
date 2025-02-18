@@ -101,7 +101,13 @@ const SearchBar = () => {
           </li>
         ))}
       </ul>
-      <PlanTripButton />
+      <PlanTripButton
+        refreshItems={() => {
+          axios.get("http://localhost:8080/trips").then((response) => {
+            setItems(response.data);
+          });
+        }}
+      />
       <Modal
         title="Add place to trip"
         okText="submit"
