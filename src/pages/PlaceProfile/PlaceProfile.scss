@@ -15,18 +15,33 @@
     list-style: none;
 
     width: fit-content;
-    border-radius: 30px;
+    border-radius: 20px;
 
-    // background-color: #f8eef2;
+    &::after {
+      position: absolute;
+      width: 250px;
+      height: 150px;
+      content: "";
+      top: 0;
+      left: 0;
+      background: linear-gradient(#ffffff, #000000);
+      border-radius: 20px;
+      opacity: 40%;
+    }
   }
   &__place-img {
-    border-radius: 30px;
+    border-radius: 20px;
     width: 250px;
     height: 150px;
-    object-position: center;
   }
+
   &__place-name {
     position: absolute;
+    right: 5px;
+    bottom: 8px;
+    padding: 0.5rem 1.5rem;
+    color: white;
+    z-index: 2;
   }
 }
 .plan-trip-button {
