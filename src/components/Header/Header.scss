@@ -4,7 +4,8 @@
 @use "../../styles/partials/mixins" as *;
 
 .header {
-  width: 100vw;
+  max-width: $desktop-max-width;
+  width: 100%;
   padding: 2rem 3rem;
   display: flex;
   justify-content: space-between;
@@ -13,10 +14,26 @@
   top: 0;
   height: 90px;
 
+  z-index: 10;
+
   &__title {
     font-size: 40px;
+    color: $persian-green;
+    font-weight: 500;
+    font-family: "Apple Chancery";
+  }
+  &__title-1 {
     color: $rose;
   }
+  // &__title-2 {
+  //   color: $persian-green;
+  // }
+  // &__title-3 {
+  //   color: $ceruean;
+  // }
+  // &__title-4 {
+  //   color: $cobalt-blue;
+  // }
   &__link {
     text-decoration: none;
   }

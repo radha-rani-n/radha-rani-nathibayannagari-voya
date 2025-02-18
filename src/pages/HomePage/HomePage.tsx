@@ -1,20 +1,12 @@
 import "./HomePage.scss";
-import SearchBar from "../PlaceProfile/PlaceProfile";
+
 import SearchBarAutoComplete from "../../components/SearchAuto/SearchAuto";
-import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <>
-      {/* <Link to={"/search-result"}> */}
-
+    <main className="home">
       <SearchBarAutoComplete />
-      {/* </Link> */}
-
-      {/* <Link to="/plan-trip">
-        <button>Plan a trip</button>
-      </Link> */}
-    </>
+    </main>
   );
 };
 export default HomePage;

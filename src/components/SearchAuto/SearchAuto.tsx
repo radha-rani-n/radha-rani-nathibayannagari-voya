@@ -1,4 +1,4 @@
-import { AutoComplete } from "antd";
+import { AutoComplete, ConfigProvider } from "antd";
 import "./SearchAuto.scss";
 import axios from "axios";
 import { useState } from "react";
@@ -33,18 +33,27 @@ const SearchBar = () => {
   };
 
   return (
-    <>
+    <ConfigProvider
+      theme={{
+        token: {
+          borderRadius: 20,
+          padding: 20,
+          controlHeight: 40,
+          colorBorder: "#db3069",
+          colorTextPlaceholder: "#db3069",
+        },
+      }}
+    >
       <AutoComplete
         value={value}
         options={options}
-        style={{ width: 200 }}
         onSelect={onSelect}
         onSearch={onSearch}
         onChange={onChange}
-        placeholder="control mode"
+        placeholder="Enter Place"
         className="search-bar"
       />
-    </>
+    </ConfigProvider>
   );
 };
 export default SearchBar;

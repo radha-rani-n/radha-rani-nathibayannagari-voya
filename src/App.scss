@@ -1,11 +1,14 @@
-// #root {
-//   max-width: 1280px;
-//   margin: 0 auto;
-// }
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
 .main {
   height: 100vh;
-  background-color: antiquewhite;
+
   margin-top: 90px;
+  padding: 3rem;
+  box-sizing: border-box;
+  // width: 100vw;
 }
 footer {
   height: 400px;
