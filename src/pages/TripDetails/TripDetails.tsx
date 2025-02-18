@@ -1,12 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Card } from "antd";
 import "./TripDetails.scss";
 const TripDetails = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const { id } = useParams();
   const [tripData, setTripData] = useState(null);
+  function formatDate(timestamp) {
+    const date = new Date(timestamp);
+
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    return `${month < 10 ? "0" + month : month}/${
+      day < 10 ? "0" + day : day
+    }/${year}`;
+  }
   useEffect(() => {
     const getTripData = async () => {
       try {
@@ -23,18 +33,19 @@ const TripDetails = () => {
   }
   return (
     <article className="trip-data">
-      {/* <h3 className="trip-data__title">{tripData.trip.trip_name}</h3> */}
+      <h3 className="trip-data__title">{tripData.trip.trip_name}</h3>
 
-      <Card
+      <div
         title={tripData.trip.trip_name}
         variant="borderless"
         style={{ width: 300 }}
+        className="trip-data__card"
       >
         <h4>Place Name: {tripData.trip.place_name}</h4>
-        <p>From Date: {tripData.trip.from_date}</p>
-        <p>To Date: {tripData.trip.to_date}</p>
+        <p>From Date: {formatDate(tripData.trip.from_date)}</p>
+        <p>To Date:{formatDate(tripData.trip.to_date)}</p>
         <p>No. Of Travellers: {tripData.trip.no_of_travellers}</p>
-      </Card>
+      </div>
       <ul className="trip-data__places">
         {tripData.places.map((place, i) => (
           <li className="trip-data__place" key={i}>

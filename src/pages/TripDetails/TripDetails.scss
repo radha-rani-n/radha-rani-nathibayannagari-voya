@@ -1,11 +1,32 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+
 .trip-data {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  padding: 3rem;
+  background-color: #f8f3f4;
+  border-radius: 20px;
+  filter: drop-shadow(0 0 0.75rem #cbb2b7);
   &__title {
+    font-size: 24px;
+    color: $rose;
+    font-family: "Apple Chancery";
+  }
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
   }
   &__places {
     display: flex;
 
     gap: 1.5rem;
-    padding: 2rem;
   }
   &__place {
     position: relative;
