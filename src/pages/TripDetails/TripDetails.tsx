@@ -20,14 +20,20 @@ const TripDetails = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div>
-      <p>{tripdata.trip.trip_name}</p>
-      <ul>
+    <article className="trip-data">
+      <h3 className="trip-data__title">{tripdata.trip.trip_name}</h3>
+      <ul className="trip-data__places">
         {tripdata.places.map((place) => (
-          <li>{place.place_name}</li>
+          <li className="trip-data__place">
+            <img
+              className="trip-data__place-img"
+              src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${place.photo_reference}&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+            />
+            <p className="trip-data__place-name">{place.place_name}</p>
+          </li>
         ))}
       </ul>
-    </div>
+    </article>
   );
 };
 export default TripDetails;
