@@ -1,9 +1,11 @@
-import { AutoComplete, ConfigProvider } from "antd";
+import { AutoComplete, ConfigProvider, Input } from "antd";
 import "./SearchAuto.scss";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSession } from "@clerk/clerk-react";
+import qs from "qs";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 const SearchBar = () => {
@@ -19,14 +21,19 @@ const SearchBar = () => {
         return;
       }
       axios
-        .get(`${API_URL}/places/auto-complete?input=${searchText}`, {
+        .get(`${API_URL}/places/auto-complete`, {
+          params: {
+            input: searchText,
+          },
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
           const searchData = response.data.map((res) => {
-            return { value: res.description };
+            return {
+              value: res.placePrediction.text.text,
+            };
           });
           setOptions(searchData);
         });
@@ -51,27 +58,32 @@ const SearchBar = () => {
   };
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          borderRadius: 20,
-          padding: 20,
-          controlHeight: 40,
-          colorBorder: "#db3069",
-          colorTextPlaceholder: "#db3069",
-        },
-      }}
+    // <ConfigProvider
+    //   theme={{
+    //     token: {
+    //       borderRadius: 20,
+    //       padding: 20,
+    //       controlHeight: 40,
+    //       colorBorder: "#db3069",
+    //       colorTextPlaceholder: "#db3069",
+    //     },
+    //   }}
+    // >
+    <AutoComplete
+      value={value}
+      options={options}
+      onSelect={onSelect}
+      onSearch={onSearch}
+      onChange={onChange}
+      className="search-bar"
     >
-      <AutoComplete
-        value={value}
-        options={options}
-        onSelect={onSelect}
-        onSearch={onSearch}
-        onChange={onChange}
-        placeholder="Enter Place"
-        className="search-bar"
+      <Input.Search
+        size="large"
+        placeholder="Enter a City or Country"
+        enterButton
       />
-    </ConfigProvider>
+    </AutoComplete>
+    // </ConfigProvider>
   );
 };
 export default SearchBar;

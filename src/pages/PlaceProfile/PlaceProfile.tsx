@@ -43,13 +43,14 @@ const SearchBar = () => {
   const savePlace = async () => {
     const token = await session?.getToken();
     const trip_id = selectedTrip?.trip_id;
-    const { place_id, name, photos } = selectedPlace;
-    const photo_reference =
-      photos && photos.length > 0 && photos[0].photo_reference;
+    const { id, displayName, photos, location } = selectedPlace;
+    const photo_reference = photos && photos.length > 0 && photos[0].name;
     const data = {
-      place_id: place_id,
-      place_name: name,
+      place_id: id,
+      place_name: displayName.text,
       photo_reference: photo_reference,
+      latitude: location.latitude,
+      longitude: location.longitude,
       trip_id: trip_id,
     };
     await axios.post("http://localhost:8080/places/addPlace", data, {
@@ -68,14 +69,13 @@ const SearchBar = () => {
       }
       axios
         .get("http://localhost:8080/places/search", {
-          params: { q: `${searchText}` },
+          params: { q: decodeURIComponent(searchText) },
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
-          setSearchData(response.data.results);
-          console.log(response.data.results);
+          setSearchData(response.data.places);
         });
     },
     [session]
@@ -128,7 +128,6 @@ const SearchBar = () => {
     return <p>Loading...</p>;
   }
 
-  console.log(`sadas: ${items}`);
   const dropDownItems: MenuProps["items"] = items.map((item: any) => {
     return {
       label: <span>{item.trip_name}</span>,
@@ -144,13 +143,15 @@ const SearchBar = () => {
             i < 4 && (
               <li key={i} className="place-profile__place">
                 <div className="place-profile__img-name">
-                  <img
-                    className="place-profile__place-img"
-                    src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${
-                      data.photos && data.photos[0].photo_reference
-                    }&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
-                  />
-                  <p className="place-profile__place-name">{data.name}</p>
+                  {data.photos && data.photos.length > 0 && (
+                    <img
+                      className="place-profile__place-img"
+                      src={`https://places.googleapis.com/v1/${data.photos[0].name}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+                    />
+                  )}
+                  <p className="place-profile__place-name">
+                    {data.displayName.text}
+                  </p>
                 </div>
                 <div onClick={() => handlePlaceOnClick(data)}>
                   <svg
