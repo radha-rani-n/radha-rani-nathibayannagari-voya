@@ -71,10 +71,6 @@ const YourTrips = () => {
 
   return (
     <section className="trips">
-      <p>
-        This session has been active since{" "}
-        {session.lastActiveAt.toLocaleString()}
-      </p>
       <h2 className="trips__title">Your planned trips</h2>
 
       <ul className="trips__list">
