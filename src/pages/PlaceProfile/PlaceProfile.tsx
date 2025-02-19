@@ -138,43 +138,40 @@ const SearchBar = () => {
   return (
     <section className="place-profile">
       <ul className="place-profile__places">
-        {searchData.map(
-          (data, i: number) =>
-            i < 4 && (
-              <li key={i} className="place-profile__place">
-                <div className="place-profile__img-name">
-                  {data.photos && data.photos.length > 0 && (
-                    <img
-                      className="place-profile__place-img"
-                      src={`https://places.googleapis.com/v1/${data.photos[0].name}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
-                    />
-                  )}
-                  <p className="place-profile__place-name">
-                    {data.displayName.text}
-                  </p>
-                </div>
-                <div onClick={() => handlePlaceOnClick(data)}>
-                  <svg
-                    class="w-6 h-6 text-gray-800 dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
-                  </svg>
-                </div>
-              </li>
-            )
-        )}
+        {searchData.map((data, i: number) => (
+          <li key={i} className="place-profile__place">
+            <div className="place-profile__img-name">
+              {data.photos && data.photos.length > 0 && (
+                <img
+                  className="place-profile__place-img"
+                  src={`https://places.googleapis.com/v1/${data.photos[0].name}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+                />
+              )}
+              <p className="place-profile__place-name">
+                {data.displayName.text}
+              </p>
+            </div>
+            <div onClick={() => handlePlaceOnClick(data)}>
+              <svg
+                className="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            </div>
+          </li>
+        ))}
       </ul>
 
       <Modal

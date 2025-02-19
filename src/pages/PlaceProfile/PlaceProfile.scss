@@ -4,11 +4,19 @@
 @use "../../styles/partials/mixins" as *;
 
 .place-profile {
+  width: $desktop-max-width;
+  width: 100%;
   &__places {
     display: flex;
+    scroll-behavior: smooth;
+    scrollbar-width: $desktop-max-width;
 
+    overflow: scroll;
     gap: 1.5rem;
-    padding: 2rem;
+    padding: 2rem 0;
+
+    align-items: center;
+    justify-content: flex-start;
   }
   &__place {
     position: relative;
@@ -31,6 +39,9 @@
       background: linear-gradient(#ffffff, #000000);
       border-radius: 20px;
       opacity: 40%;
+    }
+    &:first-child {
+      margin-left: 3rem;
     }
   }
   &__img-name {
