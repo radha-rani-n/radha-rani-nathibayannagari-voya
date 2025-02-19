@@ -45,4 +45,83 @@
       right: 0;
     }
   }
+  &__chat-widget {
+    position: fixed;
+    bottom: 3rem;
+    right: 24px;
+  }
+  &__chat-button {
+    background-color: $persian-green;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px #ff006e4d;
+    transition: transform 1s ease, 1s ease;
+    &:hover {
+      transform: rotate(360deg); // Full rotation
+      background-color: darken($persian-green, 10%);
+    }
+  }
+  &__chat-window {
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+    // width: 250px;
+    background-color: $persian-green;
+    color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+
+    box-shadow: 0 2px 10px #ff006e4d;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  &__chat-header {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  &__chat-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: white;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    align-items: center;
+  }
+  &__chat-input {
+    resize: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    padding: 1rem;
+    font-family: "Roboto";
+    color: $persian-green;
+  }
+  &__chat-send {
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    background-color: $persian-green;
+    color: white;
+    border: none;
+    font-weight: 600;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  &__chat-send-icon {
+    rotate: 45deg;
+  }
 }
