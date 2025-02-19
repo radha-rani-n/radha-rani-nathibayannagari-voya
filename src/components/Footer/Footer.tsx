@@ -4,6 +4,7 @@ import { MessageCircle } from "lucide-react";
 import { Send } from "lucide-react";
 import "./Footer.scss";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -13,8 +14,18 @@ const Footer = () => {
         <h2 className="footer__title">Voya</h2>
         <ul className="footer__list">
           <li className="footer__list-item">About Creator</li>
-          <li className="footer__list-item">Home</li>
-          <li className="footer__list-item">Your Trips</li>
+
+          <li className="footer__list-item">
+            <Link to="/" className="footer__list-item">
+              Home{" "}
+            </Link>
+          </li>
+
+          <li className="footer__list-item">
+            <Link to="/your-trips" className="footer__list-item">
+              Your Trips{" "}
+            </Link>
+          </li>
         </ul>
         <img
           src={Travel}

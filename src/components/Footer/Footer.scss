@@ -12,7 +12,7 @@
     max-width: $desktop-max-width;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 3rem 18rem;
+    padding: 3rem 20rem;
   }
   &__title {
     font-size: 40px;
@@ -30,6 +30,8 @@
   }
   &__list-item {
     list-style: none;
+    text-decoration: none;
+    color: $rose;
   }
   &__illustration {
     width: 200px;
