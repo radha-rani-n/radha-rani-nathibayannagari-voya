@@ -6,7 +6,7 @@
 .header {
   width: 100vw;
 
-  background-color: #ffd9da33;
+  background-color: #fbf4f5;
 
   top: 0;
 
@@ -15,6 +15,7 @@
     position: fixed;
     z-index: 100;
     top: 0;
+    border-bottom: 1px solid #ffd9da;
   }
   &__data {
     padding: 2rem 3rem;

@@ -1,3 +1,7 @@
+@use "./styles/partials/fonts" as *;
+@use "./styles/partials/variables" as *;
+@use "./styles/partials/global" as *;
+@use "./styles/partials/mixins" as *;
 .main {
   margin-top: 90px;
   max-width: 1280px;
@@ -5,6 +9,7 @@
   box-sizing: border-box;
   padding: 3rem;
   position: relative;
+  background-color: $misty-pink;
 }
 footer {
   height: 400px;
