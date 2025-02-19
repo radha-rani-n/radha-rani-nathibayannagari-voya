@@ -62,7 +62,10 @@ const SearchBar = () => {
 
   const updatePlaces = useCallback(
     async (searchText: string) => {
-      const token = session?.getToken();
+      const token = await session?.getToken();
+      if (!token) {
+        return;
+      }
       axios
         .get("http://localhost:8080/places/search", {
           params: { q: `${searchText}` },
@@ -78,8 +81,11 @@ const SearchBar = () => {
     [session]
   );
 
-  const updateTrips = useCallback(() => {
-    const token = session?.getToken();
+  const updateTrips = useCallback(async () => {
+    const token = await session?.getToken();
+    if (!token) {
+      return;
+    }
     axios
       .get("http://localhost:8080/trips", {
         headers: {
@@ -91,8 +97,11 @@ const SearchBar = () => {
       });
   }, [session]);
 
-  const refreshItems = useCallback(() => {
-    const token = session?.getToken();
+  const refreshItems = useCallback(async () => {
+    const token = await session?.getToken();
+    if (!token) {
+      return;
+    }
     axios
       .get("http://localhost:8080/trips", {
         headers: {

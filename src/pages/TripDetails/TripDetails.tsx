@@ -22,6 +22,9 @@ const TripDetails = () => {
 
   const getTripData = useCallback(async () => {
     const token = await session?.getToken();
+    if (!token) {
+      return;
+    }
     try {
       const { data } = await axios.get(`${API_URL}/trips/${id}`, {
         headers: {

@@ -65,6 +65,9 @@ const PlanTrip = ({
     data
   ) => {
     const token = await session?.getToken();
+    if (!token) {
+      return;
+    }
     // const form = formRef.current;
     const tripData = {
       trip_name: data.tripName,

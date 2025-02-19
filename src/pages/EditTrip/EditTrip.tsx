@@ -56,23 +56,24 @@ const EditTrip = () => {
     });
   };
   useEffect(() => {
-    const token = session?.getToken();
-    axios
-      .get(`${API_URL}/trips/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(({ data }) => {
-        setValue("tripName", data["trip_name"]);
-        setValue("placeName", data["place_name"]);
-        setValue("fromDate", dayjs(data["from_date"]));
-        setValue("toDate", dayjs(data["to_date"]));
-        setValue("noOfTravellers", data["no_of_travellers"]);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    session?.getToken().then((token) => {
+      axios
+        .get(`${API_URL}/trips/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(({ data }) => {
+          setValue("tripName", data["trip_name"]);
+          setValue("placeName", data["place_name"]);
+          setValue("fromDate", dayjs(data["from_date"]));
+          setValue("toDate", dayjs(data["to_date"]));
+          setValue("noOfTravellers", data["no_of_travellers"]);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
   }, [id, API_URL, session, setValue]);
 
   const handleOnFormSubmit: SubmitHandler<PlanTripSchemaType> = async (

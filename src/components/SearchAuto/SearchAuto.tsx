@@ -15,6 +15,9 @@ const SearchBar = () => {
   const updateOptions = useCallback(
     async (searchText: string) => {
       const token = await session?.getToken();
+      if (!token) {
+        return;
+      }
       axios
         .get(`${API_URL}/places/auto-complete?input=${searchText}`, {
           headers: {

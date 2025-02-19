@@ -22,6 +22,9 @@ const YourTrips = () => {
 
   const fetchTrips = useCallback(async () => {
     const token = await session?.getToken();
+    if (!token) {
+      return;
+    }
     try {
       const { data } = await axios.get(`${API_URL}/trips`, {
         headers: {
@@ -40,6 +43,9 @@ const YourTrips = () => {
   const handleDeleteTrip = useCallback(
     async (id: number) => {
       const token = await session?.getToken();
+      if (!token) {
+        return;
+      }
       await axios.delete(`${API_URL}/trips/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
