@@ -1,12 +1,11 @@
 .main {
-  height: 100vh;
-
   margin-top: 90px;
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 90px auto 0 auto;
   box-sizing: border-box;
-
+  padding: 3rem;
   position: relative;
+  height: 100vh;
 }
 footer {
   height: 400px;
