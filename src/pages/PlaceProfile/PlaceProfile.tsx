@@ -2,12 +2,14 @@ import { useLocation } from "react-router-dom";
 import "./PlaceProfile.scss";
 import axios from "axios";
 import { DownOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { MenuProps } from "antd";
 import PlanTripButton from "../../components/PlanTripButton/PlanTripButton";
 import { Button, Dropdown, Modal, Space } from "antd";
+import { useSession } from "@clerk/clerk-react";
 
 const SearchBar = () => {
+  const { session } = useSession();
   //   const API_URL = import.meta.env.VITE_API_URL;
 
   const [searchData, setSearchData] = useState(null);
@@ -39,6 +41,7 @@ const SearchBar = () => {
   };
 
   const savePlace = async () => {
+    const token = await session?.getToken();
     const trip_id = selectedTrip?.trip_id;
     const { place_id, name, photos } = selectedPlace;
     const photo_reference =
@@ -49,36 +52,74 @@ const SearchBar = () => {
       photo_reference: photo_reference,
       trip_id: trip_id,
     };
-    await axios.post("http://localhost:8080/places/addPlace", data);
+    await axios.post("http://localhost:8080/places/addPlace", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log(data);
   };
+
+  const updatePlaces = useCallback(
+    async (searchText: string) => {
+      const token = session?.getToken();
+      axios
+        .get("http://localhost:8080/places/search", {
+          params: { q: `${searchText}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setSearchData(response.data.results);
+          console.log(response.data.results);
+        });
+    },
+    [session]
+  );
+
+  const updateTrips = useCallback(() => {
+    const token = session?.getToken();
+    axios
+      .get("http://localhost:8080/trips", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setItems(response.data);
+      });
+  }, [session]);
+
+  const refreshItems = useCallback(() => {
+    const token = session?.getToken();
+    axios
+      .get("http://localhost:8080/trips", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setItems(response.data);
+      });
+  }, [session]);
 
   useEffect(() => {
     const splitPath = pathname.split("/");
     const searchText = splitPath[splitPath.length - 1];
-    axios
-      .get("http://localhost:8080/places/search", {
-        params: { q: `${searchText}` },
-      })
-      .then((response) => {
-        setSearchData(response.data.results);
-        console.log(response.data.results);
-      });
-
-    axios.get("http://localhost:8080/trips").then((response) => {
-      setItems(response.data);
-    });
-  }, [pathname]);
+    updatePlaces(searchText);
+    updateTrips();
+  }, [pathname, updatePlaces, updateTrips]);
 
   const handlePlaceOnClick = (placeData: any) => {
     setSelectedPlace(placeData);
     setOpen(true);
-    // axios.patch(`http://localhost:8080/`);
   };
   if (!searchData) {
     return <p>Loading...</p>;
   }
 
+  console.log(`sadas: ${items}`);
   const dropDownItems: MenuProps["items"] = items.map((item: any) => {
     return {
       label: <span>{item.trip_name}</span>,
@@ -133,7 +174,6 @@ const SearchBar = () => {
         onCancel={handleCancel}
         footer={[]}
       >
-        {" "}
         <Dropdown menu={{ items: dropDownItems, onClick }}>
           <a onClick={(e) => e.preventDefault()}>
             <Space>
@@ -148,13 +188,7 @@ const SearchBar = () => {
         </Button>
       </Modal>
       <div className="plan-trip-button">
-        <PlanTripButton
-          refreshItems={() => {
-            axios.get("http://localhost:8080/trips").then((response) => {
-              setItems(response.data);
-            });
-          }}
-        />
+        <PlanTripButton refreshItems={refreshItems} />
       </div>
     </section>
   );

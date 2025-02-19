@@ -1,24 +1,39 @@
 import { AutoComplete, ConfigProvider } from "antd";
 import "./SearchAuto.scss";
 import axios from "axios";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSession } from "@clerk/clerk-react";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const SearchBar = () => {
+  const { session } = useSession();
   const [value, setValue] = useState("");
   const [options, setOptions] = useState<{ value: string }[]>([]);
   const navigate = useNavigate();
-  const onSearch = (searchText: string) => {
-    if (searchText.length > 0) {
+
+  const updateOptions = useCallback(
+    async (searchText: string) => {
+      const token = await session?.getToken();
       axios
-        .get(`${API_URL}/places/auto-complete?input=${searchText}`)
+        .get(`${API_URL}/places/auto-complete?input=${searchText}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           const searchData = response.data.map((res) => {
             return { value: res.description };
           });
           setOptions(searchData);
         });
+    },
+    [session]
+  );
+
+  const onSearch = (searchText: string) => {
+    if (searchText.length > 0) {
+      updateOptions(searchText);
     } else {
       setOptions([]);
     }

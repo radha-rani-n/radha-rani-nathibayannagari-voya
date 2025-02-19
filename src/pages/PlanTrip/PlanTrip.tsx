@@ -5,6 +5,7 @@ import { Button } from "antd";
 import axios from "axios";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSession } from "@clerk/clerk-react";
 
 const dateFormat = "YYYY-MM-DD";
 
@@ -37,6 +38,7 @@ const PlanTrip = ({
   handleOk: () => void;
   handleCancel: () => void;
 }) => {
+  const { session } = useSession();
   // const formRef = useRef<HTMLFormElement>(null);
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -62,6 +64,7 @@ const PlanTrip = ({
   const handleOnFormSubmit: SubmitHandler<PlanTripSchemaType> = async (
     data
   ) => {
+    const token = await session?.getToken();
     // const form = formRef.current;
     const tripData = {
       trip_name: data.tripName,
@@ -74,7 +77,11 @@ const PlanTrip = ({
     console.log(tripData);
 
     try {
-      const postTrip = await axios.post(`${API_URL}/trips/addTrip`, tripData);
+      await axios.post(`${API_URL}/trips/addTrip`, tripData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       reset();
       openNotification("Trip Added Successfully!", "info");
       handleOk();

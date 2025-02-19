@@ -7,6 +7,7 @@ import axios from "axios";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dayjs, { type Dayjs } from "dayjs";
+import { useSession } from "@clerk/clerk-react";
 
 const dateFormat = "YYYY-MM-DD";
 
@@ -29,6 +30,7 @@ const PlanTripSchema = z.object({
 });
 type PlanTripSchemaType = z.infer<typeof PlanTripSchema>;
 const EditTrip = () => {
+  const { session } = useSession();
   const { id } = useParams();
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -54,8 +56,13 @@ const EditTrip = () => {
     });
   };
   useEffect(() => {
+    const token = session?.getToken();
     axios
-      .get(`${API_URL}/trips/${id}`)
+      .get(`${API_URL}/trips/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(({ data }) => {
         setValue("tripName", data["trip_name"]);
         setValue("placeName", data["place_name"]);
@@ -66,7 +73,7 @@ const EditTrip = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [id, API_URL]);
+  }, [id, API_URL, session, setValue]);
 
   const handleOnFormSubmit: SubmitHandler<PlanTripSchemaType> = async (
     data

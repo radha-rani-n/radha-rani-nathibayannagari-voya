@@ -1,8 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./TripDetails.scss";
+import { useSession } from "@clerk/clerk-react";
 const TripDetails = () => {
+  const { session } = useSession();
   const API_URL = import.meta.env.VITE_API_URL;
   const { id } = useParams();
   const [tripData, setTripData] = useState(null);
@@ -17,17 +19,25 @@ const TripDetails = () => {
       day < 10 ? "0" + day : day
     }/${year}`;
   }
+
+  const getTripData = useCallback(async () => {
+    const token = await session?.getToken();
+    try {
+      const { data } = await axios.get(`${API_URL}/trips/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setTripData(data);
+    } catch (err) {
+      console.error(err);
+    }
+  }, [API_URL, session, id]);
+
   useEffect(() => {
-    const getTripData = async () => {
-      try {
-        const { data } = await axios.get(`${API_URL}/trips/${id}`);
-        setTripData(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
     getTripData();
-  }, []);
+  }, [API_URL, id, session, getTripData]);
+
   if (!tripData) {
     return <p>Loading...</p>;
   }
