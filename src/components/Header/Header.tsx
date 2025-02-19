@@ -9,10 +9,26 @@ import {
 } from "@clerk/clerk-react";
 
 import { Button } from "antd";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [isSticky, setIsSticky] = useState(false);
+  const handleScroll = () => {
+    if (window.scrollY > 200) {
+      setIsSticky(true);
+    } else {
+      setIsSticky(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.addEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
-    <header className="header">
+    <header className={`header ${isSticky ? "header--sticky" : ""}`}>
       <Link to="/" className="header__link">
         <h1 className="header__title">
           <span className="header__title-1">V</span>

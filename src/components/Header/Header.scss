@@ -9,13 +9,19 @@
   padding: 2rem 3rem;
   display: flex;
   justify-content: space-between;
-  position: fixed;
+  background-color: #ffd9da33;
   align-items: center;
   top: 0;
   height: 90px;
 
   z-index: 10;
-
+  &--sticky {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
   &__title {
     font-size: 40px;
     color: $persian-green;
