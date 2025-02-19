@@ -13,7 +13,11 @@ const Footer = () => {
       <section className="footer__data">
         <h2 className="footer__title">Voya</h2>
         <ul className="footer__list">
-          <li className="footer__list-item">About Creator</li>
+          <li className="footer__list-item">
+            <Link to="/about-creator" className="footer__list-item">
+              About Creator
+            </Link>
+          </li>
 
           <li className="footer__list-item">
             <Link to="/" className="footer__list-item">

@@ -10,6 +10,7 @@ import EditTrip from "./pages/EditTrip/EditTrip";
 import PlaceProfile from "./pages/PlaceProfile/PlaceProfile";
 import TripDetails from "./pages/TripDetails/TripDetails";
 import Footer from "./components/Footer/Footer";
+import AboutCreator from "./pages/AboutCreator/AboutCreator";
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/trips/:id/edit" element={<EditTrip />} />
           <Route path="/places/:id" element={<PlaceProfile />} />
           <Route path="/trips/:id" element={<TripDetails />} />
+          <Route path="/about-creator" element={<AboutCreator />} />
         </Routes>
       </main>
       <Footer />

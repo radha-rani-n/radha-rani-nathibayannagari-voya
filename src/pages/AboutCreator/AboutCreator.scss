@@ -1,0 +1,42 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+.about {
+  background-image: url("../../assets/images/pastel-background.jpg");
+  padding: 3rem;
+  display: flex;
+  gap: 3rem;
+  color: $rose;
+  &__img {
+    width: 280px;
+    height: 300px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 50%;
+  }
+  &__title {
+    font-size: 24px;
+  }
+  &__data {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  &__details {
+    color: $persian-green;
+    line-height: 1.7;
+    letter-spacing: 1px;
+    font-style: italic;
+    padding-right: 2rem;
+    text-align: center;
+  }
+  &__social {
+    display: flex;
+    gap: 2rem;
+  }
+  &__social-icon {
+    color: $rose;
+  }
+}
