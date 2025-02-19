@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EditTrip from "./pages/EditTrip/EditTrip";
 import PlaceProfile from "./pages/PlaceProfile/PlaceProfile";
 import TripDetails from "./pages/TripDetails/TripDetails";
+import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <BrowserRouter>
@@ -24,7 +25,7 @@ function App() {
           <Route path="/trips/:id" element={<TripDetails />} />
         </Routes>
       </main>
-      <footer>Footer</footer>
+      <Footer />
     </BrowserRouter>
   );
 }
