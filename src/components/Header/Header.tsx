@@ -29,25 +29,27 @@ const Header = () => {
   }, []);
   return (
     <header className={`header ${isSticky ? "header--sticky" : ""}`}>
-      <Link to="/" className="header__link">
-        <h1 className="header__title">
-          <span className="header__title-1">V</span>
-          <span className="header__title-2">o</span>
-          <span className="header__title-3">y</span>
-          <span className="header__title-4">a</span>
-        </h1>
-      </Link>
-      <div className="header__nav">
-        <Navigation />
-        <div>
-          <SignedOut>
-            <SignInButton asChild>
-              <Button type="primary">Sign In</Button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+      <div className="header__data">
+        <Link to="/" className="header__link">
+          <h1 className="header__title">
+            <span className="header__title-1">V</span>
+            <span className="header__title-2">o</span>
+            <span className="header__title-3">y</span>
+            <span className="header__title-4">a</span>
+          </h1>
+        </Link>
+        <div className="header__nav">
+          <Navigation />
+          <div>
+            <SignedOut>
+              <SignInButton asChild>
+                <Button type="primary">Sign In</Button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
         </div>
       </div>
     </header>

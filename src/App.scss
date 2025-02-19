@@ -1,14 +1,11 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-}
 .main {
   height: 100vh;
 
   margin-top: 90px;
-  padding: 3rem;
+  max-width: 1280px;
+  margin: 0 auto;
   box-sizing: border-box;
-  // width: 100vw;
+
   position: relative;
 }
 footer {

@@ -4,8 +4,7 @@
 @use "../../styles/partials/mixins" as *;
 
 .place-profile {
-  width: $desktop-max-width;
-  width: 100%;
+  // width: 100%;
   &__places {
     display: flex;
     scroll-behavior: smooth;
