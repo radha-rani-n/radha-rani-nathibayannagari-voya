@@ -19,8 +19,6 @@
     position: fixed;
     z-index: 100;
     top: 0;
-    left: 0;
-    right: 0;
   }
   &__title {
     font-size: 40px;
@@ -31,16 +29,22 @@
   &__title-1 {
     color: $rose;
   }
-  // &__title-2 {
-  //   color: $persian-green;
-  // }
-  // &__title-3 {
-  //   color: $ceruean;
-  // }
-  // &__title-4 {
-  //   color: $cobalt-blue;
-  // }
+  &__title-2 {
+    color: #097cee;
+  }
+  &__title-3 {
+    color: #f7cb08;
+  }
+  &__title-4 {
+    color: #14c0ac;
+  }
   &__link {
     text-decoration: none;
+  }
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
   }
 }

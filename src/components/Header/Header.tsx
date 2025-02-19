@@ -37,16 +37,18 @@ const Header = () => {
           <span className="header__title-4">a</span>
         </h1>
       </Link>
-      <Navigation />
-      <div>
-        <SignedOut>
-          <SignInButton asChild>
-            <Button type="primary">Sign In</Button>
-          </SignInButton>
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+      <div className="header__nav">
+        <Navigation />
+        <div>
+          <SignedOut>
+            <SignInButton asChild>
+              <Button type="primary">Sign In</Button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </div>
       </div>
     </header>
   );
