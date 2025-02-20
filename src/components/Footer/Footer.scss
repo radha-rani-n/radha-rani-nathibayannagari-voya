@@ -81,13 +81,11 @@
     gap: 1rem;
   }
   &__chat-form {
-    display: flex;
-    flex-direction: column;
+    @include flex;
     gap: 1rem;
     background-color: white;
     padding: 1.5rem 1rem;
     border-radius: 10px;
-    align-items: center;
   }
   &__chat-input {
     resize: none;

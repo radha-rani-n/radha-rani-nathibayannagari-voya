@@ -32,9 +32,9 @@ const Header = () => {
   return (
     <header className={`header ${isSticky ? "header--sticky" : ""}`}>
       <div className="header__data">
-        {/* <Link to="/" className="header__link"> */}
-        <Logo />
-        {/* </Link> */}
+        <Link to="/" className="header__link">
+          <Logo />
+        </Link>
 
         <div className="header__nav">
           <Navigation />

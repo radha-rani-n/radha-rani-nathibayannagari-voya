@@ -24,10 +24,9 @@
   &__place {
     position: relative;
     list-style: none;
-    display: flex;
-    flex-direction: column;
+    @include flex;
     justify-content: center;
-    align-items: center;
+
     gap: 0.5rem;
     width: fit-content;
     border-radius: 20px;

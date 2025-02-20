@@ -4,15 +4,13 @@
 @use "../../styles/partials/mixins" as *;
 
 .trips {
-  display: flex;
-  flex-direction: column;
+  @include flex;
   gap: 2rem;
   &__title {
     color: $primary-text-color;
   }
   &__list {
-    display: flex;
-    flex-direction: column;
+    @include flex;
     gap: 1rem;
   }
   &__list-item {

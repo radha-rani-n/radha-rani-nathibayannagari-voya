@@ -21,10 +21,8 @@
     font-size: 24px;
   }
   &__data {
-    display: flex;
-    flex-direction: column;
     gap: 2rem;
-    align-items: center;
+    @include flex;
   }
   &__details {
     color: $persian-green;

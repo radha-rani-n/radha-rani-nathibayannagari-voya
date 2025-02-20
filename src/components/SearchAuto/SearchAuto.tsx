@@ -1,6 +1,5 @@
 import { AutoComplete, Input } from "antd";
-// import Travel from "../../assets/illustrations/Traveling-rafiki.svg";
-// import travelGirl from "../../assets/illustrations/Traveling-bro.svg";
+
 import "./SearchAuto.scss";
 import axios from "axios";
 import { useCallback, useState } from "react";
@@ -76,16 +75,6 @@ const SearchBar = () => {
           />
         </AutoComplete>
       </div>
-      {/* <img
-        src={Travel}
-        alt="Travel Illustration"
-        className="search__illustration search__illustration--1"
-      />
-      <img
-        src={travelGirl}
-        alt="Travel Illustration"
-        className="search__illustration search__illustration--2"
-      /> */}
     </section>
   );
 };

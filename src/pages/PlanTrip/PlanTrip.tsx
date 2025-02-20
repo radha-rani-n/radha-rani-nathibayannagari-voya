@@ -39,7 +39,7 @@ const PlanTrip = ({
   handleCancel: () => void;
 }) => {
   const { session } = useSession();
-  // const formRef = useRef<HTMLFormElement>(null);
+
   const API_URL = import.meta.env.VITE_API_URL;
 
   const {
@@ -68,7 +68,7 @@ const PlanTrip = ({
     if (!token) {
       return;
     }
-    // const form = formRef.current;
+
     const tripData = {
       trip_name: data.tripName,
       place_name: data.placeName,

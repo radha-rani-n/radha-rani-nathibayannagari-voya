@@ -30,16 +30,6 @@ const Footer = () => {
           </li>
         </ul>
         <div>
-          {/* <img
-            src={Travel}
-            alt="Travel Illustration"
-            className="footer__illustration footer__illustration--1"
-          />
-          <img
-            src={travelGirl}
-            alt="Travel Illustration"
-            className="footer__illustration footer__illustration--2"
-          /> */}
           <div className="footer__chat-widget">
             <button
               className="footer__chat-button"
