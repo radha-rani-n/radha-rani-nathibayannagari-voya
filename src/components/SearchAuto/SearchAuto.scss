@@ -2,7 +2,29 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/global" as *;
 @use "../../styles/partials/mixins" as *;
-.search-bar {
+.search {
+  height: calc(100vh - 90px);
+  position: relative;
   width: 70vw;
-  margin-top: 7rem;
+  margin: 0 auto;
+  &__bar {
+    width: 100%;
+    position: absolute;
+    top: 40%;
+    left: 0;
+  }
+  &__illustration {
+    width: 200px;
+    position: absolute;
+
+    &--1 {
+      width: 400px;
+      bottom: 0;
+      left: 0;
+    }
+    &--2 {
+      top: 0;
+      right: 0;
+    }
+  }
 }

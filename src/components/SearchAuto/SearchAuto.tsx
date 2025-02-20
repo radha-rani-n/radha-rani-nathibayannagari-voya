@@ -1,10 +1,11 @@
-import { AutoComplete, ConfigProvider, Input } from "antd";
+import { AutoComplete, Input } from "antd";
+import Travel from "../../assets/illustrations/Traveling-rafiki.svg";
+import travelGirl from "../../assets/illustrations/Traveling-bro.svg";
 import "./SearchAuto.scss";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSession } from "@clerk/clerk-react";
-import qs from "qs";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -58,32 +59,34 @@ const SearchBar = () => {
   };
 
   return (
-    // <ConfigProvider
-    //   theme={{
-    //     token: {
-    //       borderRadius: 20,
-    //       padding: 20,
-    //       controlHeight: 40,
-    //       colorBorder: "#db3069",
-    //       colorTextPlaceholder: "#db3069",
-    //     },
-    //   }}
-    // >
-    <AutoComplete
-      value={value}
-      options={options}
-      onSelect={onSelect}
-      onSearch={onSearch}
-      onChange={onChange}
-      className="search-bar"
-    >
-      <Input.Search
-        size="large"
-        placeholder="Enter a City or Country"
-        enterButton
+    <section className="search-page">
+      <div className="search">
+        <AutoComplete
+          value={value}
+          options={options}
+          onSelect={onSelect}
+          onSearch={onSearch}
+          onChange={onChange}
+          className="search__bar"
+        >
+          <Input.Search
+            size="large"
+            placeholder="Enter a City or Country"
+            enterButton
+          />
+        </AutoComplete>
+      </div>
+      <img
+        src={Travel}
+        alt="Travel Illustration"
+        className="search__illustration search__illustration--1"
       />
-    </AutoComplete>
-    // </ConfigProvider>
+      <img
+        src={travelGirl}
+        alt="Travel Illustration"
+        className="search__illustration search__illustration--2"
+      />
+    </section>
   );
 };
 export default SearchBar;

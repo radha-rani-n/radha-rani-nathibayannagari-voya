@@ -4,6 +4,8 @@
 @use "../../styles/partials/mixins" as *;
 .about {
   background-image: url("../../assets/images/pastel-background.jpg");
+  background-position: center;
+  background-size: cover;
   padding: 3rem;
   display: flex;
   gap: 3rem;

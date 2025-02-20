@@ -1,5 +1,3 @@
-import Travel from "../../assets/illustrations/Traveling-rafiki.svg";
-import travelGirl from "../../assets/illustrations/Traveling-bro.svg";
 import { MessageCircle } from "lucide-react";
 import { Send } from "lucide-react";
 import "./Footer.scss";
@@ -31,47 +29,49 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <img
-          src={Travel}
-          alt="Travel Illustration"
-          className="footer__illustration footer__illustration--1"
-        />
-        <img
-          src={travelGirl}
-          alt="Travel Illustration"
-          className="footer__illustration footer__illustration--2"
-        />
-        <div className="footer__chat-widget">
-          <button
-            className="footer__chat-button"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {" "}
-            <MessageCircle size={24} />
-          </button>
+        <div>
+          {/* <img
+            src={Travel}
+            alt="Travel Illustration"
+            className="footer__illustration footer__illustration--1"
+          />
+          <img
+            src={travelGirl}
+            alt="Travel Illustration"
+            className="footer__illustration footer__illustration--2"
+          /> */}
+          <div className="footer__chat-widget">
+            <button
+              className="footer__chat-button"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {" "}
+              <MessageCircle size={24} />
+            </button>
 
-          {isOpen && (
-            <div className="footer__chat-window">
-              <div className="footer__chat-header">
-                <h3>Voya Support</h3>
-                <p>I'm Radha, creator of Voya:how can I help?</p>
+            {isOpen && (
+              <div className="footer__chat-window">
+                <div className="footer__chat-header">
+                  <h3>Voya Support</h3>
+                  <p>I'm Radha, creator of Voya:how can I help?</p>
+                </div>
+                <div className="footer__chat-form">
+                  <textarea
+                    name=""
+                    id=""
+                    placeholder="Type your message..."
+                    className="footer__chat-input"
+                  />
+                  <button
+                    className="footer__chat-send"
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    <Send size={20} className="footer__chat-send-icon" /> Send
+                  </button>
+                </div>
               </div>
-              <div className="footer__chat-form">
-                <textarea
-                  name=""
-                  id=""
-                  placeholder="Type your message..."
-                  className="footer__chat-input"
-                />
-                <button
-                  className="footer__chat-send"
-                  onClick={() => setIsOpen(!isOpen)}
-                >
-                  <Send size={20} className="footer__chat-send-icon" /> Send
-                </button>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </section>
     </footer>

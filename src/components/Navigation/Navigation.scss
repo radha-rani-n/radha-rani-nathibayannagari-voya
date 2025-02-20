@@ -13,14 +13,16 @@
   &__item {
     list-style: none;
     color: $rose;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    padding: 0.5rem 0rem;
+    // border-radius: 20px;
     font-size: 20px;
+    padding-bottom: 0.5rem;
     &--active {
-      background-color: #fbeef4;
+      border-bottom: 2px solid black;
     }
     &:hover {
-      background-color: #fbeef4;
+      // background-color: #fbeef4;
+      border-bottom: 2px solid black;
     }
   }
 }
