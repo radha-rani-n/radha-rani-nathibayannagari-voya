@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./Navigation.scss";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import PlanTripButton from "../PlanTripButton/PlanTripButton";
 const Navigation = () => {
   const location = useLocation();
   const [yourTripsActive, setYourTripsActive] = useState(false);
@@ -30,6 +31,9 @@ const Navigation = () => {
               Home
             </li>
           </Link>
+          <div className="plan-trip-button">
+            <PlanTripButton />
+          </div>
         </ul>
       </nav>
     </>

@@ -4,7 +4,6 @@ import axios from "axios";
 import { DownOutlined } from "@ant-design/icons";
 import { useCallback, useEffect, useState } from "react";
 import type { MenuProps } from "antd";
-import PlanTripButton from "../../components/PlanTripButton/PlanTripButton";
 import { Button, Dropdown, Modal, Space } from "antd";
 import { useSession } from "@clerk/clerk-react";
 
@@ -75,6 +74,7 @@ const SearchBar = () => {
           },
         })
         .then((response) => {
+          console.log(response);
           setSearchData(response.data.places);
         });
     },
@@ -182,7 +182,12 @@ const SearchBar = () => {
         footer={[]}
       >
         <Dropdown menu={{ items: dropDownItems, onClick }}>
-          <a onClick={(e) => e.preventDefault()}>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              refreshItems();
+            }}
+          >
             <Space>
               Select A Trip
               <DownOutlined />
@@ -194,9 +199,6 @@ const SearchBar = () => {
           Add Place
         </Button>
       </Modal>
-      <div className="plan-trip-button">
-        <PlanTripButton refreshItems={refreshItems} />
-      </div>
     </section>
   );
 };
