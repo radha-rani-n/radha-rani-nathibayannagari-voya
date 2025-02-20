@@ -31,9 +31,9 @@ const Navigation = () => {
               Home
             </li>
           </Link>
-          <div className="plan-trip-button">
+          <li className="nav-bar__item">
             <PlanTripButton />
-          </div>
+          </li>
         </ul>
       </nav>
     </>

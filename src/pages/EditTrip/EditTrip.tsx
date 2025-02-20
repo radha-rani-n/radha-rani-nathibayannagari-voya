@@ -69,6 +69,7 @@ const EditTrip = () => {
           setValue("fromDate", dayjs(data["from_date"]));
           setValue("toDate", dayjs(data["to_date"]));
           setValue("noOfTravellers", data["no_of_travellers"]);
+          console.log(data);
         })
         .catch((error) => {
           console.error(error);
