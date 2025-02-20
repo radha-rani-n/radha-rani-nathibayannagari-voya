@@ -1,5 +1,6 @@
 import "./Header.scss";
 import Navigation from "../Navigation/Navigation";
+import voya from "../../assets/images/voya.svg";
 import { Link } from "react-router-dom";
 import {
   SignedIn,
@@ -10,6 +11,7 @@ import {
 
 import { Button } from "antd";
 import { useEffect, useState } from "react";
+import Logo from "../Logo/Logo";
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -30,14 +32,10 @@ const Header = () => {
   return (
     <header className={`header ${isSticky ? "header--sticky" : ""}`}>
       <div className="header__data">
-        <Link to="/" className="header__link">
-          <h1 className="header__title">
-            <span className="header__title-1">V</span>
-            <span className="header__title-2">o</span>
-            <span className="header__title-3">y</span>
-            <span className="header__title-4">a</span>
-          </h1>
-        </Link>
+        {/* <Link to="/" className="header__link"> */}
+        <Logo />
+        {/* </Link> */}
+
         <div className="header__nav">
           <Navigation />
           <div>
