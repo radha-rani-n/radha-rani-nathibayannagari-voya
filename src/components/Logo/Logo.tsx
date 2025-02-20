@@ -6,7 +6,7 @@ const Logo = () => {
         <span
           key={i}
           className="header__letter"
-          style={{ animationDelay: `${i * 0.2}s` }}
+          style={{ animationDelay: `${i * 0.1}s` }}
         >
           {letter}
         </span>

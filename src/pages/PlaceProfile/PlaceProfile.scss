@@ -49,6 +49,8 @@
     border-radius: 20px;
     width: 250px;
     height: 150px;
+    object-fit: cover;
+    object-position: center;
   }
 
   &__place-name {

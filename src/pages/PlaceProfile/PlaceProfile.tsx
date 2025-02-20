@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import "./PlaceProfile.scss";
 import axios from "axios";
+import plus from "../../assets/icons/iconmonstr-heart-plus-lined.svg";
 import { DownOutlined } from "@ant-design/icons";
 import { useCallback, useEffect, useState } from "react";
 import type { MenuProps } from "antd";
@@ -152,23 +153,7 @@ const SearchBar = () => {
               </p>
             </div>
             <div onClick={() => handlePlaceOnClick(data)}>
-              <svg
-                className="w-6 h-6 text-gray-800 dark:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                />
-              </svg>
+              <img src={plus} alt="plus-icon" width="25" />
             </div>
           </li>
         ))}
