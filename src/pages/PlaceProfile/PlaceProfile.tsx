@@ -72,7 +72,7 @@ const SearchBar = () => {
       });
 
       openNotification("Place added to trip Successfully!", "info");
-      console.log(data);
+      setOpen(false);
     } catch (err) {
       console.error(err);
     }
