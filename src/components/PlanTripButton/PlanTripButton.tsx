@@ -1,6 +1,7 @@
 import { Button, Modal } from "antd";
 import { useState, useCallback } from "react";
 import PlanTrip from "../../pages/PlanTrip/PlanTrip";
+import "./PlanTripButton.scss";
 const PlanTripButton = () => {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -23,7 +24,12 @@ const PlanTripButton = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button
+        variant="text"
+        color="default"
+        onClick={showModal}
+        className="plan-trip"
+      >
         Plan A Trip
       </Button>
       <Modal

@@ -6,6 +6,7 @@
   &__list {
     display: flex;
     gap: 3rem;
+    align-items: center;
   }
   &__item-link {
     text-decoration: none;

@@ -64,11 +64,11 @@ const EditTrip = () => {
           },
         })
         .then(({ data }) => {
-          setValue("tripName", data["trip_name"]);
-          setValue("placeName", data["place_name"]);
-          setValue("fromDate", dayjs(data["from_date"]));
-          setValue("toDate", dayjs(data["to_date"]));
-          setValue("noOfTravellers", data["no_of_travellers"]);
+          setValue("tripName", data.trip["trip_name"]);
+          setValue("placeName", data.trip["place_name"]);
+          setValue("fromDate", dayjs(data.trip["from_date"]));
+          setValue("toDate", dayjs(data.trip["to_date"]));
+          setValue("noOfTravellers", data.trip["no_of_travellers"]);
           console.log(data);
         })
         .catch((error) => {
