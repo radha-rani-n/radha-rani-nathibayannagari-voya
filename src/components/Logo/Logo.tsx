@@ -1,5 +1,5 @@
 const Logo = () => {
-  const text = "Voya";
+  const text = "VOYA";
   return (
     <h1 className="header__logo-container">
       {text.split("").map((letter, i) => (

@@ -8,8 +8,11 @@
   100% {
     transform: scaleY(1);
   }
-  50% {
-    transform: scaleY(1.2);
+  40% {
+    transform: scaleY(1.3);
+  }
+  80% {
+    transform: translateY(-3px);
   }
 }
 .header {
@@ -36,6 +39,8 @@
     display: flex;
     font-size: 3rem;
     font-family: "DynaPuff";
+    font-weight: 400;
+    color: orange;
   }
   &__letter {
     display: inline-block;
@@ -43,7 +48,7 @@
     transform-origin: center;
   }
   &__logo-container:hover span {
-    animation: stretch 0.6s ease-in-out forwards;
+    animation: stretch 0.5s ease-in-out forwards;
   }
 
   &__title {
