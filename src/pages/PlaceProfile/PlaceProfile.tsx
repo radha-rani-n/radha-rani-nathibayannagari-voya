@@ -16,6 +16,7 @@ const SearchBar = () => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<{}[]>([]);
+  const [searchText, setSearchText] = useState("");
   const [selectedTrip, setSelectedTrip] = useState<{
     trip_name: string;
     trip_id: string;
@@ -116,7 +117,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     const splitPath = pathname.split("/");
-    const searchText = splitPath[splitPath.length - 1];
+    setSearchText(splitPath[splitPath.length - 1]);
     updatePlaces(searchText);
     updateTrips();
   }, [pathname, updatePlaces, updateTrips]);
@@ -138,6 +139,9 @@ const SearchBar = () => {
 
   return (
     <section className="place-profile">
+      <h2 className="place-profile__title">
+        Popular Tourist Attractions in {decodeURIComponent(searchText)}
+      </h2>
       <ul className="place-profile__places">
         {searchData.map((data, i: number) => (
           <li key={i} className="place-profile__place">

@@ -4,6 +4,11 @@
 @use "../../styles/partials/mixins" as *;
 
 .place-profile {
+  &__title {
+    color: orange;
+    text-align: center;
+    padding: 2rem;
+  }
   &__places {
     display: flex;
     scroll-behavior: smooth;
