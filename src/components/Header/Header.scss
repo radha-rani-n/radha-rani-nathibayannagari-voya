@@ -3,7 +3,7 @@
 @use "../../styles/partials/global" as *;
 @use "../../styles/partials/mixins" as *;
 
-@keyframes stretch {
+@keyframes stretchJump {
   0%,
   100% {
     transform: scaleY(1);
@@ -44,7 +44,7 @@
     transform-origin: center;
   }
   &__logo-container:hover span {
-    animation: stretch 0.5s ease-in-out forwards;
+    animation: stretchJump 0.5s ease-in-out forwards;
   }
 
   &__title {
