@@ -73,3 +73,11 @@
     z-index: 2;
   }
 }
+.modal {
+  &__selected-item {
+    padding: 0 1rem;
+  }
+  &__button {
+    margin: 0 1rem;
+  }
+}

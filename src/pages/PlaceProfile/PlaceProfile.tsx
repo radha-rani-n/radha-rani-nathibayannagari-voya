@@ -201,6 +201,7 @@ const SearchBar = () => {
           open={open}
           onCancel={handleCancel}
           footer={[]}
+          className="modal"
         >
           <Dropdown menu={{ items: dropDownItems, onClick }}>
             <a
@@ -215,8 +216,17 @@ const SearchBar = () => {
               </Space>
             </a>
           </Dropdown>
-          {selectedTrip && <span>{selectedTrip.trip_name}</span>}
-          <Button type={"primary"} onClick={savePlace}>
+
+          {selectedTrip && (
+            <span className="modal__selected-item">
+              {selectedTrip.trip_name}
+            </span>
+          )}
+          <Button
+            type={"primary"}
+            onClick={savePlace}
+            className="modal__button"
+          >
             Add Place
           </Button>
         </Modal>
