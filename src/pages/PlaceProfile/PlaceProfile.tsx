@@ -58,7 +58,7 @@ const SearchBar = () => {
       const { data } = await axios.get(
         `https:api.unsplash.com/search/photos?query=${searchText}&client_id=${UNSPLASH_API}`
       );
-      setPlaceImgae(data.results[1].urls.regular);
+      setPlaceImgae(data.results[0].urls.regular);
     } catch (err) {
       console.error(err);
     }
@@ -69,6 +69,7 @@ const SearchBar = () => {
     const trip_id = selectedTrip?.trip_id;
     const { id, displayName, photos, location } = selectedPlace;
     const photo_reference = photos && photos.length > 0 && photos[0].name;
+    console.log(id);
     const data = {
       place_id: id,
       place_name: displayName.text,
@@ -173,11 +174,11 @@ const SearchBar = () => {
       {contextHolder}
       <section className="place-profile">
         <div className="place-profile__title-image">
-          {/* <img
+          <img
             src={placeImage}
             alt="place-image"
             className="place-profile__image"
-          /> */}
+          />
           <h2 className="place-profile__title">
             Popular Tourist Attractions in {decodeURIComponent(searchText)}
           </h2>
