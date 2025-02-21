@@ -31,6 +31,7 @@ const PlanTripSchema = z.object({
     .nonnegative(),
 });
 type PlanTripSchemaType = z.infer<typeof PlanTripSchema>;
+
 const PlanTrip = ({
   handleOk,
   handleCancel,

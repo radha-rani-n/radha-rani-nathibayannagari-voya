@@ -1,12 +1,13 @@
 import { useLocation } from "react-router-dom";
 import "./PlaceProfile.scss";
 import axios from "axios";
-
+import { ArrowLeft } from "lucide-react";
 import { DownOutlined } from "@ant-design/icons";
 import { useCallback, useEffect, useState } from "react";
 import type { MenuProps } from "antd";
 import { Button, Dropdown, Modal, Space, notification } from "antd";
 import { useSession } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   const { session } = useSession();
@@ -170,8 +171,12 @@ const SearchBar = () => {
 
   return (
     <>
-      {" "}
       {contextHolder}
+      <Link to="/">
+        <Button>
+          <ArrowLeft />
+        </Button>
+      </Link>
       <section className="place-profile">
         <div className="place-profile__title-image">
           <img

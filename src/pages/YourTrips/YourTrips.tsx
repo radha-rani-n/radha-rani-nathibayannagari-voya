@@ -9,7 +9,7 @@ import { useSession } from "@clerk/clerk-react";
 import { CustomModal } from "../../components/Modal/CustomModal";
 import EditTrip from "../EditTrip/EditTrip";
 import { useCustomModal } from "../../hooks/useModal";
-import { Button, Descriptions, notification } from "antd";
+import { Button, Descriptions, notification, Modal } from "antd";
 interface tripData {
   trip_name: string;
   place_name: string;
@@ -47,6 +47,20 @@ const YourTrips = () => {
     }/${year}`;
   }
   const API_URL = import.meta.env.VITE_API_URL;
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const showDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDeleteOk = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setIsDeleteModalOpen(false);
+  };
 
   const fetchTrips = useCallback(async () => {
     const token = await session?.getToken();
@@ -129,12 +143,29 @@ const YourTrips = () => {
               >
                 <Pencil />
               </Button>
-              <Button>
-                <Trash
-                  onClick={() => handleDeleteTrip(+`${trip.trip_id}`)}
-                  className="trips__delete-trip"
-                />
+              <Button onClick={showDeleteModal}>
+                <Trash className="trips__delete-trip" />
               </Button>
+              <Modal
+                title="Basic Modal"
+                open={isDeleteModalOpen}
+                // onOk={handleDeleteOk}
+                // onCancel={handleDeleteCancel}
+                footer={null}
+                okText="Yes"
+                cancelText="No"
+              >
+                <p>Do you want to delete this trip</p>
+                <Button
+                  onClick={() => {
+                    handleDeleteOk();
+                    handleDeleteTrip(+`${trip.trip_id}`);
+                  }}
+                >
+                  Yes
+                </Button>
+                <Button onClick={handleDeleteCancel}>No</Button>
+              </Modal>
             </div>
           </li>
         ))}
