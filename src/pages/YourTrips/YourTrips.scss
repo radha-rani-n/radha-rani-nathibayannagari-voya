@@ -11,15 +11,28 @@
   }
   &__list {
     @include flex;
-    gap: 1rem;
+    gap: 2rem;
+    align-items: flex-start;
   }
   &__list-item {
+    width: 100%;
     list-style: none;
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr 1fr;
+    gap: 1rem;
+    background-color: #f3f4f5;
+    padding: 1rem;
+    border-radius: 20px;
+  }
+  &__item-data {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
+    flex-direction: column;
   }
   &__trip-name {
     text-decoration: none;
     color: $primary-text-color;
+    display: flex;
+    align-items: center;
   }
 }

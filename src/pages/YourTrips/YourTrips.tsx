@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import { EditOutlined } from "@ant-design/icons";
-import { DeleteOutlined } from "@ant-design/icons";
+
+import { Pencil } from "lucide-react";
+import { Trash } from "lucide-react";
 import "./YourTrips.scss";
 import { Link } from "react-router-dom";
 import { useSession } from "@clerk/clerk-react";
 import { CustomModal } from "../../components/Modal/CustomModal";
 import EditTrip from "../EditTrip/EditTrip";
 import { useCustomModal } from "../../hooks/useModal";
-import { Button, notification } from "antd";
+import { Button, Descriptions, notification } from "antd";
 interface tripData {
   trip_name: string;
   place_name: string;
@@ -34,7 +35,17 @@ const YourTrips = () => {
       duration: 4,
     });
   };
+  function formatDate(timestamp) {
+    const date = new Date(timestamp);
 
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    return `${month < 10 ? "0" + month : month}/${
+      day < 10 ? "0" + day : day
+    }/${year}`;
+  }
   const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchTrips = useCallback(async () => {
@@ -96,12 +107,12 @@ const YourTrips = () => {
             <Link to={`/trips/${trip.trip_id}`} className="trips__trip-name">
               <h3>{trip.trip_name}</h3>
             </Link>
-            {/* <Link
-              to={`/trips/${trip.trip_id}/edit`}
-              className="trips__edit-trip"
-            >
-              <EditOutlined />
-            </Link> */}
+            <div className="trips__item-data">
+              <p>PlaceName: {trip.place_name}</p>
+              <p>FromDate: {formatDate(trip.from_date)}</p>
+              <p>ToDate: {formatDate(trip.to_date)}</p>
+              <p>NoOfTravellers: {trip.no_of_travellers}</p>
+            </div>
             <Button
               variant="text"
               color="default"
@@ -111,12 +122,14 @@ const YourTrips = () => {
               }}
               className="edit-trip"
             >
-              Edit Trip
+              <Pencil />
             </Button>
-            <DeleteOutlined
-              onClick={() => handleDeleteTrip(+`${trip.trip_id}`)}
-              className="trips__delete-trip"
-            />
+            <Button>
+              <Trash
+                onClick={() => handleDeleteTrip(+`${trip.trip_id}`)}
+                className="trips__delete-trip"
+              />
+            </Button>
           </li>
         ))}
       </ul>
