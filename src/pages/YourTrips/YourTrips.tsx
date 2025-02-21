@@ -104,32 +104,38 @@ const YourTrips = () => {
       <ul className="trips__list">
         {trips.map((trip, i: number) => (
           <li key={i} className="trips__list-item">
-            <Link to={`/trips/${trip.trip_id}`} className="trips__trip-name">
+            <div className="trips__item-title">
               <h3>{trip.trip_name}</h3>
-            </Link>
+
+              <Link to={`/trips/${trip.trip_id}`} className="trips__trip-name">
+                <Button>View More</Button>{" "}
+              </Link>
+            </div>
             <div className="trips__item-data">
               <p>PlaceName: {trip.place_name}</p>
               <p>FromDate: {formatDate(trip.from_date)}</p>
               <p>ToDate: {formatDate(trip.to_date)}</p>
               <p>NoOfTravellers: {trip.no_of_travellers}</p>
             </div>
-            <Button
-              variant="text"
-              color="default"
-              onClick={() => {
-                setSelectedTripId(`${trip.trip_id}`);
-                showModal();
-              }}
-              className="edit-trip"
-            >
-              <Pencil />
-            </Button>
-            <Button>
-              <Trash
-                onClick={() => handleDeleteTrip(+`${trip.trip_id}`)}
-                className="trips__delete-trip"
-              />
-            </Button>
+            <div className="trips__buttons">
+              <Button
+                variant="text"
+                color="default"
+                onClick={() => {
+                  setSelectedTripId(`${trip.trip_id}`);
+                  showModal();
+                }}
+                className="edit-trip"
+              >
+                <Pencil />
+              </Button>
+              <Button>
+                <Trash
+                  onClick={() => handleDeleteTrip(+`${trip.trip_id}`)}
+                  className="trips__delete-trip"
+                />
+              </Button>
+            </div>
           </li>
         ))}
       </ul>

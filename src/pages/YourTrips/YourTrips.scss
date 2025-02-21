@@ -24,6 +24,11 @@
     padding: 1rem;
     border-radius: 20px;
   }
+  &__item-title {
+    @include flex;
+    justify-content: center;
+    gap: 2rem;
+  }
   &__item-data {
     display: flex;
     gap: 1rem;
@@ -32,7 +37,10 @@
   &__trip-name {
     text-decoration: none;
     color: $primary-text-color;
-    display: flex;
-    align-items: center;
+  }
+  &__buttons {
+    @include flex;
+    justify-content: center;
+    gap: 2rem;
   }
 }
