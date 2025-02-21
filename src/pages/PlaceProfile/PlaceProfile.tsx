@@ -10,13 +10,15 @@ import { useSession } from "@clerk/clerk-react";
 
 const SearchBar = () => {
   const { session } = useSession();
-  //   const API_URL = import.meta.env.VITE_API_URL;
 
+  // const API_URL = import.meta.env.VITE_API_URL;
+  const UNSPLASH_API = import.meta.env.VITE_UNSPLASH_API_KEY;
   const [searchData, setSearchData] = useState(null);
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<{}[]>([]);
   const [searchText, setSearchText] = useState("");
+  const [placeImage, setPlaceImgae] = useState(null);
   const [selectedTrip, setSelectedTrip] = useState<{
     trip_name: string;
     trip_id: string;
@@ -49,6 +51,17 @@ const SearchBar = () => {
     setSelectedPlace(null);
     setSelectedTrip(null);
     setOpen(false);
+  };
+
+  const getPlaceImage = async (searchText) => {
+    try {
+      const { data } = await axios.get(
+        `https:api.unsplash.com/search/photos?query=${searchText}&client_id=${UNSPLASH_API}`
+      );
+      setPlaceImgae(data.results[0].urls.regular);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const savePlace = async () => {
@@ -134,6 +147,7 @@ const SearchBar = () => {
   useEffect(() => {
     const splitPath = pathname.split("/");
     setSearchText(splitPath[splitPath.length - 1]);
+    getPlaceImage(searchText);
     updatePlaces(searchText);
     updateTrips();
   }, [pathname, updatePlaces, updateTrips]);
@@ -161,6 +175,7 @@ const SearchBar = () => {
         <h2 className="place-profile__title">
           Popular Tourist Attractions in {decodeURIComponent(searchText)}
         </h2>
+        <img src={placeImage} alt="place-image" />
         <ul className="place-profile__places">
           {searchData.map((data, i: number) => (
             <li key={i} className="place-profile__place">
