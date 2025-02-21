@@ -147,7 +147,8 @@ const YourTrips = () => {
                 <Trash className="trips__delete-trip" />
               </Button>
               <Modal
-                title="Basic Modal"
+                className="trips__delete-modal"
+                title="Delete Trip"
                 open={isDeleteModalOpen}
                 // onOk={handleDeleteOk}
                 // onCancel={handleDeleteCancel}
@@ -155,16 +156,27 @@ const YourTrips = () => {
                 okText="Yes"
                 cancelText="No"
               >
-                <p>Do you want to delete this trip</p>
-                <Button
-                  onClick={() => {
-                    handleDeleteOk();
-                    handleDeleteTrip(+`${trip.trip_id}`);
-                  }}
-                >
-                  Yes
-                </Button>
-                <Button onClick={handleDeleteCancel}>No</Button>
+                <p className="trips__delete-confirm">
+                  Do you want to delete this trip
+                </p>
+                <div className="trips__delete-buttons">
+                  <Button
+                    onClick={handleDeleteCancel}
+                    className="trips__delete-no"
+                  >
+                    No
+                  </Button>
+                  <Button
+                    className="trips__delete-yes"
+                    type="primary"
+                    onClick={() => {
+                      handleDeleteOk();
+                      handleDeleteTrip(+`${trip.trip_id}`);
+                    }}
+                  >
+                    Yes
+                  </Button>
+                </div>
               </Modal>
             </div>
           </li>

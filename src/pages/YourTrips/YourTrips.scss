@@ -43,4 +43,9 @@
     justify-content: center;
     gap: 2rem;
   }
+  &__delete-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
 }
