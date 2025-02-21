@@ -58,7 +58,7 @@ const SearchBar = () => {
       const { data } = await axios.get(
         `https:api.unsplash.com/search/photos?query=${searchText}&client_id=${UNSPLASH_API}`
       );
-      setPlaceImgae(data.results[0].urls.regular);
+      setPlaceImgae(data.results[1].urls.regular);
     } catch (err) {
       console.error(err);
     }
@@ -172,10 +172,16 @@ const SearchBar = () => {
       {" "}
       {contextHolder}
       <section className="place-profile">
-        <h2 className="place-profile__title">
-          Popular Tourist Attractions in {decodeURIComponent(searchText)}
-        </h2>
-        <img src={placeImage} alt="place-image" />
+        <div className="place-profile__title-image">
+          {/* <img
+            src={placeImage}
+            alt="place-image"
+            className="place-profile__image"
+          /> */}
+          <h2 className="place-profile__title">
+            Popular Tourist Attractions in {decodeURIComponent(searchText)}
+          </h2>
+        </div>
         <ul className="place-profile__places">
           {searchData.map((data, i: number) => (
             <li key={i} className="place-profile__place">

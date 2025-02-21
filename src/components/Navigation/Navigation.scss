@@ -44,9 +44,9 @@
     padding-bottom: 0.5rem;
     position: relative;
     transition: transform 0.2s ease-in-out;
-    &--active {
-      border-bottom: 2px solid black;
-    }
+    // &--active {
+    //   border-bottom: 2px solid black;
+    // }
     &::after {
       content: "";
       position: absolute;

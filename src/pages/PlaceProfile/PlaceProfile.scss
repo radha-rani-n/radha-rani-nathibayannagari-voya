@@ -4,11 +4,24 @@
 @use "../../styles/partials/mixins" as *;
 
 .place-profile {
+  &__title-image {
+    // position: relative;
+  }
   &__title {
-    color: orange;
+    // color: white;
     text-align: center;
     padding: 2rem;
+    // position: absolute;
+    // top: 20px;
+    // left: 100px;
   }
+  // &__image {
+  //   width: 100%;
+  //   max-height: 500px;
+  //   object-fit: contain;
+  //   object-position: top;
+  //   border-radius: 10px;
+  // }
   &__places {
     display: flex;
     scroll-behavior: smooth;
