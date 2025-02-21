@@ -1,6 +1,6 @@
 import "./Header.scss";
 import Navigation from "../Navigation/Navigation";
-import voya from "../../assets/images/voya.svg";
+
 import { Link } from "react-router-dom";
 import {
   SignedIn,
@@ -33,7 +33,7 @@ const Header = () => {
     <header className={`header ${isSticky ? "header--sticky" : ""}`}>
       <div className="header__data">
         <Link to="/" className="header__link">
-          <Logo />
+          <Logo section="header" />
         </Link>
 
         <div className="header__nav">

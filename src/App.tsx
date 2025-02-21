@@ -27,7 +27,7 @@ function App() {
           <Route path="/about-creator" element={<AboutCreator />} />
         </Routes>
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 }

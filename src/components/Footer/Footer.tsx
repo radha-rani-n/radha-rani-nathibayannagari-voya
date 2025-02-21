@@ -3,17 +3,21 @@ import { Send } from "lucide-react";
 import "./Footer.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Logo from "../Logo/Logo";
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <footer className="footer">
       <section className="footer__data">
-        <h2 className="footer__title">Voya</h2>
+        <div className="footer__name">
+          <Logo section="footer" />
+        </div>
         <ul className="footer__list">
+          <li className="footer__list-item">Made with ❤</li>
           <li className="footer__list-item">
             <Link to="/about-creator" className="footer__list-item">
-              About Creator
+              About Us
             </Link>
           </li>
 
