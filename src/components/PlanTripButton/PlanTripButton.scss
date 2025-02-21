@@ -1,3 +1,17 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+
 .plan-trip {
   font-size: 20px;
+  background-color: $rose;
+  color: white;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  border: none;
+  &:hover {
+    background-color: transparent;
+    color: $rose;
+  }
 }

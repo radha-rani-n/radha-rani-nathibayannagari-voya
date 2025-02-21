@@ -8,14 +8,9 @@ const PlanTripButton = () => {
     useCustomModal();
   return (
     <>
-      <Button
-        variant="text"
-        color="default"
-        onClick={showModal}
-        className="plan-trip"
-      >
+      <button onClick={showModal} className="plan-trip">
         Plan A Trip
-      </Button>
+      </button>
       <CustomModal
         open={open}
         handleOk={handleOk}
