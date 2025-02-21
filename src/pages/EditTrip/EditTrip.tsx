@@ -29,9 +29,16 @@ const PlanTripSchema = z.object({
     .nonnegative(),
 });
 type PlanTripSchemaType = z.infer<typeof PlanTripSchema>;
-const EditTrip = () => {
+const EditTrip = ({
+  id,
+  openNotification,
+  contextHolder,
+}: {
+  id: string;
+  openNotification: (message: string, type: any) => void;
+  contextHolder: any;
+}) => {
   const { session } = useSession();
-  const { id } = useParams();
   const API_URL = import.meta.env.VITE_API_URL;
 
   const {
@@ -43,18 +50,6 @@ const EditTrip = () => {
   } = useForm<PlanTripSchemaType>({
     resolver: zodResolver(PlanTripSchema),
   });
-
-  const [api, contextHolder] = notification.useNotification();
-
-  type NotificationType = "success" | "info" | "warning" | "error";
-
-  const openNotification = (message: string, type: NotificationType) => {
-    api[type]({
-      message: "Trip Plan Update",
-      description: message,
-      duration: 4,
-    });
-  };
   useEffect(() => {
     session?.getToken().then((token) => {
       axios
@@ -80,6 +75,7 @@ const EditTrip = () => {
   const handleOnFormSubmit: SubmitHandler<PlanTripSchemaType> = async (
     data
   ) => {
+    const token = await session?.getToken();
     const tripData = {
       trip_name: data.tripName,
       place_name: data.placeName,
@@ -90,7 +86,11 @@ const EditTrip = () => {
 
     console.log(tripData);
     try {
-      const postTrip = await axios.put(`${API_URL}/trips/${id}`, tripData);
+      await axios.put(`${API_URL}/trips/${id}`, tripData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       reset();
       openNotification("Trip Updated Successfully!", "info");
     } catch (e) {

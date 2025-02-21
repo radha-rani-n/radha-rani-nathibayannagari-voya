@@ -5,6 +5,10 @@ import { DeleteOutlined } from "@ant-design/icons";
 import "./YourTrips.scss";
 import { Link } from "react-router-dom";
 import { useSession } from "@clerk/clerk-react";
+import { CustomModal } from "../../components/Modal/CustomModal";
+import EditTrip from "../EditTrip/EditTrip";
+import { useCustomModal } from "../../hooks/useModal";
+import { Button, notification } from "antd";
 interface tripData {
   trip_name: string;
   place_name: string;
@@ -16,8 +20,21 @@ interface tripData {
 
 const YourTrips = () => {
   const { isLoaded, session, isSignedIn } = useSession();
-
+  const [selectedTripId, setSelectedTripId] = useState<string | null>(null);
   const [trips, setTrips] = useState<tripData[] | null>(null);
+  const { open, confirmLoading, showModal, handleOk, handleCancel } =
+    useCustomModal();
+  const [api, contextHolder] = notification.useNotification();
+  type NotificationType = "success" | "info" | "warning" | "error";
+
+  const openNotification = (message: string, type: NotificationType) => {
+    api[type]({
+      message: "Trip Plan Update",
+      description: message,
+      duration: 4,
+    });
+  };
+
   const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchTrips = useCallback(async () => {
@@ -79,13 +96,23 @@ const YourTrips = () => {
             <Link to={`/trips/${trip.trip_id}`} className="trips__trip-name">
               <h3>{trip.trip_name}</h3>
             </Link>
-            <Link
+            {/* <Link
               to={`/trips/${trip.trip_id}/edit`}
               className="trips__edit-trip"
             >
               <EditOutlined />
-            </Link>
-
+            </Link> */}
+            <Button
+              variant="text"
+              color="default"
+              onClick={() => {
+                setSelectedTripId(`${trip.trip_id}`);
+                showModal();
+              }}
+              className="edit-trip"
+            >
+              Edit Trip
+            </Button>
             <DeleteOutlined
               onClick={() => handleDeleteTrip(+`${trip.trip_id}`)}
               className="trips__delete-trip"
@@ -93,6 +120,18 @@ const YourTrips = () => {
           </li>
         ))}
       </ul>
+      <CustomModal
+        open={open}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+        confirmLoading={confirmLoading}
+      >
+        <EditTrip
+          id={selectedTripId}
+          openNotification={openNotification}
+          contextHolder={contextHolder}
+        />
+      </CustomModal>
     </section>
   );
 };
