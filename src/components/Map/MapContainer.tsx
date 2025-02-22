@@ -25,11 +25,12 @@ const MapComponent = ({ tripData }: { tripData: any }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {tripData.places.map((place) => (
+      {tripData.places.map((place, i) => (
         <MarkerComponent
           lat={+place.latitude}
           long={+place.longitude}
           photoReference={place.photo_reference}
+          key={i}
         />
       ))}
     </MapContainer>

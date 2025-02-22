@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CircleX, Cross } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./TripDetails.scss";
@@ -32,6 +33,7 @@ const TripDetails = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(data);
       setTripData(data);
     } catch (err) {
       console.error(err);
@@ -41,6 +43,23 @@ const TripDetails = () => {
   useEffect(() => {
     getTripData();
   }, [API_URL, id, session, getTripData]);
+
+  const handleDeletePlace = useCallback(
+    async (tripId: number, placeId: string) => {
+      const token = await session?.getToken();
+      if (!token) {
+        return;
+      }
+      await axios.delete(`${API_URL}/places/${id}`, {
+        params: { placeId: placeId },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      getTripData();
+    },
+    [API_URL, session]
+  );
 
   if (!tripData) {
     return <p>Loading...</p>;
@@ -69,12 +88,18 @@ const TripDetails = () => {
                 src={`https://places.googleapis.com/v1/${place.photo_reference}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
               />
               <p className="trip-data__place-name">{place.place_name}</p>
+              <CircleX
+                className="trip-data__delete-icon"
+                onClick={() =>
+                  handleDeletePlace(tripData.trip.trip_id, place.place_id)
+                }
+              />
             </li>
           ))}
         </ul>
       </article>
       <div style={{ height: "450px" }}>
-        <MapComponent tripData={tripData} />
+        {tripData.places.length > 0 && <MapComponent tripData={tripData} />}
       </div>
     </div>
   );

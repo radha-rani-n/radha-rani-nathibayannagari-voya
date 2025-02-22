@@ -73,7 +73,13 @@ const CustomTable: React.FC = ({ data, onEditClick, onDeleteClick }) => {
     },
   ];
 
-  return <Table<DataType> columns={columns} dataSource={data} />;
+  return (
+    <Table<DataType>
+      columns={columns}
+      dataSource={data}
+      rowKey={(record) => record.trip_id}
+    />
+  );
 };
 
 export default CustomTable;

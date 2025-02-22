@@ -104,9 +104,12 @@ const EditTrip = ({
   };
 
   return (
-    <>
+    <div className="edit-trip">
       {contextHolder}
-      <Form onFinish={handleSubmit(handleOnFormSubmit)} className="edit-trip">
+      <Form
+        onFinish={handleSubmit(handleOnFormSubmit)}
+        className="edit-trip-form"
+      >
         <Form.Item label="Trip Name:">
           <Controller
             name="tripName"
@@ -205,7 +208,7 @@ const EditTrip = ({
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </div>
   );
 };
 export default EditTrip;
