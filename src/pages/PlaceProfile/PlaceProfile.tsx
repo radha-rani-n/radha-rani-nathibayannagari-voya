@@ -32,6 +32,8 @@ type TripType = {
 };
 
 const SearchBar = () => {
+  const { pathname } = useLocation();
+
   const { session } = useSession();
 
   // const API_URL = import.meta.env.VITE_API_URL;
@@ -39,11 +41,10 @@ const SearchBar = () => {
   const [searchData, setSearchData] = useState<PlaceType[] | null>(null);
   const { open, handleCancel, handleOk, confirmLoading, setOpen } =
     useCustomModal();
-  const { pathname } = useLocation();
 
   const [allTrips, setAllTrips] = useState<TripType[]>([]);
-  const [searchText, setSearchText] = useState("");
   const [placeImage, setPlaceImgae] = useState<string | null>(null);
+  const [placeSummary, setPlaceSummary] = useState<string | null>(null);
   const [selectedTrips, setSelectedTrips] = useState<
     | {
         trip_name: string;
@@ -55,6 +56,9 @@ const SearchBar = () => {
 
   const [selectedPlace, setSelectedPlace] = useState<PlaceType | null>(null);
   const [api, contextHolder] = notification.useNotification();
+
+  const splitPath = pathname.split("/");
+  const searchText = splitPath[splitPath.length - 1];
 
   type NotificationType = "success" | "info" | "warning" | "error";
 
@@ -89,12 +93,37 @@ const SearchBar = () => {
   //   setOpen(false);
   // };
 
-  const getPlaceImage = async (searchText: string) => {
+  const getPlaceImage = async () => {
     try {
-      const { data } = await axios.get(
-        `https:api.unsplash.com/search/photos?query=${searchText}&client_id=${UNSPLASH_API}`
-      );
+      const { data } = await axios.get(`https:api.unsplash.com/search/photos`, {
+        params: {
+          query: searchText,
+          orientation: "landscape",
+          client_id: UNSPLASH_API,
+        },
+      });
       setPlaceImgae(data.results[0].urls.regular);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getPlaceSummary = async () => {
+    const token = await session?.getToken();
+    if (!token) return;
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/ai/getPlaceSummary",
+        {
+          params: {
+            placeName: searchText,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setPlaceSummary(response.data.summary);
     } catch (err) {
       console.error(err);
     }
@@ -105,6 +134,7 @@ const SearchBar = () => {
     if (!selectedPlace) return;
     const { id, displayName, photos, location } = selectedPlace;
     const photo_reference = photos && photos.length > 0 && photos[0].name;
+    console.log(id);
     const data = {
       place_id: id,
       place_name: displayName.text,
@@ -128,25 +158,23 @@ const SearchBar = () => {
     }
   };
 
-  const updatePlaces = useCallback(
-    async (searchText: string) => {
-      const token = await session?.getToken();
-      if (!token) {
-        return;
-      }
-      axios
-        .get("http://localhost:8080/places/search", {
-          params: { q: decodeURIComponent(searchText) },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setSearchData(response.data.places);
-        });
-    },
-    [session]
-  );
+  const updatePlaces = useCallback(async () => {
+    const token = await session?.getToken();
+    if (!token) {
+      return;
+    }
+    axios
+      .get("http://localhost:8080/places/search", {
+        params: { q: decodeURIComponent(searchText) },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setSearchData(response.data.places);
+        console.log(response.data);
+      });
+  }, [session]);
 
   const updateTrips = useCallback(async () => {
     const token = await session?.getToken();
@@ -181,10 +209,9 @@ const SearchBar = () => {
   }, [session]);
 
   useEffect(() => {
-    const splitPath = pathname.split("/");
-    setSearchText(splitPath[splitPath.length - 1]);
-    getPlaceImage(searchText);
-    updatePlaces(searchText);
+    getPlaceImage();
+    getPlaceSummary();
+    updatePlaces();
     updateTrips();
   }, [pathname, updatePlaces, updateTrips]);
 
@@ -220,6 +247,7 @@ const SearchBar = () => {
               className="place-profile__image"
             />
           )}
+          {placeSummary && <span>{placeSummary}</span>}
           <h2 className="place-profile__title">
             Popular Tourist Attractions in {decodeURIComponent(searchText)}
           </h2>

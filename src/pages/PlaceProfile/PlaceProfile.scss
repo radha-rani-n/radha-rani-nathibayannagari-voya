@@ -24,6 +24,9 @@
     object-position: top;
     border-radius: 10px;
   }
+  &__title {
+    color: white;
+  }
   &__places {
     display: flex;
     scroll-behavior: smooth;
