@@ -16,6 +16,7 @@ const PlanTripButton = () => {
         handleOk={handleOk}
         handleCancel={handleCancel}
         confirmLoading={confirmLoading}
+        title="Plan A Trip"
       >
         <PlanTrip
           handleOk={() => {

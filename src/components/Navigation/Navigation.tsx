@@ -13,15 +13,6 @@ const Navigation = () => {
     <>
       <nav className="nav-bar">
         <ul className="nav-bar__list">
-          <Link to="/your-trips" className="nav-bar__item-link">
-            <li
-              className={`nav-bar__item ${
-                yourTripsActive ? "nav-bar__item--active" : ""
-              }`}
-            >
-              Your Trips
-            </li>
-          </Link>
           <Link to="/" className="nav-bar__item-link">
             <li
               className={`nav-bar__item ${
@@ -31,6 +22,16 @@ const Navigation = () => {
               Home
             </li>
           </Link>
+          <Link to="/your-trips" className="nav-bar__item-link">
+            <li
+              className={`nav-bar__item ${
+                yourTripsActive ? "nav-bar__item--active" : ""
+              }`}
+            >
+              Your Trips
+            </li>
+          </Link>
+
           <li className="nav-bar__item nav-bar__item--plan">
             <PlanTripButton />
           </li>

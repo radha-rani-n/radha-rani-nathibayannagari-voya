@@ -2,7 +2,7 @@ import { Input, Form, DatePicker, notification } from "antd";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Button } from "antd";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import "./EditTrip.scss";
 import axios from "axios";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,10 +33,12 @@ const EditTrip = ({
   id,
   openNotification,
   contextHolder,
+  onSubmit,
 }: {
   id: string;
   openNotification: (message: string, type: any) => void;
   contextHolder: any;
+  onSubmit: () => void;
 }) => {
   const { session } = useSession();
   const API_URL = import.meta.env.VITE_API_URL;
@@ -93,16 +95,18 @@ const EditTrip = ({
       });
       reset();
       openNotification("Trip Updated Successfully!", "info");
+      onSubmit();
     } catch (e) {
       console.error(`Cannot add new trip data :error: ${e}`);
       openNotification("There was an error!", "error");
+      onSubmit();
     }
   };
 
   return (
     <>
       {contextHolder}
-      <Form onFinish={handleSubmit(handleOnFormSubmit)}>
+      <Form onFinish={handleSubmit(handleOnFormSubmit)} className="edit-trip">
         <Form.Item label="Trip Name:">
           <Controller
             name="tripName"

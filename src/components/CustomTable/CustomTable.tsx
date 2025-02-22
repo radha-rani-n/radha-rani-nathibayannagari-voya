@@ -1,67 +1,80 @@
 import React from "react";
 import { Space, Table, Tag } from "antd";
 import type { TableProps } from "antd";
-
+import { Link } from "react-router-dom";
+import { Pencil, Trash } from "lucide-react";
 interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
+  tripName: string;
+  placeName: string;
+  fromDate: string;
+  toDate: string;
+  noOfTravellers: number;
+}
+function formatDate(timestamp) {
+  const date = new Date(timestamp);
+
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  return `${month < 10 ? "0" + month : month}/${
+    day < 10 ? "0" + day : day
+  }/${year}`;
 }
 
-const columns: TableProps<DataType>["columns"] = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
+const CustomTable: React.FC = ({ data, onEditClick, onDeleteClick }) => {
+  const columns: TableProps<DataType>["columns"] = [
+    {
+      title: "Trip Name",
+      dataIndex: "trip_name",
+      key: "trip_name",
+      render: (text, record) => (
+        <Link to={`/trips/${record.trip_id}`}>{text}</Link>
+      ),
+    },
+    {
+      title: "Place Name",
+      dataIndex: "place_name",
+      key: "place_name",
+    },
+    {
+      title: "From Date",
+      dataIndex: "from_date",
+      key: "from_date",
+      render: (value) => {
+        return formatDate(value);
+      },
+    },
 
-const CustomTable: React.FC = ({ data }) => (
-  <Table<DataType> columns={columns} dataSource={data} />
-);
+    {
+      title: "To Date",
+      dataIndex: "to_date",
+      key: "to_date",
+      render: (value) => {
+        return formatDate(value);
+      },
+    },
+
+    {
+      title: "No. Of Travellers",
+      dataIndex: "no_of_travellers",
+      key: "no_of_travellers",
+    },
+
+    {
+      title: "Action",
+      key: "action",
+      render: (record) => (
+        <Space size="middle">
+          <Pencil onClick={() => onEditClick(record)} />
+          <Trash onClick={() => onDeleteClick(record)} />
+        </Space>
+      ),
+    },
+  ];
+
+  return <Table<DataType> columns={columns} dataSource={data} />;
+};
 
 export default CustomTable;
 export { type DataType };

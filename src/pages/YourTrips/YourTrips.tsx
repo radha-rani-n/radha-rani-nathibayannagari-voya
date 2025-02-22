@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
-import { Pencil } from "lucide-react";
-import { Trash } from "lucide-react";
+import { Pencil, Trash } from "lucide-react";
+
 import "./YourTrips.scss";
 import { Link } from "react-router-dom";
 import { useSession } from "@clerk/clerk-react";
@@ -10,6 +10,7 @@ import { CustomModal } from "../../components/Modal/CustomModal";
 import EditTrip from "../EditTrip/EditTrip";
 import { useCustomModal } from "../../hooks/useCustomModal";
 import { Button, Descriptions, notification, Modal } from "antd";
+import CustomTable from "../../components/CustomTable/CustomTable";
 interface tripData {
   trip_name: string;
   place_name: string;
@@ -23,9 +24,17 @@ const YourTrips = () => {
   const { isLoaded, session, isSignedIn } = useSession();
   const [selectedTripId, setSelectedTripId] = useState<string | null>(null);
   const [trips, setTrips] = useState<tripData[] | null>(null);
+
   const { open, confirmLoading, showModal, handleOk, handleCancel } =
     useCustomModal();
+  const {
+    open: openDelete,
+    showModal: showModalDelete,
+    handleOk: handleDeleteOk,
+    handleCancel: handleDeleteCancel,
+  } = useCustomModal();
   const [api, contextHolder] = notification.useNotification();
+
   type NotificationType = "success" | "info" | "warning" | "error";
 
   const openNotification = (message: string, type: NotificationType) => {
@@ -47,21 +56,14 @@ const YourTrips = () => {
     }/${year}`;
   }
   const API_URL = import.meta.env.VITE_API_URL;
-
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  const showDeleteModal = () => {
-    setIsDeleteModalOpen(true);
+  const onEditClick = (trip) => {
+    showModal();
+    setSelectedTripId(trip.trip_id);
   };
-
-  const handleDeleteOk = () => {
-    setIsDeleteModalOpen(false);
+  const onDeleteClick = (trip) => {
+    showModalDelete();
+    setSelectedTripId(trip.trip_id);
   };
-
-  const handleDeleteCancel = () => {
-    setIsDeleteModalOpen(false);
-  };
-
   const fetchTrips = useCallback(async () => {
     const token = await session?.getToken();
     if (!token) {
@@ -111,11 +113,20 @@ const YourTrips = () => {
     return <h2>You don't have any planned trips</h2>;
   }
 
+  const handleEditSubmit = () => {
+    fetchTrips();
+    handleOk();
+  };
+
   return (
     <section className="trips">
       <h2 className="trips__title">Your planned trips</h2>
-
-      <ul className="trips__list">
+      <CustomTable
+        data={trips}
+        onEditClick={onEditClick}
+        onDeleteClick={onDeleteClick}
+      />
+      {/* <ul className="trips__list">
         {trips.map((trip, i: number) => (
           <li key={i} className="trips__list-item">
             <div className="trips__item-title">
@@ -181,7 +192,7 @@ const YourTrips = () => {
             </div>
           </li>
         ))}
-      </ul>
+      </ul> */}
       <CustomModal
         open={open}
         handleOk={handleOk}
@@ -193,7 +204,33 @@ const YourTrips = () => {
           id={selectedTripId}
           openNotification={openNotification}
           contextHolder={contextHolder}
+          onSubmit={handleEditSubmit}
         />
+      </CustomModal>
+      <CustomModal
+        className="trips__delete-modal"
+        title="Delete Trip"
+        open={openDelete}
+        footer={null}
+        okText="Yes"
+        cancelText="No"
+      >
+        <p className="trips__delete-confirm">Do you want to delete this trip</p>
+        <div className="trips__delete-buttons">
+          <Button onClick={handleDeleteCancel} className="trips__delete-no">
+            No
+          </Button>
+          <Button
+            className="trips__delete-yes"
+            type="primary"
+            onClick={() => {
+              handleDeleteTrip(+`${selectedTripId}`);
+              handleDeleteOk();
+            }}
+          >
+            Yes
+          </Button>
+        </div>
       </CustomModal>
     </section>
   );
