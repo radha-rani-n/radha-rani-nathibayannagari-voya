@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useSession } from "@clerk/clerk-react";
 import { CustomModal } from "../../components/Modal/CustomModal";
 import EditTrip from "../EditTrip/EditTrip";
-import { useCustomModal } from "../../hooks/useModal";
+import { useCustomModal } from "../../hooks/useCustomModal";
 import { Button, Descriptions, notification, Modal } from "antd";
 interface tripData {
   trip_name: string;
@@ -187,6 +187,7 @@ const YourTrips = () => {
         handleOk={handleOk}
         handleCancel={handleCancel}
         confirmLoading={confirmLoading}
+        title="Edit Trip"
       >
         <EditTrip
           id={selectedTripId}

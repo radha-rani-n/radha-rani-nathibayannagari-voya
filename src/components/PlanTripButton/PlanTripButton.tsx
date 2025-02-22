@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import PlanTrip from "../../pages/PlanTrip/PlanTrip";
 import "./PlanTripButton.scss";
-import { useCustomModal } from "../../hooks/useModal";
+import { useCustomModal } from "../../hooks/useCustomModal";
 import { CustomModal } from "../Modal/CustomModal";
 const PlanTripButton = () => {
   const { open, confirmLoading, showModal, handleOk, handleCancel } =

@@ -83,15 +83,14 @@
     position: absolute;
     right: 10px;
     top: 10px;
-
+    color: #ffffff;
     z-index: 2;
+    cursor: pointer;
   }
-}
-.modal {
-  &__selected-item {
-    padding: 0 1rem;
-  }
-  &__button {
-    margin: 0 1rem;
+  &__modal-form {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
   }
 }
