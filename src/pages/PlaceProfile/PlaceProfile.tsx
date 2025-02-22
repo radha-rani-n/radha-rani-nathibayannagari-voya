@@ -56,7 +56,7 @@ const SearchBar = () => {
 
   const [selectedPlace, setSelectedPlace] = useState<PlaceType | null>(null);
   const [api, contextHolder] = notification.useNotification();
-
+  const [weather, setWeather] = useState(null);
   const splitPath = pathname.split("/");
   const searchText = splitPath[splitPath.length - 1];
 
@@ -86,12 +86,6 @@ const SearchBar = () => {
       setSelectedTrips(uniqBy(newSelectedTrips, "trip_id"));
     }
   };
-
-  // const handleCancel = () => {
-  //   setSelectedPlace(null);
-  //   setSelectedTrip(null);
-  //   setOpen(false);
-  // };
 
   const getPlaceImage = async () => {
     try {
@@ -128,7 +122,16 @@ const SearchBar = () => {
       console.error(err);
     }
   };
-
+  const getWeather = async () => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:8080/place/weather?q=${searchText}`
+      );
+      setWeather(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const savePlace = async () => {
     const token = await session?.getToken();
     if (!selectedPlace) return;
@@ -211,6 +214,7 @@ const SearchBar = () => {
   useEffect(() => {
     getPlaceImage();
     getPlaceSummary();
+    getWeather();
     updatePlaces();
     updateTrips();
   }, [pathname, updatePlaces, updateTrips]);
@@ -247,11 +251,17 @@ const SearchBar = () => {
               className="place-profile__image"
             />
           )}
-          {placeSummary && <span>{placeSummary}</span>}
+          {placeSummary && (
+            <span className="place-profile__summary">{placeSummary}</span>
+          )}
           <h2 className="place-profile__title">
-            Popular Tourist Attractions in {decodeURIComponent(searchText)}
+            {decodeURIComponent(searchText)}
           </h2>
+          <p>
+            Current Weather in {decodeURIComponent(searchText)} is {weather}C
+          </p>
         </div>
+        <h2>Popular attraction in {decodeURIComponent(searchText)}</h2>
         <ul className="place-profile__places">
           {searchData.map((data, i: number) => (
             <li key={i} className="place-profile__place">

@@ -8,14 +8,20 @@
     width: 50vw;
     margin: 0 auto;
     position: relative;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
   }
   &__title {
-    // color: white;
-    text-align: center;
+    color: white;
+
     padding: 2rem;
     position: absolute;
-    top: 20px;
-    left: 100px;
+    // top: 20px;
+    // left: 0;
+
+    font-size: 32px;
   }
   &__image {
     width: 100%;
@@ -23,9 +29,33 @@
     object-fit: contain;
     object-position: top;
     border-radius: 10px;
+    position: relative;
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.4)
+      );
+    }
   }
-  &__title {
+
+  &__summary {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+
+    padding: 1.5rem;
+    position: absolute;
+    bottom: 20%;
+    left: 0px;
     color: white;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    font-weight: 500;
+    text-align: center;
   }
   &__places {
     display: flex;
