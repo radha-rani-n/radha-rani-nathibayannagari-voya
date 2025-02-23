@@ -265,6 +265,7 @@ const SearchBar = () => {
               {data.photos && data.photos.length > 0 && (
                 <img
                   className="place-profile__place-img"
+                  alt="place-image"
                   src={`https://places.googleapis.com/v1/${data.photos[0].name}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
                 />
               )}

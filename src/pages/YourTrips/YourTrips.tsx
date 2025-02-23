@@ -17,7 +17,6 @@ const YourTrips = () => {
   const fetchAllTrips = useTripsStore((state) => state.fetchAllTrips);
 
   const [selectedTripId, setSelectedTripId] = useState<string | null>(null);
-  // const [trips, setTrips] = useState<tripData[] | null>(null);
 
   useEffect(() => {
     fetchAllTrips(session);

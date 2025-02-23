@@ -3,7 +3,7 @@
 @use "../../styles/partials/global" as *;
 @use "../../styles/partials/mixins" as *;
 .search-page {
-  height: calc(100vh - 90px);
+  height: calc(100vh - 5.625rem);
   position: relative;
   width: 70vw;
   margin: 0 auto;
@@ -20,16 +20,16 @@
   }
 }
 .ant-btn {
-  background-color: $rose;
-  border-radius: 20px;
+  background-color: $secondary-background-color;
+  border-radius: 1.25rem;
 }
 button:hover {
   background-color: $persian-green !important;
 }
 .ant-input:first-child {
-  border-radius: 20px;
+  border-radius: 1.25rem;
   &:focus,
   &:hover {
-    border-color: $rose;
+    border-color: $secondary-background-color;
   }
 }

@@ -4,15 +4,15 @@
 @use "../../styles/partials/mixins" as *;
 
 .plan-trip {
-  font-size: 20px;
-  background-color: $rose;
-  color: white;
-  border-radius: 10px;
+  font-size: 1.25rem;
+  background-color: $secondary-background-color;
+  color: $primary-background-color;
+  border-radius: 0.625rem;
   padding: 0.5rem 1rem;
   border: none;
   cursor: pointer;
   &:hover {
     background-color: transparent;
-    color: white;
+    color: $primary-background-color;
   }
 }

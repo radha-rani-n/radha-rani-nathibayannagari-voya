@@ -9,7 +9,6 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 
-import { Button } from "antd";
 import { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 

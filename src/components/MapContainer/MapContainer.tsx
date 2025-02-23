@@ -17,7 +17,6 @@ const MapComponent = ({ tripData }: { tripData: any }) => {
     <MapContainer
       style={{ height: "100%", minHeight: "100%" }}
       center={searchCenter}
-      //   zoom={10}
       scrollWheelZoom={false}
       bounds={bounds}
     >
@@ -51,6 +50,7 @@ const MarkerComponent = ({
       <Popup>
         <img
           src={`https://places.googleapis.com/v1/${photoReference}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+          alt="place-image"
         />
       </Popup>
     </Marker>

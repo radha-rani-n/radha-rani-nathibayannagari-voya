@@ -4,7 +4,7 @@
 @use "../../styles/partials/mixins" as *;
 
 .footer {
-  color: $rose;
+  color: $secondary-background-color;
   position: relative;
   margin-top: auto;
   &--show {
@@ -27,8 +27,8 @@
     padding: 0 2rem;
   }
   &__title {
-    font-size: 40px;
-    color: $rose;
+    font-size: 2.5rem;
+    color: $secondary-background-color;
     font-weight: 500;
     font-family: "Apple Chancery";
     z-index: 100;
@@ -45,28 +45,25 @@
   &__list-item {
     list-style: none;
     text-decoration: none;
-    color: $rose;
+    color: $secondary-background-color;
   }
   &__chat-widget {
     position: absolute;
-    right: 20px;
-    bottom: 20px;
+    right: 1.25rem;
+    bottom: 1.25rem;
   }
   &__chat-button {
-    // position: absolute;
-    // right: 24px;
-    // bottom: 0px;
-    background-color: $rose;
-    color: white;
-    width: 50px;
-    height: 50px;
+    background-color: $secondary-background-color;
+    color: $primary-background-color;
+    width: 3.125rem;
+    height: 3.125rem;
     border-radius: 50%;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 10px #ff006e4d;
+    box-shadow: 0 0.125rem 0.625rem #ff006e4d;
     transition: transform 1s ease, 1s ease;
     &:hover {
       transform: rotate(360deg);
@@ -75,14 +72,14 @@
   }
   &__chat-window {
     position: absolute;
-    right: 24px;
+    right: 1.5rem;
     bottom: 3rem;
     background-color: $persian-green;
-    color: white;
-    border-radius: 10px;
+    color: $primary-background-color;
+    border-radius: 0.625rem;
     padding: 1.5rem;
 
-    box-shadow: 0 2px 10px #ff006e4d;
+    box-shadow: 0 0.125rem 0.625rem #ff006e4d;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -96,26 +93,26 @@
   &__chat-form {
     @include flex;
     gap: 1rem;
-    background-color: white;
+    background-color: $primary-background-color;
     padding: 1.5rem 1rem;
-    border-radius: 10px;
+    border-radius: 0.625rem;
   }
   &__chat-input {
     resize: none;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
+    height: 3.75rem;
     padding: 1rem;
     font-family: "Roboto";
     color: $persian-green;
   }
   &__chat-send {
     padding: 0.5rem 1.5rem;
-    border-radius: 30px;
+    border-radius: 1.875rem;
     background-color: $persian-green;
-    color: white;
+    color: $primary-background-color;
     border: none;
     font-weight: 600;
     width: fit-content;

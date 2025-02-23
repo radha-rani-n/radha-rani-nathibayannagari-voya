@@ -1,5 +1,5 @@
 import "./HomePage.scss";
-// import Travel from "../../assets/illustrations/Traveling-rafiki.svg";
+
 import travelGirl from "../../assets/illustrations/Traveling-bro.svg";
 import TravelAnimation from "../../assets/illustrations/traveling-animate.svg";
 import SearchBarAutoComplete from "../../components/SearchAuto/SearchAuto";
