@@ -5,7 +5,7 @@ import { ArrowLeft, CirclePlus } from "lucide-react";
 import { DownOutlined } from "@ant-design/icons";
 import { useCallback, useEffect, useState } from "react";
 import type { MenuProps } from "antd";
-import { Button, Dropdown, Space, notification } from "antd";
+import { Button, Dropdown, Space, notification, Tooltip } from "antd";
 import { useSession } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 import CustomTag from "../../components/CustomTag/CustomTag";
@@ -234,12 +234,13 @@ const SearchBar = () => {
   return (
     <>
       {contextHolder}
-      <Link to="/">
-        <Button>
-          <ArrowLeft />
-        </Button>
-      </Link>
+
       <section className="place-profile">
+        <Link to="/">
+          <Button className="place-profile__back-btn">
+            <ArrowLeft className="place-profile__back-arrow" />
+          </Button>
+        </Link>
         <div className="place-profile__title-image">
           {placeImage && (
             <img
@@ -258,6 +259,7 @@ const SearchBar = () => {
             Current Weather in {decodeURIComponent(searchText)} is {weather}C
           </p>
         </div>
+
         <h2>Popular attraction in {decodeURIComponent(searchText)}</h2>
         <ul className="place-profile__places">
           {searchData.map((data, i: number) => (
@@ -271,11 +273,12 @@ const SearchBar = () => {
               <p className="place-profile__place-name">
                 {data.displayName.text}
               </p>
-
-              <CirclePlus
-                onClick={() => handlePlaceOnClick(data)}
-                className="place-profile__plus-icon"
-              />
+              <Tooltip title="Add place to a trip">
+                <CirclePlus
+                  onClick={() => handlePlaceOnClick(data)}
+                  className="place-profile__plus-icon"
+                />
+              </Tooltip>
             </li>
           ))}
         </ul>

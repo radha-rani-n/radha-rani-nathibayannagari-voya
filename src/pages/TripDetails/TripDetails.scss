@@ -10,19 +10,21 @@
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   font-size: 16px;
+  &__container {
+    @include flex;
+    justify-content: space-between;
+  }
   &__details {
     box-sizing: border-box;
     @include flex;
-    // gap: 3rem;
+    flex-grow: 1;
     justify-content: space-between;
     background-image: url("../../assets/images/flat-vector-forest-river-illustration.jpg");
     width: 640px;
     background-position: center;
     background-size: cover;
-    // padding: 2rem;
-    // background-color: #f8f3f4;
+
     border-radius: 20px;
-    // filter: drop-shadow(0 0 0.75rem #cbb2b7);
   }
   &__title {
     font-size: 24px;
@@ -53,7 +55,7 @@
     scroll-behavior: smooth;
     background-color: #ffffff;
     padding: 1rem;
-    width: 100%;
+    width: 640px;
     overflow: scroll;
     gap: 1.5rem;
     align-items: center;

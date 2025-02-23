@@ -68,25 +68,27 @@ const TripDetails = () => {
   }
   return (
     <div className="trip-data">
-      <article className="trip-data__details">
-        <div className="trip-data__card">
-          <div className="trip-data__border">
-            <div className="trip-data__border-inside">
-              <h3 className="trip-data__title">
-                Trip to {tripData.trip.trip_name}
-              </h3>
+      <div className="trip-data__container">
+        <article className="trip-data__details">
+          <div className="trip-data__card">
+            <div className="trip-data__border">
+              <div className="trip-data__border-inside">
+                <h3 className="trip-data__title">
+                  Trip to {tripData.trip.trip_name}
+                </h3>
 
-              <h4>Place Name: {tripData.trip.place_name}</h4>
-              <p className="trip-data__date">
-                <CalendarDays />
-                {formatDate(tripData.trip.from_date)} -{" "}
-                {formatDate(tripData.trip.to_date)}
-              </p>
-              {/* <p>To Date:{formatDate(tripData.trip.to_date)}</p> */}
-              <p>No. Of Travellers: {tripData.trip.no_of_travellers}</p>
+                <h4>Place Name: {tripData.trip.place_name}</h4>
+                <p className="trip-data__date">
+                  <CalendarDays />
+                  {formatDate(tripData.trip.from_date)} -{" "}
+                  {formatDate(tripData.trip.to_date)}
+                </p>
+                {/* <p>To Date:{formatDate(tripData.trip.to_date)}</p> */}
+                <p>No. Of Travellers: {tripData.trip.no_of_travellers}</p>
+              </div>
             </div>
-          </div>
-        </div>
+          </div>{" "}
+        </article>
         {tripData.places.length > 0 && (
           <ul className="trip-data__places">
             {tripData.places.map((place, i) => (
@@ -108,7 +110,7 @@ const TripDetails = () => {
             ))}
           </ul>
         )}
-      </article>
+      </div>
       <div style={{ height: "450px" }} className="trip-data__map">
         {tripData.places.length > 0 && <MapComponent tripData={tripData} />}
       </div>
