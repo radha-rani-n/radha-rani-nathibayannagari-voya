@@ -1,10 +1,11 @@
 import axios from "axios";
-import { CircleX, Cross } from "lucide-react";
+import { CircleX, CalendarDays } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import "./TripDetails.scss";
 import { useSession } from "@clerk/clerk-react";
-import MapComponent from "../../components/Map/MapContainer";
+import MapComponent from "../../components/MapContainer/MapContainer";
 const TripDetails = () => {
   const { session } = useSession();
   const API_URL = import.meta.env.VITE_API_URL;
@@ -75,8 +76,12 @@ const TripDetails = () => {
               </h3>
 
               <h4>Place Name: {tripData.trip.place_name}</h4>
-              <p>From Date: {formatDate(tripData.trip.from_date)}</p>
-              <p>To Date:{formatDate(tripData.trip.to_date)}</p>
+              <p className="trip-data__date">
+                <CalendarDays />
+                {formatDate(tripData.trip.from_date)} -{" "}
+                {formatDate(tripData.trip.to_date)}
+              </p>
+              {/* <p>To Date:{formatDate(tripData.trip.to_date)}</p> */}
               <p>No. Of Travellers: {tripData.trip.no_of_travellers}</p>
             </div>
           </div>

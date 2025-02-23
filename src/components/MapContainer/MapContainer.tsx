@@ -50,7 +50,6 @@ const MarkerComponent = ({
     <Marker position={[lat, long]}>
       <Popup>
         <img
-          className="trip-data__place-img"
           src={`https://places.googleapis.com/v1/${photoReference}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
         />
       </Popup>
