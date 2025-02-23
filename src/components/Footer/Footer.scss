@@ -4,8 +4,17 @@
 @use "../../styles/partials/mixins" as *;
 
 .footer {
-  position: relative;
   color: $rose;
+  position: relative;
+  margin-top: auto;
+  &--show {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 10;
+  }
 
   &__data {
     background-color: #f7f0f3;
@@ -39,11 +48,6 @@
     color: $rose;
   }
 
-  &__chat-widget {
-    // position: fixed;
-    // bottom: 3rem;
-    // right: 24px;
-  }
   &__chat-button {
     background-color: $rose;
     color: white;
@@ -58,15 +62,11 @@
     box-shadow: 0 2px 10px #ff006e4d;
     transition: transform 1s ease, 1s ease;
     &:hover {
-      transform: rotate(360deg); // Full rotation
+      transform: rotate(360deg);
       background-color: darken($persian-green, 10%);
     }
   }
   &__chat-window {
-    position: absolute;
-    bottom: 60px;
-    right: 0;
-    // width: 250px;
     background-color: $persian-green;
     color: white;
     border-radius: 10px;

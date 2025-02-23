@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import PlanTrip from "./pages/PlanTrip/PlanTrip";
 import YourTrips from "./pages/YourTrips/YourTrips";
 import HomePage from "./pages/HomePage/HomePage";
-// import SearchResult from "./pages/SearchResult/SearchResult";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import EditTrip from "./pages/EditTrip/EditTrip";
@@ -24,7 +24,6 @@ function App() {
       const value = modules[key];
       fileNames.push(value.name.split("/").pop());
     }
-    // .map((fileObject) => fileObject.name.split("/").pop());
 
     console.log(fileNames);
     document.body.style.cursor = `url(icons/${sample(
@@ -33,22 +32,24 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Header />
-      <main className="main">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/plan-trip" element={<PlanTrip />} />
-          <Route path="/your-trips" element={<YourTrips />} />
+    <div className="app-container">
+      <BrowserRouter>
+        <Header />
+        <main className="app-container__main">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/plan-trip" element={<PlanTrip />} />
+            <Route path="/your-trips" element={<YourTrips />} />
 
-          <Route path="/trips/:id/edit" element={<EditTrip />} />
-          <Route path="/places/:id" element={<PlaceProfile />} />
-          <Route path="/trips/:id" element={<TripDetails />} />
-          <Route path="/about-creator" element={<AboutCreator />} />
-        </Routes>
-      </main>
-      <Footer />
-    </BrowserRouter>
+            <Route path="/trips/:id/edit" element={<EditTrip />} />
+            <Route path="/places/:id" element={<PlaceProfile />} />
+            <Route path="/trips/:id" element={<TripDetails />} />
+            <Route path="/about-creator" element={<AboutCreator />} />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 

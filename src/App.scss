@@ -2,9 +2,16 @@
 @use "./styles/partials/variables" as *;
 @use "./styles/partials/global" as *;
 @use "./styles/partials/mixins" as *;
-.main {
-  max-width: 1280px;
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding: 0 3rem;
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  &__main {
+    max-width: 1280px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0 3rem;
+    flex-grow: 1;
+  }
 }
