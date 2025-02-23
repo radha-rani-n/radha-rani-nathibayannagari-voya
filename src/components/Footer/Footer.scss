@@ -47,8 +47,15 @@
     text-decoration: none;
     color: $rose;
   }
-
+  &__chat-widget {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+  }
   &__chat-button {
+    // position: absolute;
+    // right: 24px;
+    // bottom: 0px;
     background-color: $rose;
     color: white;
     width: 50px;
@@ -67,6 +74,9 @@
     }
   }
   &__chat-window {
+    position: absolute;
+    right: 24px;
+    bottom: 3rem;
     background-color: $persian-green;
     color: white;
     border-radius: 10px;
@@ -115,5 +125,6 @@
   }
   &__chat-send-icon {
     rotate: 45deg;
+    cursor: pointer;
   }
 }
