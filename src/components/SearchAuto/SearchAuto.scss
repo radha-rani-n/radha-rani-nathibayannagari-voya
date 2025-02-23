@@ -13,4 +13,16 @@
     top: 40%;
     left: 0;
   }
+  &__bar-input {
+  }
+}
+.ant-btn {
+  background-color: $rose;
+  border-radius: 20px;
+}
+button:hover {
+  background-color: $celadon !important;
+}
+.ant-input:first-child {
+  border-radius: 20px;
 }

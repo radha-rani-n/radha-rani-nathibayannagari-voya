@@ -1,5 +1,5 @@
 import { AutoComplete, Input } from "antd";
-
+import Route from "../../assets/illustrations/Journey.gif";
 import "./SearchAuto.scss";
 import axios from "axios";
 import { useCallback, useState } from "react";
@@ -9,7 +9,12 @@ import { useSession } from "@clerk/clerk-react";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const SearchBar = () => {
-  const { session } = useSession();
+  const { session, isSignedIn } = useSession();
+
+  if (!isSignedIn) {
+    // redirect to sign in page
+  }
+
   const [value, setValue] = useState("");
   const [options, setOptions] = useState<{ value: string }[]>([]);
   const navigate = useNavigate();
@@ -60,6 +65,8 @@ const SearchBar = () => {
   return (
     <section className="search-page">
       <div className="search">
+        <img src={Route} alt="" />
+        <img src={Route} alt="" />
         <AutoComplete
           value={value}
           options={options}
@@ -72,6 +79,7 @@ const SearchBar = () => {
             size="large"
             placeholder="Enter a City or Country"
             enterButton
+            className="search__bar-input"
           />
         </AutoComplete>
       </div>

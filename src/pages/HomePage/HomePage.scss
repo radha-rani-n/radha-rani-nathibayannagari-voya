@@ -1,6 +1,9 @@
 .home {
   text-align: center;
-  height: 90vh !important;
+  // height: 90vh !important;
+  // background-image: url("../../assets/illustrations/Journey.gif");
+  object-position: center;
+  object-fit: cover;
   &__illustration {
     width: 200px;
     position: absolute;
