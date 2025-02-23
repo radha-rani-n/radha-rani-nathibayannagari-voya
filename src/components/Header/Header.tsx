@@ -38,10 +38,10 @@ const Header = () => {
 
         <div className="header__nav">
           <Navigation />
-          <div>
+          <div className="header__sign-in">
             <SignedOut>
               <SignInButton asChild>
-                <Button type="primary">Sign In</Button>
+                <button className="header__sign-in-btn">Sign In</button>
               </SignInButton>
             </SignedOut>
             <SignedIn>
