@@ -6,18 +6,36 @@
 .place-profile {
   max-width: $desktop-max-width;
   position: relative;
-  padding: 0 3rem;
+  padding: 0 3rem 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+
   &__title-image {
-    width: 50vw;
+    width: fit-content;
     margin: 0 auto;
     position: relative;
     display: flex;
 
     flex-direction: column;
     align-items: center;
+    &::after {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      content: "";
+      top: 0;
+      left: 0;
+      background: linear-gradient(transparent, #000000);
+      border-radius: 20px;
+      opacity: 15%;
+    }
   }
   &__back-btn {
     position: absolute;
+    left: 0;
+    top: 2rem;
   }
   &__back-arrow {
     color: #ffffff;
@@ -25,11 +43,11 @@
   }
   &__title {
     color: white;
-
+    z-index: 10;
     padding: 2rem;
     position: absolute;
 
-    font-size: 32px;
+    font-size: 40px;
   }
   &__image {
     width: 100%;
@@ -38,37 +56,32 @@
     object-position: top;
     border-radius: 10px;
     position: relative;
-    // &::after {
-    //   position: absolute;
-    //   width: 100%;
-    //   height: 100%;
-    //   content: "";
-    //   top: 0;
-    //   left: 0;
-    //   background: black;
-    //   border-radius: 20px;
-    //   opacity: 15%;
-    // }
   }
 
   &__summary {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-
+    z-index: 10;
     padding: 1.5rem;
     position: absolute;
-    bottom: 20%;
+    bottom: 30%;
     left: 0px;
     color: white;
     line-height: 1.5;
     letter-spacing: 1px;
     font-weight: 500;
     text-align: center;
+    border-radius: 0 0 20px 20px;
+  }
+  &__weather {
+    position: absolute;
+    right: 5%;
+    top: 15%;
+    color: #ffffff;
   }
   &__places {
     display: flex;
     scroll-behavior: smooth;
     scrollbar-width: $desktop-max-width;
-
+    max-width: $desktop-max-width;
     overflow: scroll;
     gap: 1.5rem;
     padding: 2rem 0;

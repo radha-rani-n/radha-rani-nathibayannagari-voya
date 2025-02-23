@@ -255,9 +255,7 @@ const SearchBar = () => {
           <h2 className="place-profile__title">
             {decodeURIComponent(searchText)}
           </h2>
-          <p>
-            Current Weather in {decodeURIComponent(searchText)} is {weather}C
-          </p>
+          <p className="place-profile__weather">{weather}&deg;C</p>
         </div>
 
         <h2>Popular attraction in {decodeURIComponent(searchText)}</h2>
