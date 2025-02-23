@@ -11,9 +11,9 @@ const API_URL = import.meta.env.VITE_API_URL;
 const SearchBar = () => {
   const { session, isSignedIn } = useSession();
 
-  if (!isSignedIn) {
-    // redirect to sign in page
-  }
+  // if (!isSignedIn) {
+  //   redirect to sign in page
+  // }
 
   const [value, setValue] = useState("");
   const [options, setOptions] = useState<{ value: string }[]>([]);

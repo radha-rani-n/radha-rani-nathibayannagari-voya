@@ -36,7 +36,7 @@ const SearchBar = () => {
 
   const { session } = useSession();
 
-  // const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
   const UNSPLASH_API = import.meta.env.VITE_UNSPLASH_API_KEY;
   const [searchData, setSearchData] = useState<PlaceType[] | null>(null);
   const { open, handleCancel, handleOk, confirmLoading, setOpen } =
@@ -106,17 +106,14 @@ const SearchBar = () => {
     const token = await session?.getToken();
     if (!token) return;
     try {
-      const response = await axios.get(
-        "http://localhost:8080/ai/getPlaceSummary",
-        {
-          params: {
-            placeName: searchText,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${API_URL}/ai/getPlaceSummary`, {
+        params: {
+          placeName: searchText,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setPlaceSummary(response.data.summary);
     } catch (err) {
       console.error(err);
@@ -125,7 +122,7 @@ const SearchBar = () => {
   const getWeather = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/place/weather?q=${searchText}`
+        `${API_URL}/place/weather?q=${searchText}`
       );
       setWeather(data);
     } catch (err) {
@@ -147,7 +144,7 @@ const SearchBar = () => {
       trip_ids: selectedTrips?.map((trip) => trip.trip_id),
     };
     try {
-      await axios.post("http://localhost:8080/places/updateTrips", data, {
+      await axios.post(`${API_URL}/places/updateTrips`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -167,7 +164,7 @@ const SearchBar = () => {
       return;
     }
     axios
-      .get("http://localhost:8080/places/search", {
+      .get(`${API_URL}/places/search`, {
         params: { q: decodeURIComponent(searchText) },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -185,7 +182,7 @@ const SearchBar = () => {
       return;
     }
     axios
-      .get("http://localhost:8080/trips", {
+      .get(`${API_URL}/trips`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -201,7 +198,7 @@ const SearchBar = () => {
       return;
     }
     axios
-      .get("http://localhost:8080/trips", {
+      .get(`${API_URL}/trips`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
