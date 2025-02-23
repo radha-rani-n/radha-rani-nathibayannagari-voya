@@ -4,54 +4,83 @@
 @use "../../styles/partials/mixins" as *;
 
 .trip-data {
-  box-sizing: border-box;
-  @include flex;
-  gap: 2rem;
-
-  padding: 3rem;
-  background-color: #f8f3f4;
-  border-radius: 20px;
-  filter: drop-shadow(0 0 0.75rem #cbb2b7);
+  width: $desktop-max-width;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  &__details {
+    box-sizing: border-box;
+    @include flex;
+    gap: 2rem;
+    background-image: url("../../assets/images/6452058.jpg");
+    width: 640px;
+    background-position: center;
+    background-size: cover;
+    // padding: 2rem;
+    // background-color: #f8f3f4;
+    border-radius: 20px;
+    // filter: drop-shadow(0 0 0.75rem #cbb2b7);
+  }
   &__title {
     font-size: 24px;
     color: $rose;
-    font-family: "Apple Chancery";
   }
   &__card {
+    // background-color: white;
+    // background-image: url("../../assets/images/6452058.jpg");
+    background-position: center;
+    background-size: cover;
+    align-self: flex-start;
+    background-color: #ffffffcc;
+    border-radius: 15px;
+    padding: 1rem;
+  }
+  &__border {
+    border: 1px solid rgb(224, 152, 120);
+    border-radius: 15px;
+  }
+  &__border-inside {
     @include flex;
-    gap: 1.5rem;
+    gap: 01rem;
+    padding: 1rem;
   }
   &__places {
     display: flex;
     scroll-behavior: smooth;
-    width: 1000px;
-    padding: 3rem 0;
+    background-color: #ffffff;
+    padding: 1rem;
+    width: 100%;
     overflow: scroll;
     gap: 1.5rem;
     align-items: center;
     justify-content: flex-start;
+    border-radius: 15px;
   }
   &__place {
     position: relative;
     list-style: none;
     @include flex;
     justify-content: center;
+    z-index: 10;
 
     gap: 0.5rem;
     width: fit-content;
     border-radius: 20px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2),
+      0 4px 40px rgba(255, 140, 0, 0.4);
 
-    &::after {
-      position: absolute;
-      width: 250px;
-      height: 150px;
-      content: "";
-      top: 0;
-      left: 0;
-      background: linear-gradient(#ffffff, #000000);
-      border-radius: 20px;
-      opacity: 40%;
-    }
+    // &::after {
+    //   position: absolute;
+    //   width: 250px;
+    //   height: 150px;
+    //   content: "";
+    //   top: 0;
+    //   left: 0;
+    //   background: linear-gradient(#ffffff, #000000);
+    //   border-radius: 20px;
+    //   opacity: 40%;
+    // }
   }
   &__place-img {
     border-radius: 20px;
@@ -73,5 +102,9 @@
     color: #ffffff;
     z-index: 2;
     cursor: pointer;
+  }
+  &__map {
+    width: 640px;
+    border-radius: 15px;
   }
 }
