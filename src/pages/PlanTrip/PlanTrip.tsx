@@ -6,6 +6,7 @@ import axios from "axios";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "@clerk/clerk-react";
+import { useTripsStore } from "../../hooks/useTripsStore";
 
 const dateFormat = "YYYY-MM-DD";
 
@@ -52,6 +53,8 @@ const PlanTrip = ({
 
   const [api, contextHolder] = notification.useNotification();
 
+  const fetchAllTrips = useTripsStore((state) => state.fetchAllTrips);
+
   type NotificationType = "success" | "info" | "warning" | "error";
 
   const openNotification = (message: string, type: NotificationType) => {
@@ -89,6 +92,7 @@ const PlanTrip = ({
       reset();
       openNotification("Trip Added Successfully!", "info");
       handleOk();
+      fetchAllTrips(session);
     } catch (e) {
       console.error(`Cannot add new trip data :error: ${e}`);
       openNotification("There was an error!", "error");

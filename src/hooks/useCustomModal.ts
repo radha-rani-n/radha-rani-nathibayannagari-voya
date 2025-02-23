@@ -14,7 +14,7 @@ const useCustomModal = () => {
     setTimeout(() => {
       setOpen(false);
       setConfirmLoading(false);
-    }, 1000);
+    }, 0);
   };
   const handleCancel = () => {
     setOpen(false);

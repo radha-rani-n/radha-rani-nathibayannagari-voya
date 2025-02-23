@@ -1,7 +1,7 @@
 import { Input, Form, DatePicker, notification } from "antd";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Button } from "antd";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./EditTrip.scss";
 import axios from "axios";
 import { z } from "zod";
@@ -29,6 +29,17 @@ const PlanTripSchema = z.object({
     .nonnegative(),
 });
 type PlanTripSchemaType = z.infer<typeof PlanTripSchema>;
+
+type TripDeatils = {
+  trip: {
+    trip_name: string;
+    place_name: string;
+    from_date: string;
+    to_date: string;
+    no_of_travellers: number;
+  };
+};
+
 const EditTrip = ({
   id,
   openNotification,
@@ -52,27 +63,28 @@ const EditTrip = ({
   } = useForm<PlanTripSchemaType>({
     resolver: zodResolver(PlanTripSchema),
   });
+
+  const [tripDeatils, setTripDetails] = useState<TripDeatils | null>(null);
+
+  const updateTripDetails = useCallback(
+    async (id: string) => {
+      const token = await session?.getToken();
+      if (!token) {
+        return;
+      }
+      const { data } = await axios.get<TripDeatils>(`${API_URL}/trips/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setTripDetails(data);
+    },
+    [API_URL, session]
+  );
+
   useEffect(() => {
-    session?.getToken().then((token) => {
-      axios
-        .get(`${API_URL}/trips/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(({ data }) => {
-          setValue("tripName", data.trip["trip_name"]);
-          setValue("placeName", data.trip["place_name"]);
-          setValue("fromDate", dayjs(data.trip["from_date"]));
-          setValue("toDate", dayjs(data.trip["to_date"]));
-          setValue("noOfTravellers", data.trip["no_of_travellers"]);
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
-  }, [id, API_URL, session, setValue]);
+    updateTripDetails(id);
+  }, [id, updateTripDetails]);
 
   const handleOnFormSubmit: SubmitHandler<PlanTripSchemaType> = async (
     data
@@ -86,13 +98,13 @@ const EditTrip = ({
       no_of_travellers: data.noOfTravellers,
     };
 
-    console.log(tripData);
     try {
       await axios.put(`${API_URL}/trips/${id}`, tripData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      updateTripDetails(id);
       reset();
       openNotification("Trip Updated Successfully!", "info");
       onSubmit();
@@ -102,6 +114,14 @@ const EditTrip = ({
       onSubmit();
     }
   };
+
+  if (tripDeatils) {
+    setValue("tripName", tripDeatils.trip["trip_name"]);
+    setValue("placeName", tripDeatils.trip["place_name"]);
+    setValue("fromDate", dayjs(tripDeatils.trip["from_date"]));
+    setValue("toDate", dayjs(tripDeatils.trip["to_date"]));
+    setValue("noOfTravellers", tripDeatils.trip["no_of_travellers"]);
+  }
 
   return (
     <div className="edit-trip">

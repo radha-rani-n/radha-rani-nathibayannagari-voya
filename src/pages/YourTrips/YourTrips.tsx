@@ -1,29 +1,27 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
-import { Pencil, Trash } from "lucide-react";
-
 import "./YourTrips.scss";
-import { Link } from "react-router-dom";
+
 import { useSession } from "@clerk/clerk-react";
 import { CustomModal } from "../../components/Modal/CustomModal";
 import EditTrip from "../EditTrip/EditTrip";
 import { useCustomModal } from "../../hooks/useCustomModal";
-import { Button, Descriptions, notification, Modal } from "antd";
+import { Button, notification } from "antd";
 import CustomTable from "../../components/CustomTable/CustomTable";
-interface tripData {
-  trip_name: string;
-  place_name: string;
-  from_date: Date;
-  to_date: Date;
-  no_of_travellers: number;
-  trip_id: number;
-}
+import { useTripsStore } from "../../hooks/useTripsStore";
 
 const YourTrips = () => {
   const { isLoaded, session, isSignedIn } = useSession();
+  const trips = useTripsStore((state) => state.trips);
+  const fetchAllTrips = useTripsStore((state) => state.fetchAllTrips);
+
   const [selectedTripId, setSelectedTripId] = useState<string | null>(null);
-  const [trips, setTrips] = useState<tripData[] | null>(null);
+  // const [trips, setTrips] = useState<tripData[] | null>(null);
+
+  useEffect(() => {
+    fetchAllTrips(session);
+  }, [fetchAllTrips, session]);
 
   const { open, confirmLoading, showModal, handleOk, handleCancel } =
     useCustomModal();
@@ -56,34 +54,17 @@ const YourTrips = () => {
     }/${year}`;
   }
   const API_URL = import.meta.env.VITE_API_URL;
-  const onEditClick = (trip) => {
-    showModal();
-    setSelectedTripId(trip.trip_id);
-  };
-  const onDeleteClick = (trip) => {
-    showModalDelete();
-    setSelectedTripId(trip.trip_id);
-  };
-  const fetchTrips = useCallback(async () => {
-    const token = await session?.getToken();
-    if (!token) {
-      return;
-    }
-    try {
-      const { data } = await axios.get(`${API_URL}/trips`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTrips(data);
-    } catch (e) {
-      console.error(`Error getting trips : ${e}`);
-    }
-  }, [API_URL, session]);
 
-  useEffect(() => {
-    fetchTrips();
-  }, [fetchTrips]);
+  const onEditClick = (trip) => {
+    setSelectedTripId(trip.trip_id);
+    showModal();
+  };
+
+  const onDeleteClick = (trip) => {
+    setSelectedTripId(trip.trip_id);
+    showModalDelete();
+  };
+
   const handleDeleteTrip = useCallback(
     async (id: number) => {
       const token = await session?.getToken();
@@ -95,9 +76,9 @@ const YourTrips = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      fetchTrips();
+      fetchAllTrips(session);
     },
-    [API_URL, fetchTrips, session]
+    [API_URL, session, fetchAllTrips]
   );
 
   if (!isLoaded) {
@@ -114,7 +95,7 @@ const YourTrips = () => {
   }
 
   const handleEditSubmit = () => {
-    fetchTrips();
+    fetchAllTrips(session);
     handleOk();
   };
 
