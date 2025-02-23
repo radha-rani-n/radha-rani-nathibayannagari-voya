@@ -1,5 +1,14 @@
+// @function random-element($list) {
+//   $random-index: random(length($list));
+//   @return nth($list, $random-index);
+// }
+
+// $my-list: "../../assets/icons/aeroplane-plane-svgrepo-com.svg",
+//   "../../assets/icons/travel-svgrepo-com.svg";
+
 .home {
   text-align: center;
+  // cursor: url(random-element($my-list)) 16 16, pointer;
   // height: 90vh !important;
   // background-image: url("../../assets/illustrations/Journey.gif");
   object-position: center;

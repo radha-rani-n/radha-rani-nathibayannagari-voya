@@ -11,7 +11,27 @@ import PlaceProfile from "./pages/PlaceProfile/PlaceProfile";
 import TripDetails from "./pages/TripDetails/TripDetails";
 import Footer from "./components/Footer/Footer";
 import AboutCreator from "./pages/AboutCreator/AboutCreator";
+import { useEffect } from "react";
+import { sample } from "lodash";
+
 function App() {
+  useEffect(() => {
+    const modules: {
+      [key: string]: { name: string };
+    } = import.meta.glob("/public/icons/*.svg");
+    const fileNames = [];
+    for (const key in modules) {
+      const value = modules[key];
+      fileNames.push(value.name.split("/").pop());
+    }
+    // .map((fileObject) => fileObject.name.split("/").pop());
+
+    console.log(fileNames);
+    document.body.style.cursor = `url(icons/${sample(
+      fileNames
+    )}) 16 16, pointer`;
+  }, []);
+
   return (
     <BrowserRouter>
       <Header />

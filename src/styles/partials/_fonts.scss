@@ -2,12 +2,13 @@
   font-family: "Roboto";
   src: url("../../assets/fonts/Roboto-VariableFont_wdth\,wght.ttf")
     format("truetype");
+}
 
-  @font-face {
-    font-family: "Roboto";
-    src: url("../../assets/fonts/Roboto-Italic-VariableFont_wdth\,wght.ttf")
-      format("truetype");
-  }
+@font-face {
+  font-family: "Roboto";
+  src: url("../../assets/fonts/Roboto-Italic-VariableFont_wdth\,wght.ttf")
+    format("truetype");
+  font-style: italic;
 }
 @font-face {
   font-family: "DynaPuff";
