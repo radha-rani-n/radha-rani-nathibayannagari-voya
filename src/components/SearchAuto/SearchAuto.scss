@@ -2,7 +2,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/global" as *;
 @use "../../styles/partials/mixins" as *;
-.search {
+.search-page {
   height: calc(100vh - 90px);
   position: relative;
   width: 70vw;
@@ -15,7 +15,8 @@
     left: 0;
     z-index: 10;
   }
-  &__bar-input {
+  &__illustrations {
+    display: flex;
   }
 }
 .ant-btn {

@@ -64,25 +64,25 @@ const SearchBar = () => {
 
   return (
     <section className="search-page">
-      <div className="search">
-        <img src={Route} alt="" />
-        <img src={Route} alt="" />
-        <AutoComplete
-          value={value}
-          options={options}
-          onSelect={onSelect}
-          onSearch={onSearch}
-          onChange={onChange}
-          className="search__bar"
-        >
-          <Input.Search
-            size="large"
-            placeholder="Enter a City or Country"
-            enterButton
-            className="search__bar-input"
-          />
-        </AutoComplete>
+      <div className="search-page__illustrations">
+        <img src={Route} alt="route-illustration" />
+        <img src={Route} alt="route-illustration" />
       </div>
+      <AutoComplete
+        value={value}
+        options={options}
+        onSelect={onSelect}
+        onSearch={onSearch}
+        onChange={onChange}
+        className="search-page__bar"
+      >
+        <Input.Search
+          size="large"
+          placeholder="Enter a City or Country"
+          enterButton
+          className="search-page__bar-input"
+        />
+      </AutoComplete>
     </section>
   );
 };
