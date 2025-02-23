@@ -23,8 +23,12 @@
   border-radius: 20px;
 }
 button:hover {
-  background-color: $celadon !important;
+  background-color: $persian-green !important;
 }
 .ant-input:first-child {
   border-radius: 20px;
+  &:focus,
+  &:hover {
+    border-color: $rose;
+  }
 }

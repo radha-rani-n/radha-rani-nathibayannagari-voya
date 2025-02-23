@@ -126,73 +126,7 @@ const YourTrips = () => {
         onEditClick={onEditClick}
         onDeleteClick={onDeleteClick}
       />
-      {/* <ul className="trips__list">
-        {trips.map((trip, i: number) => (
-          <li key={i} className="trips__list-item">
-            <div className="trips__item-title">
-              <h3>{trip.trip_name}</h3>
 
-              <Link to={`/trips/${trip.trip_id}`} className="trips__trip-name">
-                <Button>View More</Button>{" "}
-              </Link>
-            </div>
-            <div className="trips__item-data">
-              <p>PlaceName: {trip.place_name}</p>
-              <p>FromDate: {formatDate(trip.from_date)}</p>
-              <p>ToDate: {formatDate(trip.to_date)}</p>
-              <p>NoOfTravellers: {trip.no_of_travellers}</p>
-            </div>
-            <div className="trips__buttons">
-              <Button
-                variant="text"
-                color="default"
-                onClick={() => {
-                  setSelectedTripId(`${trip.trip_id}`);
-                  showModal();
-                }}
-                className="edit-trip"
-              >
-                <Pencil />
-              </Button>
-              <Button onClick={showDeleteModal}>
-                <Trash className="trips__delete-trip" />
-              </Button>
-              <Modal
-                className="trips__delete-modal"
-                title="Delete Trip"
-                open={isDeleteModalOpen}
-                // onOk={handleDeleteOk}
-                // onCancel={handleDeleteCancel}
-                footer={null}
-                okText="Yes"
-                cancelText="No"
-              >
-                <p className="trips__delete-confirm">
-                  Do you want to delete this trip
-                </p>
-                <div className="trips__delete-buttons">
-                  <Button
-                    onClick={handleDeleteCancel}
-                    className="trips__delete-no"
-                  >
-                    No
-                  </Button>
-                  <Button
-                    className="trips__delete-yes"
-                    type="primary"
-                    onClick={() => {
-                      handleDeleteOk();
-                      handleDeleteTrip(+`${trip.trip_id}`);
-                    }}
-                  >
-                    Yes
-                  </Button>
-                </div>
-              </Modal>
-            </div>
-          </li>
-        ))}
-      </ul> */}
       <CustomModal
         open={open}
         handleOk={handleOk}

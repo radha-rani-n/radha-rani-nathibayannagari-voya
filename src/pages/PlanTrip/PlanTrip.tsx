@@ -1,5 +1,5 @@
 import { Input, Form, DatePicker, notification } from "antd";
-
+import "./PlanTrip.scss";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Button } from "antd";
 import axios from "axios";
@@ -98,7 +98,10 @@ const PlanTrip = ({
   return (
     <>
       {contextHolder}
-      <Form onFinish={handleSubmit(handleOnFormSubmit)}>
+      <Form
+        onFinish={handleSubmit(handleOnFormSubmit)}
+        className="plan-trip-form"
+      >
         <Form.Item label="Trip Name:">
           <Controller
             name="tripName"
@@ -190,16 +193,18 @@ const PlanTrip = ({
             {errors.noOfTravellers.message}
           </span>
         )}
-        <Form.Item label={null}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-        <Form.Item label={null}>
-          <Button type="default" onClick={handleCancel}>
-            Cancel
-          </Button>
-        </Form.Item>
+        <div className="plan-trip-form__buttons">
+          <Form.Item label={null}>
+            <Button onClick={handleCancel} className="plan-trip-form__cancel">
+              Cancel
+            </Button>
+          </Form.Item>
+          <Form.Item label={null}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </div>
       </Form>
     </>
   );

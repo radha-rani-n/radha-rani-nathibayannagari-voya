@@ -3,6 +3,7 @@ import { Space, Table, Tag } from "antd";
 import type { TableProps } from "antd";
 import { Link } from "react-router-dom";
 import { Pencil, Trash } from "lucide-react";
+import { Tooltip } from "antd";
 interface DataType {
   tripName: string;
   placeName: string;
@@ -66,8 +67,12 @@ const CustomTable: React.FC = ({ data, onEditClick, onDeleteClick }) => {
       key: "action",
       render: (record) => (
         <Space size="middle">
-          <Pencil onClick={() => onEditClick(record)} />
-          <Trash onClick={() => onDeleteClick(record)} />
+          <Tooltip title="Edit Trip">
+            <Pencil onClick={() => onEditClick(record)} />
+          </Tooltip>
+          <Tooltip title="Delete Trip">
+            <Trash onClick={() => onDeleteClick(record)} />
+          </Tooltip>
         </Space>
       ),
     },

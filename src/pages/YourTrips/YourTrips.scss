@@ -48,4 +48,12 @@
     justify-content: flex-end;
     gap: 1rem;
   }
+
+  &__delete-no {
+    background-color: transparent !important;
+    &:hover {
+      background-color: transparent !important;
+      color: black !important;
+    }
+  }
 }

@@ -1,0 +1,14 @@
+.plan-trip-form {
+  &__buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-end;
+  }
+  &__cancel {
+    background-color: transparent !important;
+    &:hover {
+      background-color: transparent !important;
+      color: black !important;
+    }
+  }
+}

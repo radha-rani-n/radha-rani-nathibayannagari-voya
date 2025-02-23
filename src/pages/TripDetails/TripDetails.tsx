@@ -1,11 +1,12 @@
 import axios from "axios";
-import { CircleX, CalendarDays } from "lucide-react";
+import { Trash, CalendarDays } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import "./TripDetails.scss";
 import { useSession } from "@clerk/clerk-react";
 import MapComponent from "../../components/MapContainer/MapContainer";
+import { Tooltip } from "antd";
 const TripDetails = () => {
   const { session } = useSession();
   const API_URL = import.meta.env.VITE_API_URL;
@@ -86,23 +87,27 @@ const TripDetails = () => {
             </div>
           </div>
         </div>
-        <ul className="trip-data__places">
-          {tripData.places.map((place, i) => (
-            <li className="trip-data__place" key={i}>
-              <img
-                className="trip-data__place-img"
-                src={`https://places.googleapis.com/v1/${place.photo_reference}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
-              />
-              <p className="trip-data__place-name">{place.place_name}</p>
-              <CircleX
-                className="trip-data__delete-icon"
-                onClick={() =>
-                  handleDeletePlace(tripData.trip.trip_id, place.place_id)
-                }
-              />
-            </li>
-          ))}
-        </ul>
+        {tripData.places.length > 0 && (
+          <ul className="trip-data__places">
+            {tripData.places.map((place, i) => (
+              <li className="trip-data__place" key={i}>
+                <img
+                  className="trip-data__place-img"
+                  src={`https://places.googleapis.com/v1/${place.photo_reference}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+                />
+                <p className="trip-data__place-name">{place.place_name}</p>
+                <Tooltip title="Delete Place">
+                  <Trash
+                    className="trip-data__delete-icon"
+                    onClick={() =>
+                      handleDeletePlace(tripData.trip.trip_id, place.place_id)
+                    }
+                  />
+                </Tooltip>
+              </li>
+            ))}
+          </ul>
+        )}
       </article>
       <div style={{ height: "450px" }} className="trip-data__map">
         {tripData.places.length > 0 && <MapComponent tripData={tripData} />}
