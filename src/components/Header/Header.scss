@@ -47,24 +47,6 @@
     animation: stretchJump 0.5s ease-in-out forwards;
   }
 
-  &__title {
-    font-size: 2.5rem;
-    color: $persian-green;
-    font-weight: 500;
-    font-family: "Apple Chancery";
-  }
-  &__title-1 {
-    color: $secondary-background-color;
-  }
-  &__title-2 {
-    color: #097cee;
-  }
-  &__title-3 {
-    color: #f7cb08;
-  }
-  &__title-4 {
-    color: #14c0ac;
-  }
   &__link {
     text-decoration: none;
   }

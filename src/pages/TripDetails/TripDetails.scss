@@ -15,8 +15,10 @@
     justify-content: space-between;
   }
   &__details {
+    position: relative;
     box-sizing: border-box;
     @include flex;
+
     flex-grow: 1;
     justify-content: space-between;
     background-image: url("../../assets/images/flat-vector-forest-river-illustration.jpg");
@@ -25,6 +27,14 @@
     background-size: cover;
 
     border-radius: 1.25rem;
+  }
+  &__quote {
+    position: absolute;
+    color: rgb(255, 255, 255);
+    font-family: "ShadowsIntoLightTwo";
+    font-size: 28px;
+    right: 1rem;
+    top: 39%;
   }
   &__title {
     font-size: 1.5rem;

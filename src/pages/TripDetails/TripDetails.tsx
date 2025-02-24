@@ -35,7 +35,7 @@ const TripDetails = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(data);
+
       setTripData(data);
     } catch (err) {
       console.error(err);
@@ -87,7 +87,11 @@ const TripDetails = () => {
                 <p>No. Of Travellers: {tripData.trip.no_of_travellers}</p>
               </div>
             </div>
-          </div>{" "}
+          </div>
+          <h3 className="trip-data__quote">
+            Adventure awaits ✈️ <br />
+            your trip details are here
+          </h3>
         </article>
         {tripData.places.length > 0 && (
           <ul className="trip-data__places">

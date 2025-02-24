@@ -13,6 +13,8 @@ import Footer from "./components/Footer/Footer";
 import AboutCreator from "./pages/AboutCreator/AboutCreator";
 import { useEffect } from "react";
 import { sample } from "lodash";
+import PopularTravelDestinations from "./components/PopularTravelDestinarions/PopularTravelDestinations";
+import PopularAttractions from "./components/PopularAttractions/PopularAttractions";
 
 function App() {
   useEffect(() => {
@@ -25,7 +27,6 @@ function App() {
       fileNames.push(value.name.split("/").pop());
     }
 
-    console.log(fileNames);
     document.body.style.cursor = `url(icons/${sample(
       fileNames
     )}) 16 16, pointer`;
@@ -35,9 +36,11 @@ function App() {
     <div className="app-container">
       <BrowserRouter>
         <Header />
+
         <main className="app-container__main">
           <Routes>
             <Route path="/" element={<HomePage />} />
+
             <Route path="/plan-trip" element={<PlanTrip />} />
             <Route path="/your-trips" element={<YourTrips />} />
 

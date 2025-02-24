@@ -81,8 +81,6 @@ const PlanTrip = ({
       no_of_travellers: data.noOfTravellers,
     };
 
-    console.log(tripData);
-
     try {
       await axios.post(`${API_URL}/trips/addTrip`, tripData, {
         headers: {

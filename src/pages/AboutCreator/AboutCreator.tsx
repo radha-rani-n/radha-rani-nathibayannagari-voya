@@ -17,14 +17,27 @@ const AboutCreator = () => {
           rediscovering hidden gems, I believe every adventure should be stress
           free and enjoyable.
         </p>
+        <h4>Social</h4>
         <div className="about__social">
-          <a href="" className="about__social-icon">
+          <a
+            href="https://github.com/radha-rani-n/"
+            className="about__social-icon"
+            target="_blank"
+          >
             <Github />
           </a>
-          <a href="" className="about__social-icon">
+          <a
+            href="https://www.instagram.com/"
+            className="about__social-icon"
+            target="_blank"
+          >
             <Instagram />
           </a>
-          <a href="" className="about__social-icon">
+          <a
+            href="https://www.linkedin.com/in/radha-rani-n/"
+            className="about__social-icon"
+            target="_blank"
+          >
             <Linkedin />
           </a>
         </div>

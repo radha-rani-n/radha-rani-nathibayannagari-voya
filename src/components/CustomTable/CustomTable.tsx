@@ -83,6 +83,7 @@ const CustomTable: React.FC = ({ data, onEditClick, onDeleteClick }) => {
       columns={columns}
       dataSource={data}
       rowKey={(record) => record.trip_id}
+      pagination={false}
     />
   );
 };

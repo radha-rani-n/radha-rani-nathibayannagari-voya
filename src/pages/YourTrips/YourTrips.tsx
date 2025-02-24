@@ -4,7 +4,7 @@ import axios from "axios";
 import "./YourTrips.scss";
 
 import { useSession } from "@clerk/clerk-react";
-import { CustomModal } from "../../components/Modal/CustomModal";
+import { CustomModal } from "../../components/CustomModal/CustomModal";
 import EditTrip from "../EditTrip/EditTrip";
 import { useCustomModal } from "../../hooks/useCustomModal";
 import { Button, notification } from "antd";
@@ -90,7 +90,7 @@ const YourTrips = () => {
     return <p>Loading..</p>;
   }
   if (trips.length < 1) {
-    return <h2>You don't have any planned trips</h2>;
+    return <h2>No trips yet? Let’s make those travel dreams come true!</h2>;
   }
 
   const handleEditSubmit = () => {

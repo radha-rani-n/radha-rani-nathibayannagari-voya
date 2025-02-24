@@ -9,7 +9,7 @@ import { Button, Dropdown, Space, notification, Tooltip } from "antd";
 import { useSession } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 import CustomTag from "../../components/CustomTag/CustomTag";
-import { CustomModal } from "../../components/Modal/CustomModal";
+import { CustomModal } from "../../components/CustomModal/CustomModal";
 import { useCustomModal } from "../../hooks/useCustomModal";
 import { PresetColorType } from "antd/es/_util/colors";
 import { sample, uniqBy } from "lodash";
@@ -134,7 +134,7 @@ const SearchBar = () => {
     if (!selectedPlace) return;
     const { id, displayName, photos, location } = selectedPlace;
     const photo_reference = photos && photos.length > 0 && photos[0].name;
-    console.log(id);
+
     const data = {
       place_id: id,
       place_name: displayName.text,
@@ -172,7 +172,6 @@ const SearchBar = () => {
       })
       .then((response) => {
         setSearchData(response.data.places);
-        console.log(response.data);
       });
   }, [session]);
 
