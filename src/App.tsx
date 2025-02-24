@@ -13,8 +13,6 @@ import Footer from "./components/Footer/Footer";
 import AboutCreator from "./pages/AboutCreator/AboutCreator";
 import { useEffect } from "react";
 import { sample } from "lodash";
-import PopularTravelDestinations from "./components/PopularTravelDestinarions/PopularTravelDestinations";
-import PopularAttractions from "./components/PopularAttractions/PopularAttractions";
 
 function App() {
   useEffect(() => {

@@ -1,0 +1,23 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+
+.popular-places {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  &__list {
+    color: $primary-text-color;
+    display: flex;
+    gap: 1rem;
+    overflow: scroll;
+    width: $desktop-max-width;
+  }
+  &__list-item {
+    list-style: none;
+    text-decoration: none;
+  }
+}
