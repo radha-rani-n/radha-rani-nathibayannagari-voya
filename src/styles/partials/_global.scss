@@ -1,0 +1,21 @@
+@use "./mixins" as *;
+@use "./variables" as *;
+@use "./fonts" as *;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body,
+html {
+  box-sizing: border-box;
+  font-family: "Roboto";
+  color: $primary-text-color;
+  height: 100%;
+}
+button {
+  font-family: "Roboto";
+}

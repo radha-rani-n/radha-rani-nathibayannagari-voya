@@ -1,0 +1,131 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+
+.trip-data {
+  width: $desktop-max-width;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  font-size: 1rem;
+  &__container {
+    @include flex;
+    justify-content: space-between;
+  }
+  &__details {
+    position: relative;
+    box-sizing: border-box;
+    @include flex;
+
+    flex-grow: 1;
+    justify-content: space-between;
+    background-image: url("../../assets/images/flat-vector-forest-river-illustration.jpg");
+    width: 40rem;
+    background-position: center;
+    background-size: cover;
+
+    border-radius: 1.25rem;
+  }
+  &__quote {
+    position: absolute;
+    color: rgb(255, 255, 255);
+    font-family: "ShadowsIntoLightTwo";
+    font-size: 28px;
+    right: 1rem;
+    top: 39%;
+  }
+  &__title {
+    font-size: 1.5rem;
+    color: $secondary-background-color;
+  }
+  &__card {
+    background-position: center;
+    background-size: cover;
+    align-self: flex-start;
+    background-color: #ffffffe6;
+    border-radius: 0.9375rem;
+    padding: 1rem;
+    margin: 1rem;
+  }
+  &__border {
+    border: 0.0625rem solid rgb(224, 152, 120);
+    border-radius: 0.9375rem;
+  }
+  &__border-inside {
+    @include flex;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+  &__places {
+    display: flex;
+    scroll-behavior: smooth;
+    background-color: $primary-background-color;
+    padding: 1rem;
+    width: 40rem;
+    overflow: scroll;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 0.9375rem;
+  }
+  &__place {
+    position: relative;
+    list-style: none;
+    @include flex;
+    justify-content: center;
+    z-index: 10;
+
+    gap: 0.5rem;
+    width: fit-content;
+    border-radius: 1.25rem;
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2),
+      0 0.25rem 2.5rem rgba(255, 140, 0, 0.4);
+
+    &::after {
+      position: absolute;
+      width: 15.625rem;
+      height: 9.375rem;
+      content: "";
+      top: 0;
+      left: 0;
+      background: black;
+      border-radius: 1.25rem;
+      opacity: 15%;
+    }
+  }
+  &__place-img {
+    border-radius: 1.25rem;
+    width: 15.625rem;
+    height: 9.375rem;
+  }
+  &__place-name {
+    position: absolute;
+    right: 0.3125rem;
+    bottom: 0.625rem;
+    padding: 0rem 1rem;
+    color: $primary-background-color;
+    z-index: 2;
+  }
+  &__date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  &__delete-icon {
+    position: absolute;
+    right: 0.625rem;
+    top: 0.625rem;
+    color: $primary-background-color;
+    z-index: 2;
+    cursor: pointer;
+  }
+  &__map {
+    width: 40rem;
+
+    & img {
+      border-radius: 0.9375rem;
+    }
+  }
+}

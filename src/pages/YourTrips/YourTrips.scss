@@ -1,0 +1,59 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+
+.trips {
+  @include flex;
+  gap: 2rem;
+  &__title {
+    color: $primary-text-color;
+  }
+  &__list {
+    @include flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  &__list-item {
+    width: 100%;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr 1fr;
+    gap: 1rem;
+    background-color: #f3f4f5;
+    padding: 1rem;
+    border-radius: 1.25rem;
+  }
+  &__item-title {
+    @include flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  &__item-data {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+  }
+  &__trip-name {
+    text-decoration: none;
+    color: $primary-text-color;
+  }
+  &__buttons {
+    @include flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  &__delete-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  &__delete-no {
+    background-color: transparent !important;
+    &:hover {
+      background-color: transparent !important;
+      color: black !important;
+    }
+  }
+}

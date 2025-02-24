@@ -1,0 +1,18 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+
+.plan-trip {
+  font-size: 1.25rem;
+  background-color: $secondary-background-color;
+  color: $primary-background-color;
+  border-radius: 0.625rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: transparent;
+    color: $primary-background-color;
+  }
+}

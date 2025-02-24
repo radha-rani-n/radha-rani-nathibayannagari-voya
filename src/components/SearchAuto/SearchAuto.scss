@@ -1,0 +1,35 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+.search-page {
+  height: calc(100vh - 5.625rem);
+  position: relative;
+  width: 70vw;
+  margin: 0 auto;
+
+  &__bar {
+    width: 100%;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    z-index: 10;
+  }
+  &__illustrations {
+    display: flex;
+  }
+}
+.ant-btn {
+  background-color: $secondary-background-color;
+  border-radius: 1.25rem;
+}
+button:hover {
+  background-color: $persian-green !important;
+}
+.ant-input:first-child {
+  border-radius: 1.25rem;
+  &:focus,
+  &:hover {
+    border-color: $secondary-background-color;
+  }
+}

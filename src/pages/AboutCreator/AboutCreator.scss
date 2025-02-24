@@ -1,0 +1,43 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+.about {
+  background-image: url("../../assets/images/9422700.jpg");
+  background-position: center;
+  background-size: cover;
+  padding: 3rem;
+  display: flex;
+  gap: 3rem;
+  color: $secondary-background-color;
+  &__img {
+    width: 17.5rem;
+    height: 18.75rem;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 50%;
+  }
+  &__title {
+    font-size: 1.5rem;
+  }
+  &__data {
+    gap: 2rem;
+    @include flex;
+    padding: 1.5rem;
+  }
+  &__details {
+    color: $primary-text-color;
+    line-height: 1.7;
+    letter-spacing: 0.0625rem;
+    font-style: italic;
+    padding-right: 2rem;
+    text-align: center;
+  }
+  &__social {
+    display: flex;
+    gap: 2rem;
+  }
+  &__social-icon {
+    color: $secondary-background-color;
+  }
+}

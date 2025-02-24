@@ -1,0 +1,13 @@
+@use "./variables" as *;
+@use "./fonts" as *;
+@mixin desktop {
+  @media screen and (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
+
+@mixin flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

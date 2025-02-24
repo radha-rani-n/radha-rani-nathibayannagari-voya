@@ -35,10 +35,8 @@ The primary users of Voya are individuals who love traveling and seek a seamless
 - As a user, I want to be able to delete a trip plan
 - As a user, I want to be able to save the trip plan in my profile
 - As a user, I want to be able to find place recommendations based on my search
-- As a user, I want to be able to see popular places when I visit the website
 - As a user, I want to be able to add recommended places to my trip plan
 - As a user, I want to be able to remove places from my trip plan
-- As a user, I want to be able to mark places as visited in my trip plan
 
 ## Implementation
 
@@ -70,7 +68,6 @@ For Voya, we will be using multiple API's to handle the core fucntionality of th
 
 - Managing trip plan (CRUD operations)
 - Fetching popular places based on user's search criteria
-- Fetching popular place recommendations
 
 Key endpoints of our API's will include:
 
@@ -301,8 +298,9 @@ Response
 The Voya app will consist of the following main pages:
 
 1. Home Page
+
    - Search bar for finding popular attractions in a location
-   - A section to display popular attractions
+
 2. Plan Trip
    - A form to add a new trip
 3. Place
@@ -315,8 +313,6 @@ The Voya app will consist of the following main pages:
 
 6. About Us Page
    - Information about the app creator
-   - Project background and motivation
-   - Links to creator's LinkedIn, GitHub, and portfolio
 
 ### Mockups
 

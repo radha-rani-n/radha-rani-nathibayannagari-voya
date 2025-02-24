@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.scss";
+import Header from "./components/Header/Header";
+import PlanTrip from "./pages/PlanTrip/PlanTrip";
+import YourTrips from "./pages/YourTrips/YourTrips";
+import HomePage from "./pages/HomePage/HomePage";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import EditTrip from "./pages/EditTrip/EditTrip";
+import PlaceProfile from "./pages/PlaceProfile/PlaceProfile";
+import TripDetails from "./pages/TripDetails/TripDetails";
+import Footer from "./components/Footer/Footer";
+import AboutCreator from "./pages/AboutCreator/AboutCreator";
+import { useEffect } from "react";
+import { sample } from "lodash";
+import PopularTravelDestinations from "./components/PopularTravelDestinarions/PopularTravelDestinations";
+import PopularAttractions from "./components/PopularAttractions/PopularAttractions";
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    const modules: {
+      [key: string]: { name: string };
+    } = import.meta.glob("/public/icons/*.svg");
+    const fileNames = [];
+    for (const key in modules) {
+      const value = modules[key];
+      fileNames.push(value.name.split("/").pop());
+    }
+
+    document.body.style.cursor = `url(icons/${sample(
+      fileNames
+    )}) 16 16, pointer`;
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app-container">
+      <BrowserRouter>
+        <Header />
+
+        <main className="app-container__main">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+
+            <Route path="/plan-trip" element={<PlanTrip />} />
+            <Route path="/your-trips" element={<YourTrips />} />
+
+            <Route path="/trips/:id/edit" element={<EditTrip />} />
+            <Route path="/places/:id" element={<PlaceProfile />} />
+            <Route path="/trips/:id" element={<TripDetails />} />
+            <Route path="/about-creator" element={<AboutCreator />} />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </div>
+  );
 }
 
-export default App
+export default App;

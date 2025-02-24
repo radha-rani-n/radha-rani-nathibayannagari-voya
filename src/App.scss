@@ -1,0 +1,17 @@
+@use "./styles/partials/fonts" as *;
+@use "./styles/partials/variables" as *;
+@use "./styles/partials/global" as *;
+@use "./styles/partials/mixins" as *;
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  &__main {
+    max-width: $desktop-max-width;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 3rem 0;
+    flex-grow: 1;
+  }
+}
