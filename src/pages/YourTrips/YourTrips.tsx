@@ -79,7 +79,7 @@ const YourTrips = () => {
     },
     [API_URL, session, fetchAllTrips]
   );
-
+  if (!isSignedIn) return <h3>Please Sign In to continue</h3>;
   if (!isLoaded) {
     return null;
   }

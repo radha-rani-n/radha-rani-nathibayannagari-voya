@@ -1,22 +1,15 @@
 import { MessageCircle } from "lucide-react";
 import { Send } from "lucide-react";
 import "./Footer.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
-import { useLocation } from "react-router-dom";
+
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { pathname } = useLocation();
-  const [footerView, setFooterView] = useState(true);
-  useEffect(() => {
-    if (pathname === "/") {
-      setFooterView(false);
-    }
-  }, [pathname]);
 
   return (
-    <footer className={`footer ${footerView ? "footer--show" : ""}`}>
+    <footer className="footer">
       <section className="footer__data">
         <div className="footer__name">
           <Logo section="footer" />

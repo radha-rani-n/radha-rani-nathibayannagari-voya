@@ -7,14 +7,6 @@
   color: $secondary-background-color;
   position: relative;
   margin-top: auto;
-  &--show {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: $primary-background-color;
-    z-index: 10;
-  }
 
   &__data {
     background-color: #f7f0f3;
@@ -50,7 +42,7 @@
   &__chat-widget {
     position: absolute;
     right: 1.25rem;
-    bottom: 1.25rem;
+    bottom: 1rem;
   }
   &__chat-button {
     background-color: $secondary-background-color;
