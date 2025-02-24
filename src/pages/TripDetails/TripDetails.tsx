@@ -116,7 +116,7 @@ const TripDetails = () => {
           </ul>
         )}
       </div>
-      <div style={{ height: "450px" }} className="trip-data__map">
+      <div className="trip-data__map">
         {tripData.places.length > 0 && <MapComponent tripData={tripData} />}
       </div>
     </div>
