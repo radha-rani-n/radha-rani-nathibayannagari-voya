@@ -13,8 +13,10 @@ import Footer from "./components/Footer/Footer";
 import AboutCreator from "./pages/AboutCreator/AboutCreator";
 import { useEffect } from "react";
 import { sample } from "lodash";
-
+import { useSession } from "@clerk/clerk-react";
+import { InteractiveComponent } from "./components/SignInPage/SignInPage";
 function App() {
+  const { isSignedIn } = useSession();
   useEffect(() => {
     const modules: {
       [key: string]: { name: string };
@@ -29,7 +31,9 @@ function App() {
       fileNames
     )}) 16 16, pointer`;
   }, []);
-
+  if (!isSignedIn) {
+    return <InteractiveComponent />;
+  }
   return (
     <div className="app-container">
       <BrowserRouter>

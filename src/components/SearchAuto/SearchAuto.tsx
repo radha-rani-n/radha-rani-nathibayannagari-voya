@@ -57,7 +57,7 @@ const SearchBar = () => {
   const onChange = (data: string) => {
     setValue(data);
   };
-  if (!isSignedIn) return <h3>Please Sign In to continue</h3>;
+
   return (
     <section className="search-page">
       <div className="search-page__illustrations">

@@ -96,7 +96,7 @@ const PlanTrip = ({
       openNotification("There was an error!", "error");
     }
   };
-  if (!isSignedIn) return <h3>Please Sign In to continue</h3>;
+
   return (
     <>
       {contextHolder}
