@@ -4,7 +4,7 @@ import "./Footer.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
-
+import { Tooltip } from "antd";
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,13 +36,14 @@ const Footer = () => {
         </ul>
         <div>
           <div className="footer__chat-widget">
-            <button
-              className="footer__chat-button"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {" "}
-              <MessageCircle size={24} />
-            </button>
+            <Tooltip title="Click me to close/open">
+              <button
+                className="footer__chat-button"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <MessageCircle size={24} />
+              </button>
+            </Tooltip>
 
             {isOpen && (
               <div className="footer__chat-window">
