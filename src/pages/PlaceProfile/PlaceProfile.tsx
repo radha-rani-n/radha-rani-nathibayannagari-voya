@@ -257,7 +257,7 @@ const SearchBar = () => {
           <p className="place-profile__weather">{weather}&deg;C</p>
         </div>
 
-        <h2>Popular attraction in {decodeURIComponent(searchText)}</h2>
+        <h2>Popular attractions in {decodeURIComponent(searchText)}</h2>
         <ul className="place-profile__places">
           {searchData.map((data, i: number) => (
             <li key={i} className="place-profile__place">
