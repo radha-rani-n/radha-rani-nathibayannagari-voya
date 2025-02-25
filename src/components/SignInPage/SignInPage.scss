@@ -1,18 +1,35 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
 .sign-in {
   box-sizing: border-box;
-  max-width: 1280px;
-  height: 100vh;
-
-  display: grid;
-  grid-template-columns: 1.5fr 0.5fr;
-  justify-items: center;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
   margin: auto;
-  gap: 2rem;
   margin-top: auto;
   margin-bottom: auto;
-}
+  gap: 4rem;
+  height: 100vh;
+  &__title {
+    color: $secondary-background-color;
+    font-family: "Roboto";
+    font-size: 48px;
+  }
+  &__main {
+    max-width: 1280px;
 
-.spline {
-  border-radius: 15px;
+    display: grid;
+    grid-template-columns: 1.5fr 0.5fr;
+    justify-items: center;
+    align-content: center;
+
+    gap: 2rem;
+  }
+  &__3d-animation {
+    border-radius: 15px;
+  }
 }
