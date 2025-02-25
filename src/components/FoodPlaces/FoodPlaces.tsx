@@ -41,7 +41,13 @@ const FoodPlaces = ({ searchText }: { searchText: string }) => {
   return (
     <ul>
       {searchData?.map((place, i) => (
-        <li key={i}>{place.displayName.text}</li>
+        <li key={i}>
+          <h4>{place.displayName.text}</h4>
+          <p>{place.rating}</p>
+          <p>{place.primaryType}</p>
+          {/* <p>{place.reviews[0].text}</p> */}
+          {/* <p>{place.googleMapsLinks.directionsUri}</p> */}
+        </li>
       ))}
     </ul>
   );
