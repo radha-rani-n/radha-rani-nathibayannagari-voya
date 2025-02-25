@@ -1,7 +1,7 @@
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import Leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
-
+import "./MapContainer.scss";
 const MapComponent = ({ tripData }: { tripData: any }) => {
   const searchCenter: [number, number] = [
     +tripData.places[0].latitude,
@@ -49,6 +49,7 @@ const MarkerComponent = ({
     <Marker position={[lat, long]}>
       <Popup>
         <img
+          className="map-pop-up"
           src={`https://places.googleapis.com/v1/${photoReference}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
           alt="place-image"
         />

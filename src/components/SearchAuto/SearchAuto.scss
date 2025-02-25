@@ -5,6 +5,7 @@
 .search-page {
   height: calc(100vh - 5.625rem);
   position: relative;
+  max-width: $desktop-max-width;
   width: 70vw;
   margin: 0 auto;
 

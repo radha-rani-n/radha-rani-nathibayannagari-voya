@@ -7,10 +7,10 @@
   color: $secondary-background-color;
   position: relative;
   margin-top: auto;
-
+  background-color: #f7f0f3;
   &__data {
-    background-color: #f7f0f3;
-
+    max-width: $desktop-max-width;
+    position: relative;
     margin: 0 auto;
     box-sizing: border-box;
     display: flex;
