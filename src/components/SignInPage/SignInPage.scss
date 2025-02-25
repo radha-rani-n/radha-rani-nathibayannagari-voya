@@ -22,8 +22,8 @@
     font-size: 48px;
   }
   &__content {
-    max-width: 1280px;
-
+    width: 1280px;
+    height: 485px;
     display: grid;
     grid-template-columns: 1.5fr 0.5fr;
     justify-items: center;
