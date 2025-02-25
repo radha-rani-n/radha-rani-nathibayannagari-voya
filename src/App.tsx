@@ -33,7 +33,7 @@ function App() {
   }, []);
 
   if (!isLoaded) {
-    return; // Show a loading state until Clerk is done loading
+    return;
   }
 
   if (!isSignedIn) {

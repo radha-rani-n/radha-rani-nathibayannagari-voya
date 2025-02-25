@@ -13,6 +13,7 @@ import { CustomModal } from "../../components/CustomModal/CustomModal";
 import { useCustomModal } from "../../hooks/useCustomModal";
 import { PresetColorType } from "antd/es/_util/colors";
 import { sample, uniqBy } from "lodash";
+import FoodPlaces from "../../components/FoodPlaces/FoodPlaces";
 
 type PlaceType = {
   id: string;
@@ -233,7 +234,7 @@ const SearchBar = () => {
   return (
     <>
       {contextHolder}
-
+      <FoodPlaces searchText={searchText} />
       <section className="place-profile">
         <Link to="/">
           <Button className="place-profile__back-btn">

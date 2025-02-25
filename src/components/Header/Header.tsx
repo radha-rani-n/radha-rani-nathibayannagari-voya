@@ -9,27 +9,27 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 
 const Header = () => {
-  const [isSticky, setIsSticky] = useState(false);
-  const handleScroll = () => {
-    if (window.scrollY > 200) {
-      setIsSticky(true);
-    } else {
-      setIsSticky(false);
-    }
-  };
+  // const [isSticky, setIsSticky] = useState(false);
+  // const handleScroll = () => {
+  //   if (window.scrollY > 200) {
+  //     setIsSticky(true);
+  //   } else {
+  //     setIsSticky(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.addEventListener("scroll", handleScroll);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.addEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
   return (
-    <header className={`header ${isSticky ? "header--sticky" : ""}`}>
+    <header className="header">
       <div className="header__data">
         <Link to="/" className="header__link">
           <Logo section="header" />
