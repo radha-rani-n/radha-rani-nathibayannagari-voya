@@ -7,7 +7,7 @@ const InteractiveComponent = () => {
       <header>
         <h1 className="sign-in__title">Voya</h1>
       </header>
-      <main className="sign-in__main">
+      <main className="sign-in__content">
         <Spline
           className="sign-in__3d-animation"
           scene="https://prod.spline.design/odfX05j8WfptzP7M/scene.splinecode"

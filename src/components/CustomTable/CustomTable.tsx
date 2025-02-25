@@ -4,6 +4,7 @@ import type { TableProps } from "antd";
 import { Link } from "react-router-dom";
 import { Pencil, Trash } from "lucide-react";
 import { Tooltip } from "antd";
+import "./CustomTable.scss";
 interface DataType {
   tripName: string;
   placeName: string;
@@ -84,6 +85,7 @@ const CustomTable: React.FC = ({ data, onEditClick, onDeleteClick }) => {
       dataSource={data}
       rowKey={(record) => record.trip_id}
       pagination={false}
+      className="table"
     />
   );
 };

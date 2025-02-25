@@ -16,7 +16,7 @@ import { sample } from "lodash";
 import { useSession } from "@clerk/clerk-react";
 import { InteractiveComponent } from "./components/SignInPage/SignInPage";
 function App() {
-  const { isSignedIn } = useSession();
+  const { isSignedIn, isLoaded } = useSession();
   useEffect(() => {
     const modules: {
       [key: string]: { name: string };
@@ -31,21 +31,24 @@ function App() {
       fileNames
     )}) 16 16, pointer`;
   }, []);
+
+  if (!isLoaded) {
+    return; // Show a loading state until Clerk is done loading
+  }
+
   if (!isSignedIn) {
     return <InteractiveComponent />;
   }
+
   return (
     <div className="app-container">
       <BrowserRouter>
         <Header />
-
         <main className="app-container__main">
           <Routes>
             <Route path="/" element={<HomePage />} />
-
             <Route path="/plan-trip" element={<PlanTrip />} />
             <Route path="/your-trips" element={<YourTrips />} />
-
             <Route path="/trips/:id/edit" element={<EditTrip />} />
             <Route path="/places/:id" element={<PlaceProfile />} />
             <Route path="/trips/:id" element={<TripDetails />} />
