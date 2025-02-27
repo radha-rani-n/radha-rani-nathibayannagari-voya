@@ -100,7 +100,8 @@ const TripDetails = () => {
                 <img
                   alt="place-image"
                   className="trip-data__place-img"
-                  src={`https://places.googleapis.com/v1/${place.photo_reference}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+                  src={place.unsplash_image_url}
+                  // src={`https://places.googleapis.com/v1/${place.photo_reference}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
                 />
                 <p className="trip-data__place-name">{place.place_name}</p>
                 <Tooltip title="Delete Place">

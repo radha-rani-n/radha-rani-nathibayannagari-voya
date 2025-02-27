@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 5173",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -15,6 +15,8 @@
     "@hookform/resolvers": "^4.1.0",
     "@splinetool/react-spline": "^4.0.0",
     "antd": "^5.24.0",
+    "aws-amplify": "^6.13.2",
+    "axios": "^1.8.1",
     "dayjs": "^1.11.13",
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
@@ -30,6 +32,8 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@aws-amplify/backend": "^1.14.1",
+    "@aws-amplify/backend-cli": "^1.4.11",
     "@eslint/js": "^9.17.0",
     "@types/leaflet": "^1.9.16",
     "@types/lodash": "^4.17.15",
@@ -38,11 +42,16 @@
     "@types/react-dom": "^18.3.5",
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.3.4",
+    "aws-cdk": "^2.1001.0",
+    "aws-cdk-lib": "^2.181.0",
+    "constructs": "^10.4.2",
+    "esbuild": "^0.25.0",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
-    "typescript": "~5.6.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.1.0"
   }

@@ -58,7 +58,7 @@ const SearchBar = () => {
   const [selectedPlace, setSelectedPlace] = useState<PlaceType | null>(null);
   const [api, contextHolder] = notification.useNotification();
   const [weather, setWeather] = useState(null);
-  const splitPath = pathname.split("/");
+  const splitPath = pathname.split("/").filter((text) => text.length > 0);
   const searchText = splitPath[splitPath.length - 1];
 
   type NotificationType = "success" | "info" | "warning" | "error";
@@ -90,13 +90,16 @@ const SearchBar = () => {
 
   const getPlaceImage = async () => {
     try {
-      const { data } = await axios.get(`https:api.unsplash.com/search/photos`, {
-        params: {
-          query: searchText,
-          orientation: "landscape",
-          client_id: UNSPLASH_API,
-        },
-      });
+      const { data } = await axios.get(
+        `https://api.unsplash.com/search/photos`,
+        {
+          params: {
+            query: searchText,
+            orientation: "landscape",
+            client_id: UNSPLASH_API,
+          },
+        }
+      );
       setPlaceImgae(data.results[0].urls.regular);
     } catch (err) {
       console.error(err);
@@ -136,14 +139,37 @@ const SearchBar = () => {
     const { id, displayName, photos, location } = selectedPlace;
     const photo_reference = photos && photos.length > 0 && photos[0].name;
 
+    let unsplashData = null;
+    try {
+      const unsplashResponse = await axios.get(
+        `https://api.unsplash.com/search/photos`,
+        {
+          params: {
+            query: encodeURI(displayName.text),
+            orientation: "landscape",
+            client_id: UNSPLASH_API,
+            page: 1,
+            per_page: 1,
+          },
+        }
+      );
+      unsplashData = unsplashResponse.data;
+    } catch (err) {
+      console.error(err);
+    }
+
     const data = {
       place_id: id,
       place_name: displayName.text,
       photo_reference: photo_reference,
+      unsplash_image_url: unsplashData?.results
+        ? unsplashData?.results[0]?.urls?.raw ?? ""
+        : "",
       latitude: location.latitude,
       longitude: location.longitude,
       trip_ids: selectedTrips?.map((trip) => trip.trip_id),
     };
+
     try {
       await axios.post(`${API_URL}/places/updateTrips`, data, {
         headers: {
@@ -159,6 +185,23 @@ const SearchBar = () => {
     }
   };
 
+  const transformData = async (placeData: any) => {
+    const { data } = await axios.get(`https://api.unsplash.com/search/photos`, {
+      params: {
+        query: encodeURI(placeData.displayName.text),
+        orientation: "landscape",
+        client_id: UNSPLASH_API,
+        page: 1,
+        per_page: 1,
+      },
+    });
+
+    return {
+      ...placeData,
+      placeImageUrl: data?.results ? data?.results[0]?.urls?.raw ?? "" : "",
+    };
+  };
+
   const updatePlaces = useCallback(async () => {
     const token = await session?.getToken();
     if (!token) {
@@ -172,7 +215,14 @@ const SearchBar = () => {
         },
       })
       .then((response) => {
-        setSearchData(response.data.places);
+        // setSearchData(response.data.places.slice(0, 6));
+        const promises = [];
+        for (const placeData of response.data.places.slice(0, 6)) {
+          promises.push(transformData(placeData));
+        }
+        Promise.all(promises).then((promiseResponse) => {
+          setSearchData(promiseResponse.filter((place) => place.placeImageUrl));
+        });
       });
   }, [session]);
 
@@ -234,7 +284,7 @@ const SearchBar = () => {
   return (
     <>
       {contextHolder}
-      <FoodPlaces searchText={searchText} />
+      {/* <FoodPlaces searchText={searchText} /> */}
       <section className="place-profile">
         <Link to="/">
           <Button className="place-profile__back-btn">
@@ -266,7 +316,8 @@ const SearchBar = () => {
                 <img
                   className="place-profile__place-img"
                   alt="place-image"
-                  src={`https://places.googleapis.com/v1/${data.photos[0].name}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+                  // src={`https://places.googleapis.com/v1/${data.photos[0].name}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+                  src={data.placeImageUrl}
                 />
               )}
               <p className="place-profile__place-name">

@@ -27,7 +27,7 @@ function App() {
       fileNames.push(value.name.split("/").pop());
     }
 
-    document.body.style.cursor = `url(icons/${sample(
+    document.body.style.cursor = `url(${window.location.origin}/icons/${sample(
       fileNames
     )}) 16 16, pointer`;
   }, []);

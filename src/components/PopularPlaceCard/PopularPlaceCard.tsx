@@ -9,7 +9,7 @@ const PopularPlaceCard = ({ place }) => {
     const getPlaceImage = async () => {
       try {
         const { data } = await axios.get(
-          `https:api.unsplash.com/search/photos`,
+          `https://api.unsplash.com/search/photos`,
           {
             params: {
               query: place,

@@ -2,6 +2,17 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import Leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./MapContainer.scss";
+import L from "leaflet";
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
+
+const DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
+
 const MapComponent = ({ tripData }: { tripData: any }) => {
   const searchCenter: [number, number] = [
     +tripData.places[0].latitude,
