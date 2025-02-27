@@ -29,7 +29,7 @@
       left: 0;
       background: linear-gradient(transparent, #000000);
       border-radius: 1.25rem;
-      opacity: 15%;
+      opacity: 25%;
     }
   }
   &__back-btn {
@@ -62,7 +62,7 @@
     z-index: 10;
     padding: 1.5rem;
     position: absolute;
-    bottom: 30%;
+    bottom: 10%;
     left: 0;
     color: $primary-background-color;
     line-height: 1.5;

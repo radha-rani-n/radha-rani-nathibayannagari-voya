@@ -3,7 +3,7 @@ import "./PopularPlaceCard.scss";
 import { useEffect, useState } from "react";
 const PopularPlaceCard = ({ place }) => {
   const [placeImage, setPlaceImage] = useState();
-  const UNSPLASH_API = import.meta.env.VITE_UNSPLASH_API_KEY;
+  const UNSPLASH_API = import.meta.env.VITE_UNSPLASH_API_KEY_1;
 
   useEffect(() => {
     const getPlaceImage = async () => {

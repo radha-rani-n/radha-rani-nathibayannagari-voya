@@ -38,7 +38,7 @@ const SearchBar = () => {
   const { session } = useSession();
 
   const API_URL = import.meta.env.VITE_API_URL;
-  const UNSPLASH_API = import.meta.env.VITE_UNSPLASH_API_KEY;
+  const UNSPLASH_API = import.meta.env.VITE_UNSPLASH_API_KEY_2;
   const [searchData, setSearchData] = useState<PlaceType[] | null>(null);
   const { open, handleCancel, handleOk, confirmLoading, setOpen } =
     useCustomModal();
