@@ -6,6 +6,10 @@ import PopularPlaceCard from "../PopularPlaceCard/PopularPlaceCard";
 const PopularDestinations = () => {
   const popularPlaces = [
     {
+      name: "Kerala",
+      count: 40000,
+    },
+    {
       name: "Paris",
       count: 35000,
     },

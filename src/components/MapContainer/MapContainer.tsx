@@ -40,6 +40,7 @@ const MapComponent = ({ tripData }: { tripData: any }) => {
           lat={+place.latitude}
           long={+place.longitude}
           photoReference={place.photo_reference}
+          unsplash_image_url={place.unsplash_image_url}
           key={i}
         />
       ))}
@@ -51,17 +52,20 @@ const MarkerComponent = ({
   lat,
   long,
   photoReference,
+  unsplash_image_url,
 }: {
   lat: number;
   long: number;
   photoReference: string;
+  unsplash_image_url: string;
 }) => {
   return (
     <Marker position={[lat, long]}>
       <Popup>
         <img
           className="map-pop-up"
-          src={`https://places.googleapis.com/v1/${photoReference}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
+          src={unsplash_image_url}
+          // src={`https://places.googleapis.com/v1/${photoReference}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyDD3fAb1QdZzEEn5ZJV7IlIQeUu9H8sdwU`}
           alt="place-image"
         />
       </Popup>
