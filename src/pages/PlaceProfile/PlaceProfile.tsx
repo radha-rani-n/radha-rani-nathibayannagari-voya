@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import "./PlaceProfile.scss";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { ArrowLeft, CirclePlus } from "lucide-react";
 import { DownOutlined } from "@ant-design/icons";
 import { useCallback, useEffect, useState } from "react";
@@ -25,6 +25,7 @@ type PlaceType = {
   };
   displayName: { text: string };
   photos: { name: string; authorAttributions: { photoUri: string } }[];
+  placeImageUrl: string;
 };
 
 type TripType = {
@@ -136,35 +137,33 @@ const SearchBar = () => {
   const savePlace = async () => {
     const token = await session?.getToken();
     if (!selectedPlace) return;
-    const { id, displayName, photos, location } = selectedPlace;
+    const { id, displayName, photos, location, placeImageUrl } = selectedPlace;
     const photo_reference = photos && photos.length > 0 && photos[0].name;
 
-    let unsplashData = null;
-    try {
-      const unsplashResponse = await axios.get(
-        `https://api.unsplash.com/search/photos`,
-        {
-          params: {
-            query: encodeURI(displayName.text),
-            orientation: "landscape",
-            client_id: UNSPLASH_API,
-            page: 1,
-            per_page: 1,
-          },
-        }
-      );
-      unsplashData = unsplashResponse.data;
-    } catch (err) {
-      console.error(err);
-    }
+    // let unsplashData = null;
+    // try {
+    //   const unsplashResponse = await axios.get(
+    //     `https://api.unsplash.com/search/photos`,
+    //     {
+    //       params: {
+    //         query: encodeURI(displayName.text),
+    //         orientation: "landscape",
+    //         client_id: UNSPLASH_API,
+    //         page: 1,
+    //         per_page: 1,
+    //       },
+    //     }
+    //   );
+    //   unsplashData = unsplashResponse.data;
+    // } catch (err) {
+    //   console.error(err);
+    // }
 
     const data = {
       place_id: id,
       place_name: displayName.text,
       photo_reference: photo_reference,
-      unsplash_image_url: unsplashData?.results
-        ? unsplashData?.results[0]?.urls?.raw ?? ""
-        : "",
+      unsplash_image_url: placeImageUrl,
       latitude: location.latitude,
       longitude: location.longitude,
       trip_ids: selectedTrips?.map((trip) => trip.trip_id),
@@ -186,19 +185,31 @@ const SearchBar = () => {
   };
 
   const transformData = async (placeData: any) => {
-    const { data } = await axios.get(`https://api.unsplash.com/search/photos`, {
-      params: {
-        query: encodeURI(placeData.displayName.text),
-        orientation: "landscape",
-        client_id: UNSPLASH_API,
-        page: 1,
-        per_page: 1,
-      },
-    });
+    let unsplashData = null;
+    try {
+      unsplashData = await axios.get(`https://api.unsplash.com/search/photos`, {
+        params: {
+          query: encodeURI(placeData.displayName.text),
+          orientation: "landscape",
+          client_id: UNSPLASH_API,
+          page: 1,
+          per_page: 1,
+        },
+      });
+    } catch (err: any) {
+      if (err.response && err.response.status === 403) {
+        return {
+          ...placeData,
+          placeImageUrl: "",
+        };
+      }
+    }
 
     return {
       ...placeData,
-      placeImageUrl: data?.results ? data?.results[0]?.urls?.raw ?? "" : "",
+      placeImageUrl: unsplashData?.data.results
+        ? unsplashData?.data.results[0]?.urls?.raw ?? ""
+        : "",
     };
   };
 
@@ -221,7 +232,11 @@ const SearchBar = () => {
           promises.push(transformData(placeData));
         }
         Promise.all(promises).then((promiseResponse) => {
-          setSearchData(promiseResponse.filter((place) => place.placeImageUrl));
+          setSearchData(
+            promiseResponse.filter(
+              (place) => place.placeImageUrl && place.placeImageUrl.length > 0
+            )
+          );
         });
       });
   }, [session]);
